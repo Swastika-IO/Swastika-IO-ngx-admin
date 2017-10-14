@@ -12,12 +12,14 @@ $nb-themes: nb-register-theme((
   sidebar-header-height: initial,
   layout-content-width: 1400px,
 
-  font-main: Roboto,
-  font-secondary: Exo,
+  // font-main: Roboto,
+  // font-secondary: Exo,
 
 // Swastika I/O //////////////////////////
 
-menu-icon-font-size:1.5rem,
+  font-main: Arial,
+  // font-secondary: Exo,
+  menu-icon-font-size:1.5rem,
 
 //////////////////////////////////////////
 

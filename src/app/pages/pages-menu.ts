@@ -29,7 +29,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Drafts',
         // icon: 'ion-ios-trash-outline',
-        link: '/pages/articles/drafts',
+        link: '/pages/articles/list-draft-articles',
       },
     ],
   },

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ArticlesComponent } from './articles.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
+import { ListDraftArticlesComponent } from './list-draft-articles/list-draft-articles.component';
 
 const routes: Routes = [{
   path: '',
@@ -11,7 +12,11 @@ const routes: Routes = [{
   children: [
     {
       path: 'list-articles',
-      component: ListArticlesComponent,
+      component: ListArticlesComponent, 
+    },
+    {
+      path: 'list-draft-articles',
+      component: ListDraftArticlesComponent, 
     },
     {
       path: 'create-article',
@@ -23,11 +28,12 @@ const routes: Routes = [{
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-})
+}) 
 export class ArticlesRoutingModule { }
 
 export const routedComponents = [
   ArticlesComponent,
   CreateArticleComponent,
   ListArticlesComponent,
+  ListDraftArticlesComponent,
 ];
