@@ -8,6 +8,8 @@
     overflow: visible;
   }
 
+  
+
   .input-group {
     margin-bottom: 1rem;
   }
@@ -116,6 +118,21 @@
     color: nb-theme(color-success);
     @include nb-for-theme(cosmic) {
       color: nb-theme(color-primary);
+    }
+  }
+
+  
+  nb-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .dropdown {
+      flex-basis: 10%;
+      min-width: 220px;
+    }
+    .dropdown > .dropdown-menu{
+      width: 100%;
     }
   }
 
