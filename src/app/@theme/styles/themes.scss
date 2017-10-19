@@ -20,6 +20,14 @@ $nb-themes: nb-register-theme((
   font-main: Arial,
   // font-secondary: Exo,
   menu-icon-font-size:1.5rem,
+  radius:0.1rem,
+  
+  // color-bg:rgba(0,0,0,.5),
+  // layout-bg:rgb(46, 46, 46),
+  // shadow:#000,
+  // color-fg-text:#fff,
+
+  
 
 //////////////////////////////////////////
 
@@ -32,6 +40,29 @@ $nb-themes: nb-register-theme((
   sidebar-header-height: initial,
   layout-content-width: 1400px,
 
-  font-main: Roboto,
-  font-secondary: Exo,
+  // font-main: Roboto,
+  // font-secondary: Exo,
+
+  
+// Swastika I/O //////////////////////////
+
+font-main: Arial,
+// font-secondary: Exo,
+menu-icon-font-size:1.5rem,
+radius:0.3rem,
+
+color-bg:rgba(0,0,0,.5),
+layout-bg:rgba(46, 46, 46, 0),
+shadow:#000,
+
+color-fg:#fff,
+color-fg-text:#fff,
+
+menu-fg:#fff,
+font-size:0.9rem,
+
+
+card-bg:rgba(255, 255, 255, 0.5),
+
+//////////////////////////////////////////
 ), cosmic, cosmic);

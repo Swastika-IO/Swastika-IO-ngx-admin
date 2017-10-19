@@ -3,9 +3,15 @@
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 @include nb-install-component() {
+  nb-layout {
+    position: fixed;
+    background: url(../../../../assets/images/blur-bg.jpg) center center / cover no-repeat;
+  }
+
   nb-layout-column.small {
     flex: 0.15 !important;
   }
+
 
   nb-sidebar.settings-sidebar {
     $sidebar-width: 7.5rem;
@@ -99,6 +105,7 @@
       }
     }
   }
+  
 
   @include media-breakpoint-down(xs) {
     .main-content {
