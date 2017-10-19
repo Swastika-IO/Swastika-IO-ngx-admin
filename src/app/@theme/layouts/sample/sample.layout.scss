@@ -4,7 +4,6 @@
 
 @include nb-install-component() {
   nb-layout {
-    position: fixed;
     background: url(../../../../assets/images/blur-bg.jpg) center center / cover no-repeat;
   }
 
