@@ -18,6 +18,9 @@ const PAGES_COMPONENTS = [
   declarations: [
     ...PAGES_COMPONENTS,
   ],
+  entryComponents: [
+    
+  ]
 })
 export class PagesModule {
 }
