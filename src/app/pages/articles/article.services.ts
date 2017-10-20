@@ -5,7 +5,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { ArticleListItem } from './article.viewmodels';
+import { ArticleBackend, ArticleListItem } from './article.viewmodels';
 @Injectable()
 
 export class ArticleService {
@@ -21,9 +21,16 @@ export class ArticleService {
             .catch(this.handleErrorPromise);
     }
 
+    getArticleWithPromise(culture: string, id: string): Promise<ArticleBackend> {
+        let getUrl = this.domain + "api/" + culture + "/articles/" + id;
+        return this.http.get(getUrl).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
-        return body.data.items || {};
+        return ( body.isSucceed && body.data) || {};
     }
 
     private handleErrorPromise(error: Response | any) {

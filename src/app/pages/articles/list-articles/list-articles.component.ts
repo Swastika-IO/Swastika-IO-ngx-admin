@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Input, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
@@ -23,6 +24,7 @@ import { ServerDataSource  } from '../../components/components.component';
 export class ListArticlesComponent {
 
   settings = {
+    mode: 'external',
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -70,12 +72,15 @@ export class ListArticlesComponent {
         filter: false,
       },
     },
+    actions:{
+      add: true
+    }
   };
 
   source: ServerDataSource;// = new LocalDataSource();
   data: ArticleListItem[];
   pagingData = new PagingData();
-  constructor(private http: Http, private service: ArticleService) {
+  constructor(private router: Router, private http: Http, private service: ArticleService) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
     this.pagingData.endPoint = "http://localhost:54920/api/vi-vn/articles"
@@ -85,10 +90,9 @@ export class ListArticlesComponent {
 
   ngOnInit(): void {
     console.log('init');
-    let endPoint = this.pagingData.endPoint;// + "/" + this.pagingData.pageSize + "/" + this.pagingData.pageIndex;
     this.source = new ServerDataSource(this.http,
       {
-        endPoint: endPoint,
+        endPoint: this.pagingData.endPoint,
         dataKey: 'data.items',
         pagerLimitKey: 'data.pageSize',
         pagerPageKey: 'data.pageIndex',
@@ -104,7 +108,13 @@ export class ListArticlesComponent {
       .then(data => { this.data = data; this.source.load(data); },
       error => { });
   }
-
+  
+  onCreate(event): void {
+    this.router.navigate(['/pages/articles/create-article']);
+  }
+  onEdit(event): void {    
+     this.router.navigate(['/pages/articles/edit-article', event.data.id]);
+  }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
