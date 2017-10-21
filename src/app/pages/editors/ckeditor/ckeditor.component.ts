@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import './ckeditor.loader';
 import 'ckeditor';
@@ -6,15 +6,18 @@ import 'ckeditor';
 @Component({
   selector: 'ngx-ckeditor',
   template: `
-    <nb-card>
-      <nb-card-header>
-        CKEditor
-      </nb-card-header>
+    <nb-card>      
       <nb-card-body>
-        <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }"></ckeditor>
+        <ckeditor [ngModel]="renderValue"></ckeditor>
       </nb-card-body>
     </nb-card>
   `,
 })
-export class CKEditorComponent {
+export class CKEditorComponent implements OnInit {
+  renderValue: string;
+  @Input() value: string;
+  ngOnInit() {
+    this.renderValue = this.value;
+  }
+
 }

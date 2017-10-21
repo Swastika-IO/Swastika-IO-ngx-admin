@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
-
+import { Input, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
+import { ArticleService } from '../article.services';
+import { PagingData, ArticleListItem } from '../article.viewmodels';
+import { ImageRenderComponent, DatetimeRenderComponent } from '../../components/data-render/data-render.components';
 
+import { ServerDataSource  } from '../../components/components.component';
 @Component({
   selector: 'ngx-list-articles',
   templateUrl: './list-articles.component.html',
@@ -11,10 +16,15 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
       transform: translate3d(0, 0, 0);
     }
   `],
+  entryComponents: [
+    ImageRenderComponent,
+    DatetimeRenderComponent
+  ]
 })
 export class ListArticlesComponent {
 
   settings = {
+    mode: 'external',
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -32,38 +42,79 @@ export class ListArticlesComponent {
     columns: {
       id: {
         title: 'ID',
-        type: 'number',
+        type: 'string',
+        filter: false,
       },
-      firstName: {
-        title: 'First Name',
+      specificulture: {
+        title: 'Culture',
+        type: 'string',
+        filter: false,
+      },
+      template: {
+        title: 'Template',
+        type: 'string',
+        filter: false,
+      },
+      thumbnail: {
+        title: 'thumbnail',
+        type: 'custom',
+        renderComponent: ImageRenderComponent,
+        filter: false,
+      },
+      title: {
+        title: 'Title',
         type: 'string',
       },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
+      createdDateTime: {
+        title: 'Created Date',
+        type: 'custom',
+        renderComponent: DatetimeRenderComponent,
+        filter: false,
       },
     },
+    actions:{
+      add: true
+    }
   };
 
-  source: LocalDataSource = new LocalDataSource();
+  source: ServerDataSource;// = new LocalDataSource();
+  data: ArticleListItem[];
+  pagingData = new PagingData();
+  constructor(private router: Router, private http: Http, private service: ArticleService) {
+    this.pagingData.pageIndex = 0;
+    this.pagingData.pageSize = 15;
+    this.pagingData.endPoint = "http://localhost:54920/api/vi-vn/articles"
 
-  constructor(private service: SmartTableService) {
-    const data = this.service.getData();
-    this.source.load(data);
+    // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }
 
+  ngOnInit(): void {
+    console.log('init');
+    this.source = new ServerDataSource(this.http,
+      {
+        endPoint: this.pagingData.endPoint,
+        dataKey: 'data.items',
+        pagerLimitKey: 'data.pageSize',
+        pagerPageKey: 'data.pageIndex',
+        totalKey: 'data.totalItems',
+
+      }
+
+    );
+    this.source.getElements();
+  };
+  fetchData(pageSize: number, pageIndex: number): void {
+    this.service.getArticlesWithPromise('vi-vn', pageSize, pageIndex)
+      .then(data => { this.data = data; this.source.load(data); },
+      error => { });
+  }
+  
+  onCreate(event): void {
+    this.router.navigate(['/pages/articles/create-article']);
+  }
+  onEdit(event): void {    
+     this.router.navigate(['/pages/articles/edit-article', event.data.id]);
+  }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       event.confirm.resolve();
@@ -72,3 +123,6 @@ export class ListArticlesComponent {
     }
   }
 }
+
+
+
