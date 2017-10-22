@@ -13,7 +13,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Articles',
-    icon: 'ion-ios-paper-outline',
+    icon: 'nb-compose',
     link: '/pages/articles',
     children: [
       {
@@ -35,7 +35,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Pages',
-    icon: 'ion-ios-albums-outline',
+    icon: 'nb-tables',
     link: '/pages/pages',
     children: [
       {
@@ -57,7 +57,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Modules',
-    icon: 'ion-ios-browsers-outline',
+    icon: 'nb-keypad',
     link: '/pages/modules',
     children: [
       {
@@ -76,12 +76,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Apperance',
-    icon: 'ion-ios-analytics-outline',
+    icon: 'nb-layout-sidebar-left',
     link: '/pages/apperance',
     children: [
       {
         title: 'Add New',
-        icon: 'ion-ios-analytics-outline',
         link: '/pages/apperance/create',
       },
       {
@@ -96,7 +95,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Setting',
-    icon: 'ion-ios-gear-outline',
+    icon: 'nb-gear',
     link: '/pages/setting',
     children: [
       {

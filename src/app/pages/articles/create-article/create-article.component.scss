@@ -27,7 +27,39 @@
     overflow: visible;
   }
 
+  .feature-image{
+    nb-card-body{
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+  nb-action {
+    padding: 0 0.5rem 0 0;
+
+    i {
+      color: nb-theme(color-fg);
+      font-size: 3rem;
+      margin-right: 0.5rem;
+    }
+
+    span {
+      font-family: nb-theme(font-secondary);
+      font-weight: nb-theme(font-weight-bold);
+      color: nb-theme(color-fg-heading);
+      text-transform: uppercase;
+    }
+  }
+  }
   
+  .picture {
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    border-top-left-radius: nb-theme(card-border-radius);
+    border-top-right-radius: nb-theme(card-border-radius);
+    flex: 1;
+  }
 
   .input-group {
     margin-bottom: 1rem;
@@ -171,6 +203,7 @@
     display: block;
     padding: nb-theme(padding);
   }
+
 
   @include media-breakpoint-down(sm) {
     nb-card-body {
