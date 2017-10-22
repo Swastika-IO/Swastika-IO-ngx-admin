@@ -3,6 +3,25 @@
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 @include nb-install-component() {
+  nb-card{
+  }
+
+  .action-group{
+    //overflow: auto;
+    nb-card-body {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .action-groups-header {
+    flex-basis: 30%;
+
+    color: nb-theme(card-header-fg-heading);
+    font-family: nb-theme(card-header-font-family);
+    font-size: nb-theme(card-header-font-size);
+    font-weight: nb-theme(card-header-font-weight);
+  }
 
   nb-card-body {
     overflow: visible;
@@ -110,6 +129,8 @@
     padding: 0 0 0.75rem;
   }
 
+  
+
   ngb-rating {
     outline: none;
   }
@@ -136,7 +157,56 @@
     }
   }
 
+  nb-tabset {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nb-tab {
+    padding: nb-theme(padding);
+  }
+
+  /deep/ ngx-tab1, /deep/ ngx-tab2 {
+    display: block;
+    padding: nb-theme(padding);
+  }
+
+  @include media-breakpoint-down(sm) {
+    nb-card-body {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.75rem;
+
+      .action-groups-header {
+        margin: 0 0 0.5rem 0.25rem;
+      }
+    }
+
+    nb-action {
+      padding: 0 0.5rem;
+      /deep/ .control-icon {
+        font-size: 1.75rem;
+      }
+    }
+    nb-user /deep/ {
+      .user-container {
+        font-size: 0.875rem;
+      }
+      .user-picture {
+        height: 1.75rem;
+        width: 1.75rem;
+      }
+    }
+  }
+
   @include media-breakpoint-down(xs) {
+
+    nb-tabset /deep/ul {
+      font-size: 1rem;
+      padding: 0 0.25rem;
+    }
+
     button:not(.btn-icon) {
       padding: 0.75rem 1rem;
       font-size: 0.75rem;
