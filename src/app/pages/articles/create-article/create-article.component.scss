@@ -11,6 +11,26 @@
     nb-card-body {
       display: flex;
       align-items: center;
+      nb-actions{
+        width: 100%;
+      }
+      nb-actions > nb-action {
+        padding: 0;
+      }
+      nb-action {
+        i {
+          color: nb-theme(color-fg);
+          font-size: 2.5rem;
+          margin-right: 1rem;
+        }
+    
+        span {
+          font-family: nb-theme(font-secondary);
+          font-weight: nb-theme(font-weight-bold);
+          color: nb-theme(color-fg-heading);
+          text-transform: uppercase;
+        }
+      }
     }
   }
 
@@ -34,22 +54,22 @@
       padding: 0;
     }
 
-  nb-action {
-    padding: 0 0.5rem 0 0;
-
-    i {
-      color: nb-theme(color-fg);
-      font-size: 3rem;
-      margin-right: 0.5rem;
+  
+    nb-action {
+      i {
+        color: nb-theme(color-fg);
+        font-size: 2.5rem;
+        margin-right: 1rem;
+      }
+  
+      span {
+        font-family: nb-theme(font-secondary);
+        font-weight: nb-theme(font-weight-bold);
+        color: nb-theme(color-fg-heading);
+        text-transform: uppercase;
+      }
     }
-
-    span {
-      font-family: nb-theme(font-secondary);
-      font-weight: nb-theme(font-weight-bold);
-      color: nb-theme(color-fg-heading);
-      text-transform: uppercase;
-    }
-  }
+  
   }
   
   .picture {
@@ -204,7 +224,11 @@
     padding: nb-theme(padding);
   }
 
-
+  @include media-breakpoint-down(md) {
+    nb-actions nb-action {
+      padding: 0 0.75rem;
+    }
+  }
   @include media-breakpoint-down(sm) {
     nb-card-body {
       flex-direction: column;
@@ -217,18 +241,10 @@
     }
 
     nb-action {
-      padding: 0 0.5rem;
-      /deep/ .control-icon {
-        font-size: 1.75rem;
-      }
-    }
-    nb-user /deep/ {
-      .user-container {
-        font-size: 0.875rem;
-      }
-      .user-picture {
-        height: 1.75rem;
-        width: 1.75rem;
+      font-size: 0.75rem;
+      i {
+        font-size: 2rem;
+        margin-right: 0.5rem;
       }
     }
   }
@@ -243,6 +259,16 @@
     button:not(.btn-icon) {
       padding: 0.75rem 1rem;
       font-size: 0.75rem;
+    }
+  }
+  
+  @include media-breakpoint-down(is) {
+    nb-action i {
+      font-size: 1.75rem;
+      margin: 0;
+    }
+    span {
+      display: none;
     }
   }
 }
