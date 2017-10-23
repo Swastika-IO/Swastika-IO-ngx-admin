@@ -18,6 +18,6 @@ export class CKEditorComponent implements OnInit {
   @Input() value: string;
   ngOnInit() {
     this.renderValue = this.value;
+    
   }
-
 }

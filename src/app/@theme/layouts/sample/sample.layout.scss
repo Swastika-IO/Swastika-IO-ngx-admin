@@ -7,13 +7,6 @@
     background: url(../../../../assets/images/blur-bg.jpg) center center / cover no-repeat;
   }
 
-  nb-card {
-    background: url(../../../../assets/images/blur-bg-blurred.jpg) fixed !important;
-    transition: none;
-    background-size: 1913px 1076px;
-    background-position: 0px -71px;
-  }
-
   nb-layout-column.small {
     flex: 0.15 !important;
   }
