@@ -11,7 +11,7 @@ import { ApiResult, ArticleBackend, ArticleListItem } from './article.viewmodels
 export class ArticleService {
     domain = "http://localhost:54920/";
     constructor(private http: Http) {
-
+        
     }
 
     getArticlesWithPromise(culture: string, pageSize: number, pageIndex: number): Promise<ApiResult> {
@@ -28,15 +28,15 @@ export class ArticleService {
             .catch(this.handleErrorPromise);
     }
 
-    deleteArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
-        let getUrl = this.domain + "api/" + culture + "/articles/delete/" + id;
+    getDefaultArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
+        let getUrl = this.domain + "api/" + culture + "/articles/create";
         return this.http.get(getUrl).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
     }
 
-    getDefaultArticleWithPromise(culture: string, id: string): Promise<ArticleBackend> {
-        let getUrl = this.domain + "api/" + culture + "/articles/create";
+    deleteArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
+        let getUrl = this.domain + "api/" + culture + "/articles/delete/" + id;
         return this.http.get(getUrl).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);

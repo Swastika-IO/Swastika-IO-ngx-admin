@@ -33,7 +33,7 @@ export class EditArticleComponent {
 
   fetchData(): void {
     this.service.getArticleWithPromise('vi-vn', this.id)
-      .then(data => { this.data = data; },
+      .then(result => { this.data = result.data; },
       error => { });
   }
 }

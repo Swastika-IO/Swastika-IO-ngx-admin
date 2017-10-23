@@ -40,12 +40,12 @@ export class CreateArticleComponent {
   }
   getDefaultArticle(): void {
     this.service.getDefaultArticleWithPromise('vi-vn', this.data.id)
-    .then(data => { this.data = data;this.data.title='test'; },
+    .then(result => { this.data = result.data; },
     error => { });
   }
   fetchData(): void {
     this.service.getArticleWithPromise('vi-vn', this.data.id)
-      .then(data => { this.data = data; },
+      .then(result => { this.data = result.data; },
       error => { });
   }
   submit():void{
