@@ -35,6 +35,13 @@ export class ArticleService {
             .catch(this.handleErrorPromise);
     }
 
+    getDefaultArticleWithPromise(culture: string, id: string): Promise<ArticleBackend> {
+        let getUrl = this.domain + "api/" + culture + "/articles/create";
+        return this.http.get(getUrl).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body || {};

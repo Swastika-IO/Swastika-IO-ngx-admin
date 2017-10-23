@@ -5,17 +5,16 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { ArticlesRoutingModule, routedComponents } from './articles-routing.module';
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { ArticleService } from './article.services';
-import { NbSpinnerService } from '@nebular/theme';
 import { ImageRenderComponent, DatetimeRenderComponent } from '../components/data-render/data-render.components';
 import { CKEditorModule } from 'ng2-ckeditor';
-
-
+import { AceEditorModule } from 'ng2-ace-editor';
 @NgModule({
   imports: [
     ThemeModule,
     ArticlesRoutingModule,
-    Ng2SmartTableModule,  
-    CKEditorModule,  
+    Ng2SmartTableModule,
+    CKEditorModule,
+    AceEditorModule,
   ],
   declarations: [
     ...routedComponents,
@@ -25,7 +24,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
   providers: [
     SmartTableService,
     ArticleService,
-    NbSpinnerService,
   ],
 })
 export class ArticlesModule { }

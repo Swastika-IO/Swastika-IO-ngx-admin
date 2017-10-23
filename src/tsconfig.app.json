@@ -12,6 +12,9 @@
       "@nebular/*": [
         "../node_modules/@nebular/*"
       ],
+      "@types/*": [
+        "../node_modules/@types/*"
+      ],
       "rxjs/*": [
         "../node_modules/rxjs/*"
       ]

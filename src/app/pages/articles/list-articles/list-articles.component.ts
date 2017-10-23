@@ -1,14 +1,13 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Input, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import {Router} from "@angular/router";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
 import { PagingData, ArticleListItem } from '../article.viewmodels';
 import { ImageRenderComponent, DatetimeRenderComponent } from '../../components/data-render/data-render.components';
-import { NbSpinnerService } from '@nebular/theme';
-import { ServerDataSource } from '../../components/components.component';
-import { DOCUMENT } from '@angular/platform-browser';
+
+import { ServerDataSource  } from '../../components/components.component';
 @Component({
   selector: 'ngx-list-articles',
   templateUrl: './list-articles.component.html',
@@ -73,7 +72,7 @@ export class ListArticlesComponent {
         filter: false,
       },
     },
-    actions: {
+    actions:{
       add: true
     }
   };
@@ -81,9 +80,7 @@ export class ListArticlesComponent {
   source: ServerDataSource;// = new LocalDataSource();
   data: ArticleListItem[];
   pagingData = new PagingData();
-  constructor(private router: Router, private http: Http, private service: ArticleService,
-    private spinnerService: NbSpinnerService,
-    @Inject(DOCUMENT) private document: Document) {
+  constructor(private router: Router, private http: Http, private service: ArticleService) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
     this.pagingData.endPoint = "http://localhost:54920/api/vi-vn/articles"
@@ -92,7 +89,7 @@ export class ListArticlesComponent {
   }
 
   ngOnInit(): void {
-    
+    console.log('init');
     this.source = new ServerDataSource(this.http,
       {
         endPoint: this.pagingData.endPoint,
@@ -101,48 +98,28 @@ export class ListArticlesComponent {
         pagerPageKey: 'data.pageIndex',
         totalKey: 'data.totalItems',
 
-      },
-      this.document
+      }
+
     );
-    
+    this.source.getElements();
   };
   fetchData(pageSize: number, pageIndex: number): void {
     this.service.getArticlesWithPromise('vi-vn', pageSize, pageIndex)
-      .then(result => {
-        if (result.isSucceed) {
-          this.data = result.data;
-        }
-        else {
-          this.showErrors(result.errors, result.ex);
-        }
-      },
-      error => {  });
-  }
-
-  delete(event): void {
-    this.service.deleteArticleWithPromise('vi-vn', event.data.id)
-      .then(result => {
-        if (result.isSucceed) {
-          this.source.refresh();
-        } else {
-          this.showErrors(result.errors, result.ex);
-        }
-      },
+      .then(data => { this.data = data; this.source.load(data); },
       error => { });
   }
-  showErrors(errors: string[], ex:any) {
-    console.log(ex);
-  };
+  
   onCreate(event): void {
-    this.spinnerService.load();
-    // this.router.navigate(['/pages/articles/create-article']);
+    this.router.navigate(['/pages/articles/create-article']);
   }
-  onEdit(event): void {
-    this.router.navigate(['/pages/articles/edit-article', event.data.id]);
+  onEdit(event): void {    
+     this.router.navigate(['/pages/articles/edit-article', event.data.id]);
   }
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
-      this.delete(event);
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
     }
   }
 }

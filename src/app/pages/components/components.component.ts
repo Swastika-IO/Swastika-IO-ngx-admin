@@ -6,7 +6,7 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs';
 import { getDeepFromObject } from 'ng2-smart-table/lib/helpers';
-import { DOCUMENT } from '@angular/platform-browser';
+
 export class ServerDataSource extends LocalDataSource {
 
   protected data: Array<any> = [];
@@ -36,7 +36,7 @@ export class ServerDataSource extends LocalDataSource {
 
   protected lastRequestCount: number = 0;
 
-  constructor(protected _http: Http, conf: any, private document: Document) {
+  constructor(protected _http: Http, conf: any) {
     super();
 
     this.conf.endPoint = conf.endPoint;
@@ -56,6 +56,7 @@ export class ServerDataSource extends LocalDataSource {
     return this.requestElements().map(res => {
       this.lastRequestCount = this.extractTotalFromResponse(res);
       this.data = this.extractDataFromResponse(res);
+
       return this.data;
     }).toPromise();
   }
