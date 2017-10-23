@@ -1,8 +1,8 @@
-  <div class="row">
-    <div class="col-lg-12">
-        <nb-card class="action-group">
-            <nb-card-body>
-              <!-- <div class="action-groups-header">
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card class="action-group">
+      <nb-card-body>
+        <!-- <div class="action-groups-header">
                 Action
               </div>
               <nb-actions size="medium">
@@ -12,198 +12,234 @@
                 <nb-action icon="ion-calendar"> Scheduler</nb-action>
                 <nb-action icon="nb-gear"> Setting</nb-action>
               </nb-actions> -->
-              <nb-actions size="medium" fullWidth>
-                  <nb-action>
-                    <i class="ion-ios-cloud-upload-outline"></i><a href="#"><span>Submit</span></a>
-                  </nb-action>
-                  <nb-action>
-                    <i class="ion-eye"></i><span>Publish</span>
-                  </nb-action>
-                  <nb-action>
-                    <i class="ion-compose"></i><span>Draft</span>
-                  </nb-action>
-                  <nb-action>
-                    <i class="ion-calendar"></i><span>Scheduler</span>
-                  </nb-action>
-                </nb-actions>
-            </nb-card-body>
-          </nb-card>
-    </div>
-    <div class="col-lg-8">
-      <nb-card size="">
-        <nb-tabset fullWidth>
-          <nb-tab tabTitle="Main contents">
-            <div class="input-group">
-              <input type="text" placeholder="Title" class="form-control" />
-            </div>
-            <div class="input-group">
-              <input type="text" placeholder="Static URL" class="form-control" />
-            </div>
-            <div class="input-group">
-              <textarea rows="5" placeholder="Excerpt" class="form-control"></textarea>
-            </div>
-            <div class="input-group">
-              <textarea rows="20" placeholder="Main Content" class="form-control"></textarea>
-            </div>
-          </nb-tab>
-          <nb-tab tabTitle="SEO">
-            <div class="input-group">
-              <input type="text" placeholder="Title" class="form-control" />
-            </div>
-            <div class="input-group">
-              <input type="text" placeholder="Name" class="form-control" />
-            </div>
-            <div class="input-group">
-              <textarea rows="5" placeholder="Description" class="form-control"></textarea>
-            </div>
-            <div class="input-group">
-              <textarea rows="5" placeholder="Keywords" class="form-control"></textarea>
-            </div>
-          </nb-tab>
-          <nb-tab tabTitle="Parents">
-            <nb-checkbox status="success" class="col-sm-4">Checkbox with Success</nb-checkbox>
-            <nb-checkbox status="warning" class="col-sm-4">Checkbox with Warning</nb-checkbox>
-            <nb-checkbox status="danger" class="col-sm-4">Checkbox with Danger</nb-checkbox>
-            <nb-checkbox status="success" class="col-sm-4">Checkbox with Success</nb-checkbox>
-            <nb-checkbox status="warning" class="col-sm-4">Checkbox with Warning</nb-checkbox>
-            <nb-checkbox status="danger" class="col-sm-4">Checkbox with Danger</nb-checkbox>
-            <nb-checkbox status="success" class="col-sm-4">Checkbox with Success</nb-checkbox>
-            <nb-checkbox status="warning" class="col-sm-4">Checkbox with Warning</nb-checkbox>
-            <nb-checkbox status="danger" class="col-sm-4">Checkbox with Danger</nb-checkbox>
-          </nb-tab>
-          <nb-tab tabTitle="Modules">
-          </nb-tab>
-          <nb-tab tabTitle="Layout">
-            
-              <div class="input-group">
-                  <div class="input-group-btn" ngbDropdown>
-                    <button type="button" class="btn btn-success dropdown-toggle" ngbDropdownToggle>
-                      Action
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li class="dropdown-item">[+] Create New</li>
-                      <li class="dropdown-item">Template 1</li>
-                      <li class="dropdown-item">Template 2</li>
-                      <li class="dropdown-item">Template 3</li>
-                      <li class="dropdown-item">Template 1</li>
-                      <li class="dropdown-item">Template 1</li>
-                      <li class="dropdown-item">Template 1</li>
-                      <li class="dropdown-item">Template 1</li>
-                      <li class="dropdown-item">Template 1</li>
-                      <li class="dropdown-item">Template 1</li>
-                      <!-- <div role="separator" class="dropdown-divider"></div>
-                          <li class="dropdown-item">Separated link</li> -->
-                    </ul>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Template name...">
-                </div>
-                <div class="input-group">
-                  <textarea rows="20" placeholder="Description" class="form-control"></textarea>
-                </div>
-          </nb-tab>
-        </nb-tabset>
-      </nb-card>
-
-    </div>
-    <div class="col-lg-4">
-      <nb-card>
-        <nb-card-header>Information</nb-card-header>
-        <nb-card-body>
-
-        </nb-card-body>
-      </nb-card>
-      <nb-card size="medium" class="feature-image">
-          <nb-card-body>
-            <div class="picture" style="background-image: url('assets/images/camera1.jpg');"></div>
-        
-          </nb-card-body>
-          <nb-card-footer>
-              <nb-actions size="medium" fullWidth>
-                <nb-action>
-                  <i class="ion-ios-plus-empty"></i><span>Upload</span>
-                </nb-action>
-                <nb-action>
-                  <i class="ion-ios-close-empty"></i><span>Remove</span>
-                </nb-action>
-              </nb-actions>
-            </nb-card-footer>
-        </nb-card>
-      <nb-card>
-        <nb-card-header>Post Type</nb-card-header>
-        <nb-card-body>
-          <div class="demo-checkboxes col-sm-12">
-            <nb-checkbox>Checkbox 1</nb-checkbox>
-            <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Bootstrap Checkbox</span>
-            </label>
-          </div>
-        </nb-card-body>
-      </nb-card>
-
-      <nb-card>
-          <nb-card-header>Tags</nb-card-header>
-          <nb-card-body>
-  
-          </nb-card-body>
-        </nb-card>
-      <nb-card>
-        <nb-card-header>Validation States</nb-card-header>
-        <nb-card-body>
-          <div class="form-group">
-            <input type="text" placeholder="Input with Success" class="form-control form-control-success">
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="Input with Warning" class="form-control form-control-warning">
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="Input with Danger" class="form-control form-control-danger">
-          </div>
-          <div class="form-group validation-checkboxes row">
-            <nb-checkbox status="success" class="col-sm-4">Checkbox with Success</nb-checkbox>
-            <nb-checkbox status="warning" class="col-sm-4">Checkbox with Warning</nb-checkbox>
-            <nb-checkbox status="danger" class="col-sm-4">Checkbox with Danger</nb-checkbox>
-          </div>
-          <div class="form-group has-success">
-            <input type="text" placeholder="Input with Success Icon" class="form-control form-control-success">
-          </div>
-          <div class="form-group has-warning">
-            <input type="text" placeholder="Input with Warning Icon" class="form-control form-control-warning">
-          </div>
-          <div class="form-group has-danger">
-            <input type="text" placeholder="Input with Danger Icon" class="form-control form-control-danger">
-          </div>
-        </nb-card-body>
-      </nb-card>
-
-      <nb-card>
-        <nb-card-body class="demo-rating">
-          <span class="rating-header">Rating</span>
-          <div>
-            <ngb-rating [(rate)]="starRate" max=5>
-              <ng-template let-fill="fill">
-                <span class="star fill" [class.filled]="fill === 100">
-                  <i class="ion-android-star" *ngIf="fill === 100"></i>
-                  <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
-                </span>
-              </ng-template>
-            </ngb-rating>
-            <span class="current-rate">{{ starRate }}</span>
-          </div>
-          <div>
-            <ngb-rating [(rate)]="heartRate" max=5>
-              <ng-template let-fill="fill">
-                <span class="star fill" [class.filled]="fill === 100">
-                  <i class="ion-ios-heart" *ngIf="fill === 100"></i>
-                  <i class="ion-ios-heart-outline" *ngIf="fill !== 100"></i>
-                </span>
-              </ng-template>
-            </ngb-rating>
-            <span class="current-rate">{{ heartRate }}</span>
-          </div>
-        </nb-card-body>
-      </nb-card>
-    </div>
+        <nb-actions size="medium" fullWidth>
+          <nb-action>
+            <i class="ion-ios-cloud-upload-outline"></i>
+            <a (click)="submit()">
+              <span>Submit</span>
+            </a>
+          </nb-action>
+          <nb-action>
+            <i class="ion-eye"></i>
+            <span>Publish</span>
+          </nb-action>
+          <nb-action>
+            <i class="ion-compose"></i>
+            <span>Draft</span>
+          </nb-action>
+          <nb-action>
+            <i class="ion-calendar"></i>
+            <span>Scheduler</span>
+          </nb-action>
+        </nb-actions>
+      </nb-card-body>
+    </nb-card>
   </div>
+  <div class="col-lg-8">
+    <nb-card size="">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Main contents">
+          <div class="input-group">
+            <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
+          </div>
+          <div class="input-group">
+            <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
+          </div>
+          <div class="input-group">
+            <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
+          </div>
+          <div class="input-group">
+            <!--*ngIf="data?.content"-->
+            <ckeditor [(ngModel)]="data.content" [config]="{ extraPlugins: 'divarea', width: '100%' }"></ckeditor>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="SEO">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="data.seotitle" placeholder="Title" class="form-control" />
+          </div>
+          <div class="input-group">
+            <input type="text" [(ngModel)]="data.seoname" placeholder="Name" class="form-control" />
+          </div>
+          <div class="input-group">
+            <textarea rows="5" [(ngModel)]="data.seodescription" placeholder="Description" class="form-control"></textarea>
+          </div>
+          <div class="input-group">
+            <textarea rows="5" [(ngModel)]="data.seokeywords" placeholder="Keywords" class="form-control"></textarea>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Parents">
+          <h3>Categories</h3>
+          <div class="col-md-12 row">
+            <div class="col-md-6" *ngFor="let cate of data.categories">
+              <nb-checkbox [(ngModel)]="cate.isActived" status="success">{{cate.description}}</nb-checkbox>
+            </div>
+          </div>
+          <h3>Modules</h3>
+          <div class="col-md-12 row">
+            <div class="col-md-6" *ngFor="let module of data.modules">
+              <nb-checkbox [(ngModel)]="module.isActived" status="success">{{module.description}}</nb-checkbox>
+            </div>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Modules">
+          <h3>Sub Modules</h3>
+          <div class="col-md-12 row">
+            <div class="col-md-6" *ngFor="let module of data.moduleNavs">
+              <nb-checkbox [(ngModel)]="module.isActived" status="success">{{module.description}}</nb-checkbox>
+            </div>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Languages">
+          <div class="col-md-12 row">
+            <div class="col-md-4" *ngFor="let culture of data.listSupportedCulture">
+              <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
+                {{culture.description}}<i class="{{culture.icon}}"></i>
+              </nb-checkbox>
+            </div>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Layout">
+
+          <div class="input-group">
+            <div class="input-group-btn" ngbDropdown>
+              <button type="button" class="btn btn-success dropdown-toggle" ngbDropdownToggle>
+                Action
+              </button>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">[+] Create New</li>
+                <li class="dropdown-item">Template 1</li>
+                <li class="dropdown-item">Template 2</li>
+                <li class="dropdown-item">Template 3</li>
+                <li class="dropdown-item">Template 1</li>
+                <li class="dropdown-item">Template 1</li>
+                <li class="dropdown-item">Template 1</li>
+                <li class="dropdown-item">Template 1</li>
+                <li class="dropdown-item">Template 1</li>
+                <li class="dropdown-item">Template 1</li>
+                <!-- <div role="separator" class="dropdown-divider"></div>
+                          <li class="dropdown-item">Separated link</li> -->
+              </ul>
+            </div>
+            <input type="text" class="form-control" placeholder="Template name...">
+          </div>
+          <div class="input-group">            
+            <ace-editor #editor 
+            [(text)]="data.title" 
+            [mode]="'sql'" 
+            [theme]="'eclipse'"
+            [options]="options"
+            [readOnly]="false"
+            [autoUpdateContent]="true"
+            [durationBeforeCallback]="1000"
+            style="height:450px;"></ace-editor>
+            
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+
+  </div>
+  <div class="col-lg-4">
+    <nb-card>
+      <nb-card-header>Information</nb-card-header>
+      <nb-card-body>
+
+      </nb-card-body>
+    </nb-card>
+    <nb-card size="medium" class="feature-image">
+      <nb-card-body>
+        <div class="picture" style="background-image: url('assets/images/camera1.jpg');"></div>
+
+      </nb-card-body>
+      <nb-card-footer>
+        <nb-actions size="medium" fullWidth>
+          <nb-action>
+            <i class="ion-ios-plus-empty"></i>
+            <span>Upload</span>
+          </nb-action>
+          <nb-action>
+            <i class="ion-ios-close-empty"></i>
+            <span>Remove</span>
+          </nb-action>
+        </nb-actions>
+      </nb-card-footer>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>Post Type</nb-card-header>
+      <nb-card-body>
+        <div class="demo-checkboxes col-sm-12">
+          <nb-checkbox>Checkbox 1</nb-checkbox>
+          <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Bootstrap Checkbox</span>
+          </label>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card>
+      <nb-card-header>Tags</nb-card-header>
+      <nb-card-body>
+
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>Validation States</nb-card-header>
+      <nb-card-body>
+        <div class="form-group">
+          <input type="text" placeholder="Input with Success" class="form-control form-control-success">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Input with Warning" class="form-control form-control-warning">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Input with Danger" class="form-control form-control-danger">
+        </div>
+        <div class="form-group validation-checkboxes row">
+          <nb-checkbox status="success" class="col-sm-4">Checkbox with Success</nb-checkbox>
+          <nb-checkbox status="warning" class="col-sm-4">Checkbox with Warning</nb-checkbox>
+          <nb-checkbox status="danger" class="col-sm-4">Checkbox with Danger</nb-checkbox>
+        </div>
+        <div class="form-group has-success">
+          <input type="text" placeholder="Input with Success Icon" class="form-control form-control-success">
+        </div>
+        <div class="form-group has-warning">
+          <input type="text" placeholder="Input with Warning Icon" class="form-control form-control-warning">
+        </div>
+        <div class="form-group has-danger">
+          <input type="text" placeholder="Input with Danger Icon" class="form-control form-control-danger">
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card>
+      <nb-card-body class="demo-rating">
+        <span class="rating-header">Rating</span>
+        <div>
+          <ngb-rating [(rate)]="starRate" max=5>
+            <ng-template let-fill="fill">
+              <span class="star fill" [class.filled]="fill === 100">
+                <i class="ion-android-star" *ngIf="fill === 100"></i>
+                <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+              </span>
+            </ng-template>
+          </ngb-rating>
+          <span class="current-rate">{{ starRate }}</span>
+        </div>
+        <div>
+          <ngb-rating [(rate)]="heartRate" max=5>
+            <ng-template let-fill="fill">
+              <span class="star fill" [class.filled]="fill === 100">
+                <i class="ion-ios-heart" *ngIf="fill === 100"></i>
+                <i class="ion-ios-heart-outline" *ngIf="fill !== 100"></i>
+              </span>
+            </ng-template>
+          </ngb-rating>
+          <span class="current-rate">{{ heartRate }}</span>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

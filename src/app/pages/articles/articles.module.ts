@@ -7,14 +7,14 @@ import { SmartTableService } from '../../@core/data/smart-table.service';
 import { ArticleService } from './article.services';
 import { ImageRenderComponent, DatetimeRenderComponent } from '../components/data-render/data-render.components';
 import { CKEditorModule } from 'ng2-ckeditor';
-
-
+import { AceEditorModule } from 'ng2-ace-editor';
 @NgModule({
   imports: [
     ThemeModule,
     ArticlesRoutingModule,
-    Ng2SmartTableModule,  
-    CKEditorModule,  
+    Ng2SmartTableModule,
+    CKEditorModule,
+    AceEditorModule,
   ],
   declarations: [
     ...routedComponents,

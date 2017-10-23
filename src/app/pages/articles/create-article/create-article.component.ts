@@ -1,4 +1,13 @@
+
 import { Component } from '@angular/core';
+import '../../editors/ckeditor/ckeditor.loader';
+import 'ckeditor';
+import 'ngx-input-file'
+
+import { ActivatedRoute } from '@angular/router';
+import { ArticleService } from '../article.services';
+import { ArticleBackend } from '../article.viewmodels'
+
 
 @Component({
   selector: 'ngx-create-article',
@@ -7,6 +16,39 @@ import { Component } from '@angular/core';
 })
 export class CreateArticleComponent {
 
-  starRate: number = 2;
-  heartRate: number = 4;
+  id: string;
+  private sub: any;
+  data = new ArticleBackend();
+  constructor(private route: ActivatedRoute, private service: ArticleService) { }
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      // In a real app: dispatch action to load the details here.
+
+      this.data.id = params['id']; // (+) converts string 'id' to a number
+      if (this.id != undefined) {
+        this.fetchData();
+      }
+      else {
+        this.getDefaultArticle();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+  getDefaultArticle(): void {
+    this.service.getDefaultArticleWithPromise('vi-vn', this.data.id)
+    .then(data => { this.data = data;this.data.title='test'; },
+    error => { });
+  }
+  fetchData(): void {
+    this.service.getArticleWithPromise('vi-vn', this.data.id)
+      .then(data => { this.data = data; },
+      error => { });
+  }
+  submit():void{
+    console.log(this.data);
+  }
 }
