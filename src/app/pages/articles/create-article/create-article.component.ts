@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import '../../editors/ckeditor/ckeditor.loader';
 import 'ckeditor';
 import 'ngx-input-file'
@@ -21,34 +21,28 @@ export class CreateArticleComponent {
   data = new ArticleBackend();
   constructor(private route: ActivatedRoute, private service: ArticleService) { }
 
-  ngOnInit() {
+  OnInit() {
     this.sub = this.route.params.subscribe(params => {
       // In a real app: dispatch action to load the details here.
 
       this.data.id = params['id']; // (+) converts string 'id' to a number
-      if (this.id != undefined) {
+      if (this.id !== undefined) {
         this.fetchData();
-      }
-      else {
+      } else {
         this.getDefaultArticle();
       }
     });
   }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
   getDefaultArticle(): void {
     this.service.getDefaultArticleWithPromise('vi-vn', this.data.id)
-    .then(result => { this.data = result.data; },
-    error => { });
+      .then(result => { this.data = result.data; },
+      error => { });
   }
   fetchData(): void {
     this.service.getArticleWithPromise('vi-vn', this.data.id)
       .then(result => { this.data = result.data; },
       error => { });
   }
-  submit():void{
-    console.log(this.data);
+  submit(): void {
   }
 }

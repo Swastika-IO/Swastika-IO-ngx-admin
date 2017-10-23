@@ -13,11 +13,11 @@ const routes: Routes = [{
   children: [
     {
       path: 'list-articles',
-      component: ListArticlesComponent, 
+      component: ListArticlesComponent,
     },
     {
       path: 'list-draft-articles',
-      component: ListDraftArticlesComponent, 
+      component: ListDraftArticlesComponent,
     },
     {
       path: 'create-article',
@@ -26,14 +26,14 @@ const routes: Routes = [{
     {
       path: 'edit-article/:id',
       component: EditArticleComponent,
-    }
+    },
   ],
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-}) 
+})
 export class ArticlesRoutingModule { }
 
 export const routedComponents = [

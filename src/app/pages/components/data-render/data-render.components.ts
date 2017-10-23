@@ -33,17 +33,16 @@ export class DatetimeRenderComponent implements ViewCell, OnInit {
   @Input() rowData: any;
 
   ngOnInit() {
-    
     // return if input date is null or undefined
     if (!this.value) {
       return;
     }
-    
     // append 'Z' to the date string to indicate UTC time if the timezone isn't already specified
     if (this.value.indexOf('Z') === -1 && this.value.indexOf('+') === -1) {
-      this.value += 'Z';   
+      this.value += 'Z';
     }
-    let date = new Date(this.value);
+    const date = new Date(this.value);
     this.renderValue = date.toDateString();
   }
 }
+

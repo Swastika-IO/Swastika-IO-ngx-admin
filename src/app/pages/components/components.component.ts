@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { LocalDataSource } from 'ng2-smart-table';
 import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { getDeepFromObject } from 'ng2-smart-table/lib/helpers';
 
 export class ServerDataSource extends LocalDataSource {
@@ -68,7 +68,7 @@ export class ServerDataSource extends LocalDataSource {
    */
   protected extractDataFromResponse(res: any): Array<any> {
     const rawData = res.json();
-    let data = this.conf.dataKey ? getDeepFromObject(rawData, this.conf.dataKey, []) : rawData;
+    const data = this.conf.dataKey ? getDeepFromObject(rawData, this.conf.dataKey, []) : rawData;
 
     if (data instanceof Array) {
       return data;
@@ -108,11 +108,11 @@ export class ServerDataSource extends LocalDataSource {
   }
 
   protected addSortRequestOptions(requestOptions: RequestOptionsArgs): RequestOptionsArgs {
-    let searchParams: URLSearchParams = <URLSearchParams>requestOptions.search;
+    const searchParams: URLSearchParams = <URLSearchParams>requestOptions.search;
 
     if (this.sortConf) {
       this.sortConf.forEach((fieldConf) => {
-        requestOptions.url += "/" + fieldConf.field + "/" + (fieldConf.direction == 'asc' ? 0 : 1);
+        requestOptions.url += '/' + fieldConf.field + '/' + (fieldConf.direction === 'asc' ? 0 : 1);
         // searchParams.set(this.conf.sortFieldKey, fieldConf.field);
         // searchParams.set(this.conf.sortDirKey, fieldConf.direction.toUpperCase());
       });
@@ -122,12 +122,12 @@ export class ServerDataSource extends LocalDataSource {
   }
 
   protected addFilterRequestOptions(requestOptions: RequestOptionsArgs): RequestOptionsArgs {
-    let searchParams: URLSearchParams = <URLSearchParams>requestOptions.search;
+    const searchParams: URLSearchParams = <URLSearchParams>requestOptions.search;
 
     if (this.filterConf.filters) {
       this.filterConf.filters.forEach((fieldConf: any) => {
         if (fieldConf['search']) {
-          requestOptions.url += "/" + fieldConf['search'];
+          requestOptions.url += '/' + fieldConf['search'];
           // searchParams.set(this.conf.filterFieldKey.replace('#field#', fieldConf['field']), fieldConf['search']);
         }
       });
@@ -137,10 +137,10 @@ export class ServerDataSource extends LocalDataSource {
   }
 
   protected addPagerRequestOptions(requestOptions: RequestOptionsArgs): RequestOptionsArgs {
-    let searchParams: URLSearchParams = <URLSearchParams>requestOptions.search;
+    const searchParams: URLSearchParams = <URLSearchParams>requestOptions.search;
 
     if (this.pagingConf && this.pagingConf['page'] && this.pagingConf['perPage']) {
-      requestOptions.url += "/" + this.pagingConf['perPage'] + "/" + (this.pagingConf['page'] - 1);
+      requestOptions.url += '/' + this.pagingConf['perPage'] + '/' + (this.pagingConf['page'] - 1);
       // searchParams.set(this.conf.pagerPageKey, this.pagingConf['page']);
       // searchParams.set(this.conf.pagerLimitKey, this.pagingConf['perPage']);
     }

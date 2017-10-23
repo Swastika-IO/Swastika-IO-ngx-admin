@@ -18,7 +18,7 @@ export class EditArticleComponent {
   data = new ArticleBackend();
   constructor(private route: ActivatedRoute, private service: ArticleService) { }
 
-  ngOnInit() {
+  OnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']; // (+) converts string 'id' to a number
 
@@ -27,7 +27,7 @@ export class EditArticleComponent {
     });
   }
 
-  ngOnDestroy() {
+  OnDestroy() {
     this.sub.unsubscribe();
   }
 

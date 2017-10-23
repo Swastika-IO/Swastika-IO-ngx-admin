@@ -9,41 +9,40 @@ import { ApiResult, ArticleBackend, ArticleListItem } from './article.viewmodels
 @Injectable()
 
 export class ArticleService {
-    domain = "http://localhost:54920/";
+    domain = 'http://localhost:54920/';
     constructor(private http: Http) {
-        
     }
 
     getArticlesWithPromise(culture: string, pageSize: number, pageIndex: number): Promise<ApiResult> {
-        let getUrl = this.domain + "api/" + culture + "/articles/" + pageSize + "/" + pageIndex;
+        const getUrl = this.domain + 'api/' + culture + '/articles/' + pageSize + '/' + pageIndex;
         return this.http.get(getUrl).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
     }
 
     getArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
-        let getUrl = this.domain + "api/" + culture + "/articles/" + id;
+        const getUrl = this.domain + 'api/' + culture + '/articles/' + id;
         return this.http.get(getUrl).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
     }
 
     getDefaultArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
-        let getUrl = this.domain + "api/" + culture + "/articles/create";
+        const getUrl = this.domain + 'api/' + culture + '/articles/create';
         return this.http.get(getUrl).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
     }
 
     deleteArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
-        let getUrl = this.domain + "api/" + culture + "/articles/delete/" + id;
+        const getUrl = this.domain + 'api/' + culture + '/articles/delete/' + id;
         return this.http.get(getUrl).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
     }
 
     private extractData(res: Response) {
-        let body = res.json();
+        const body = res.json();
         return body || {};
     }
 
@@ -52,3 +51,4 @@ export class ArticleService {
         return Promise.reject(error.message || error);
     }
 }
+

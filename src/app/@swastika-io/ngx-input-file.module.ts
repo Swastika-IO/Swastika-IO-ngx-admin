@@ -4,14 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 const options: InputFileOptions = new InputFileOptions(
     'auth-token-value',
-    'Authorization'
+    'Authorization',
 );
 
 @NgModule({
-    imports: [ 
+    imports: [
         BrowserModule,
-        InputFileModule,    
-    ]
+        InputFileModule,
+    ],
 })
 
 export class NgxInputFileModule {
@@ -19,3 +19,4 @@ export class NgxInputFileModule {
         repository.setOptions(options);
     }
 }
+

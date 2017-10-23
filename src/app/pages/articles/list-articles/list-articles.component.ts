@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Input, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
@@ -19,8 +19,8 @@ import { DOCUMENT } from '@angular/platform-browser';
   `],
   entryComponents: [
     ImageRenderComponent,
-    DatetimeRenderComponent
-  ]
+    DatetimeRenderComponent,
+  ],
 })
 export class ListArticlesComponent {
 
@@ -74,11 +74,11 @@ export class ListArticlesComponent {
       },
     },
     actions: {
-      add: true
-    }
+      add: true,
+    },
   };
 
-  source: ServerDataSource;// = new LocalDataSource();
+  source: ServerDataSource;
   data: ArticleListItem[];
   pagingData = new PagingData();
   constructor(private router: Router, private http: Http, private service: ArticleService,
@@ -86,13 +86,12 @@ export class ListArticlesComponent {
     @Inject(DOCUMENT) private document: Document) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
-    this.pagingData.endPoint = "http://localhost:54920/api/vi-vn/articles"
+    this.pagingData.endPoint = 'http://localhost:54920/api/vi-vn/articles'
 
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }
 
-  ngOnInit(): void {
-    
+  OnInit(): void {
     this.source = new ServerDataSource(this.http,
       {
         endPoint: this.pagingData.endPoint,
@@ -101,17 +100,15 @@ export class ListArticlesComponent {
         pagerPageKey: 'data.pageIndex',
         totalKey: 'data.totalItems',
 
-      }
+      },
     );
-    
   };
   fetchData(pageSize: number, pageIndex: number): void {
     this.service.getArticlesWithPromise('vi-vn', pageSize, pageIndex)
       .then(result => {
         if (result.isSucceed) {
           this.data = result.data;
-        }
-        else {
+        } else {
           this.showErrors(result.errors, result.ex);
         }
       },
@@ -129,20 +126,19 @@ export class ListArticlesComponent {
       },
       error => { });
   }
-  showErrors(errors: string[], ex:any) {
-    console.log(ex);
+  showErrors(errors: string[], ex: any) {
   };
   onCreate(event): void {
     this.router.navigate(['/pages/articles/create-article']);
-  }
+  };
   onEdit(event): void {
     this.router.navigate(['/pages/articles/edit-article', event.data.id]);
-  }
+  };
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.delete(event);
     }
-  }
+  };
 }
 
 
