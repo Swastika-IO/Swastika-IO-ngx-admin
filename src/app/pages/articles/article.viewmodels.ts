@@ -100,3 +100,11 @@ export class PagingData {
     totalItems: number;
     items: any[]
 }
+
+export class ApiResult
+{
+    isSucceed: boolean;
+    data: any;
+    errors: string[];
+    ex: any;
+}
