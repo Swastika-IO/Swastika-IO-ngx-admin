@@ -18,7 +18,7 @@ export class EditArticleComponent {
   data = new ArticleBackend();
   constructor(private route: ActivatedRoute, private service: ArticleService) { }
 
-  ngOnInit() {
+  OnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']; // (+) converts string 'id' to a number
 
@@ -27,13 +27,13 @@ export class EditArticleComponent {
     });
   }
 
-  ngOnDestroy() {
+  OnDestroy() {
     this.sub.unsubscribe();
   }
 
   fetchData(): void {
     this.service.getArticleWithPromise('vi-vn', this.id)
-      .then(data => { this.data = data; },
+      .then(result => { this.data = result.data; },
       error => { });
   }
 }

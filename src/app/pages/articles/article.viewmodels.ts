@@ -1,4 +1,4 @@
-export class SupportdCulture{
+export class SupportdCulture {
     id: number;
     specificulture: string;
     lcid: string;
@@ -9,7 +9,7 @@ export class SupportdCulture{
     isSupported: boolean;
 }
 
-export class Template{
+export class Template {
     fileFolder: string;
     filename: string;
     extension: string;
@@ -17,7 +17,7 @@ export class Template{
     fileStream: string;
 }
 
-export class CategotyArticleNav{
+export class CategotyArticleNav {
     articleId: string;
     categoryId: number;
     specificulture: string;
@@ -25,7 +25,7 @@ export class CategotyArticleNav{
     description: string;
 }
 
-export class ModuleArticleNav{
+export class ModuleArticleNav {
     articleId: string;
     moduleId: number;
     specificulture: string;
@@ -33,7 +33,7 @@ export class ModuleArticleNav{
     description: string;
 }
 
-export class ArticleModuleNav{
+export class ArticleModuleNav {
     articleId: string;
     id: number;
     specificulture: string;
@@ -41,7 +41,7 @@ export class ArticleModuleNav{
     description: string;
 }
 
-export class ArticleBackend{
+export class ArticleBackend {
     id: string;
     specificulture: string;
     image: string;
@@ -65,13 +65,13 @@ export class ArticleBackend{
 
     listSupportedCulture: SupportdCulture[];
     categories: CategotyArticleNav[];
-    modules:ModuleArticleNav[];
+    modules: ModuleArticleNav[];
     moduleNavs: ArticleModuleNav[];
     view: Template;
     templates: Template[];
 }
 
-export class ArticleListItem{
+export class ArticleListItem {
     id: string;
     specificulture: string;
     template: string;
@@ -100,3 +100,11 @@ export class PagingData {
     totalItems: number;
     items: any[]
 }
+
+export class ApiResult {
+    isSucceed: boolean;
+    data: any;
+    errors: string[];
+    ex: any;
+}
+

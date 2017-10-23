@@ -19,8 +19,7 @@ const PAGES_COMPONENTS = [
     ...PAGES_COMPONENTS,
   ],
   entryComponents: [
-    
-  ]
+  ],
 })
 export class PagesModule {
 }

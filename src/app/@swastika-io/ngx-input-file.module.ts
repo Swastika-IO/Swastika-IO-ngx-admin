@@ -10,7 +10,7 @@ const options: InputFileOptions = new InputFileOptions(
 @NgModule({
     imports: [
         BrowserModule,
-        InputFileModule,    
+        InputFileModule,
     ],
 })
 

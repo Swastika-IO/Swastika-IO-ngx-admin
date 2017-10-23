@@ -6,7 +6,7 @@ import 'ckeditor';
 @Component({
   selector: 'ngx-ckeditor',
   template: `
-    <nb-card>      
+    <nb-card>
       <nb-card-body>
         <ckeditor [ngModel]="renderValue"></ckeditor>
       </nb-card-body>
@@ -18,6 +18,5 @@ export class CKEditorComponent implements OnInit {
   @Input() value: string;
   ngOnInit() {
     this.renderValue = this.value;
-    
   }
 }
