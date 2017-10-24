@@ -45,7 +45,9 @@ export class ArticleBackend {
     id: string;
     specificulture: string;
     image: string;
+    imageFileStream: string;
     thumbnail: string;
+    thumbnailFileStream: string;
     title: string;
     staticUrl: string;
     briefContent: string;
@@ -57,7 +59,7 @@ export class ArticleBackend {
     source: string;
     views: string;
     type: number;
-    createdDate: Date;
+    createdDateTime: Date;
     createdBy: string;
     isVisible: boolean;
     isDeleted: boolean;

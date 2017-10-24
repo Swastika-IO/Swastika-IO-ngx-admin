@@ -1,4 +1,5 @@
-import { Component, Inject, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
@@ -21,7 +22,8 @@ import { DOCUMENT } from '@angular/platform-browser';
     DatetimeRenderComponent,
   ],
 })
-export class ListArticlesComponent implements AfterViewInit {
+export class ListArticlesComponent {
+
   settings = {
     mode: 'external',
     add: {
@@ -75,6 +77,7 @@ export class ListArticlesComponent implements AfterViewInit {
       add: true,
     },
   };
+
   source: ServerDataSource;
   data: ArticleListItem[];
   pagingData = new PagingData();
@@ -87,7 +90,8 @@ export class ListArticlesComponent implements AfterViewInit {
 
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }
-  ngAfterViewInit(): void {
+
+  ngOnInit(): void {
     this.source = new ServerDataSource(this.http,
       {
         endPoint: this.pagingData.endPoint,
@@ -98,8 +102,7 @@ export class ListArticlesComponent implements AfterViewInit {
 
       },
     );
-  }
-
+  };
   fetchData(pageSize: number, pageIndex: number): void {
     this.service.getArticlesWithPromise('vi-vn', pageSize, pageIndex)
       .then(result => {
@@ -109,7 +112,7 @@ export class ListArticlesComponent implements AfterViewInit {
           this.showErrors(result.errors, result.ex);
         }
       },
-      error => { });
+      error => {  });
   }
 
   delete(event): void {
@@ -129,7 +132,7 @@ export class ListArticlesComponent implements AfterViewInit {
     this.router.navigate(['/pages/articles/create-article']);
   };
   onEdit(event): void {
-    this.router.navigate(['/pages/articles/edit-article', event.data.id]);
+    this.router.navigate(['/pages/articles/create-article', event.data.id]);
   };
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {

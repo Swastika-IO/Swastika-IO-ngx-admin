@@ -24,6 +24,10 @@ const routes: Routes = [{
       component: CreateArticleComponent,
     },
     {
+      path: 'create-article/:id',
+      component: CreateArticleComponent,
+    },    
+    {
       path: 'edit-article/:id',
       component: EditArticleComponent,
     },

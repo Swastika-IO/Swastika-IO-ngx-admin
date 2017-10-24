@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2FileInputModule } from 'ng2-file-input'
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    Ng2FileInputModule.forRoot(
+      {
+        dropText: "Drop file here",
+        browseText: "Browse",
+        removeText: "Remove",
+        invalidFileText: "You have picked an invalid or disallowed file.",
+        invalidFileTimeout: 8000,
+        removable: true,
+        multiple: false,
+        showPreviews: false,
+        extensions: ['jpg','gif', 'png'],
+      }
+    ),
   ],
   bootstrap: [AppComponent],
   providers: [

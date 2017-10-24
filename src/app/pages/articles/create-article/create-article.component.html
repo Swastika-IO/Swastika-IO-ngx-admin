@@ -2,6 +2,7 @@
   <div class="col-lg-12">
     <nb-card class="action-group">
       <nb-card-body>
+        <toaster-container [toasterconfig]="config"></toaster-container>
         <!-- <div class="action-groups-header">
                 Action
               </div>
@@ -49,8 +50,7 @@
             <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
           </div>
           <div class="input-group">
-            <!--*ngIf="data?.content"-->
-            <ckeditor [(ngModel)]="data.content" [config]="{ extraPlugins: 'divarea', width: '100%' }"></ckeditor>
+            <ckeditor class="form-control" [(ngModel)]="data.content"></ckeditor>
           </div>
         </nb-tab>
         <nb-tab tabTitle="SEO">
@@ -93,7 +93,8 @@
           <div class="col-md-12 row">
             <div class="col-md-4" *ngFor="let culture of data.listSupportedCulture">
               <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
-                {{culture.description}}<i class="{{culture.icon}}"></i>
+                {{culture.description}}
+                <i class="{{culture.icon}}"></i>
               </nb-checkbox>
             </div>
           </div>
@@ -101,54 +102,60 @@
         <nb-tab tabTitle="Layout">
 
           <div class="input-group">
-            <div class="input-group-btn" ngbDropdown>
-              <button type="button" class="btn btn-success dropdown-toggle" ngbDropdownToggle>
-                Action
-              </button>
-              <ul class="dropdown-menu">
-                <li class="dropdown-item">[+] Create New</li>
-                <li class="dropdown-item">Template 1</li>
-                <li class="dropdown-item">Template 2</li>
-                <li class="dropdown-item">Template 3</li>
-                <li class="dropdown-item">Template 1</li>
-                <li class="dropdown-item">Template 1</li>
-                <li class="dropdown-item">Template 1</li>
-                <li class="dropdown-item">Template 1</li>
-                <li class="dropdown-item">Template 1</li>
-                <li class="dropdown-item">Template 1</li>
-                <!-- <div role="separator" class="dropdown-divider"></div>
+            <ng-container *ngIf="data?.view">
+              <div class="input-group-btn" ngbDropdown>
+                <button type="button" class="btn btn-success dropdown-toggle" ngbDropdownToggle>
+                  Action
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-item" *ngFor="let templ of data.templates" (click)="setView(templ)">{{templ.filename}}</li>
+                  <!-- <div role="separator" class="dropdown-divider"></div>
                           <li class="dropdown-item">Separated link</li> -->
-              </ul>
-            </div>
-            <input type="text" class="form-control" placeholder="Template name...">
+                </ul>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="data.view.filename" placeholder="Template name...">
+            </ng-container>
           </div>
-          <div class="input-group">            
-            <ace-editor #editor 
-            [(text)]="data.title" 
-            [mode]="'sql'" 
-            [theme]="'eclipse'"
-            [options]="options"
-            [readOnly]="false"
-            [autoUpdateContent]="true"
-            [durationBeforeCallback]="1000"
-            style="height:450px;"></ace-editor>
-            
+          <div class="input-group">
+            <ng-container *ngIf="data?.view">
+              <ace-editor #editor [(text)]="data.view.content" [mode]="'csharp'" [theme]="'eclipse'" [options]="options" [readOnly]="false"
+                [autoUpdateContent]="true" [durationBeforeCallback]="1000" style="height:450px;"></ace-editor>
+            </ng-container>
           </div>
         </nb-tab>
       </nb-tabset>
     </nb-card>
 
   </div>
-  <div class="col-lg-4">
-    <nb-card>
-      <nb-card-header>Information</nb-card-header>
+  <div class="col-lg-4">   
+    <nb-card size="auto" class="feature-image">
+        <nb-card-header>Image</nb-card-header>
       <nb-card-body>
-
+        <ng2-file-input (onAction)="onSelectFile('image', $event)" class="form-control"></ng2-file-input>
+        <ng-container *ngIf="data?.image">
+          <img src="{{data.image}}" class="form-control" />
+        </ng-container>
       </nb-card-body>
+      <nb-card-footer>
+        <nb-actions size="auto" fullWidth>
+          <nb-action>
+            <i class="ion-ios-plus-empty"></i>
+            <span>Upload</span>
+          </nb-action>
+          <nb-action>
+            <i class="ion-ios-close-empty"></i>
+            <span>Remove</span>
+          </nb-action>
+        </nb-actions>
+      </nb-card-footer>
     </nb-card>
-    <nb-card size="medium" class="feature-image">
+    <nb-card size="auto" class="feature-image">
+        <nb-card-header>Thumbnail</nb-card-header>
       <nb-card-body>
-        <div class="picture" style="background-image: url('assets/images/camera1.jpg');"></div>
+        <ng2-file-input (onAction)="onSelectFile('thumbnail', $event)" class="form-control"></ng2-file-input>
+        <ng-container *ngIf="data?.thumbnail">
+          <img src="{{data.thumbnail}}" class="form-control" />
+        </ng-container>
 
       </nb-card-body>
       <nb-card-footer>

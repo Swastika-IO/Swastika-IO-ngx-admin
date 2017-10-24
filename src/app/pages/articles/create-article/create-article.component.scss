@@ -1,6 +1,7 @@
 @import '../../../@theme/styles/themes';
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import "~ng2-file-input/ng2-file-input.scss";
 
 @include nb-install-component() {
   nb-card{
@@ -271,4 +272,25 @@
       display: none;
     }
   }
+  nb-card-footer {
+    padding-bottom: 0.25rem;
+
+    button {
+      margin: 0 1rem 1rem 0;
+    }
+  }
+
+  /* stylelint-disable *//* style for toaster*/
+  toaster-container /deep/ {
+     #toast-container .toast-close-button {
+      right: 0;
+    }
+  }
+  /* stylelint-enable */
+
+  @include media-breakpoint-down(xs) {
+    .dropdown-toggle {
+      font-size: 0.75rem;
+    }
+  }  
 }

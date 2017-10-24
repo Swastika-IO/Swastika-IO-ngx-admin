@@ -6,8 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { ApiResult, ArticleBackend, ArticleListItem } from './article.viewmodels';
-@Injectable()
 
+@Injectable()
 export class ArticleService {
     domain = 'http://localhost:54920/';
     constructor(private http: Http) {
@@ -22,7 +22,7 @@ export class ArticleService {
     }
 
     getArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
-        const getUrl = this.domain + 'api/' + culture + '/articles/' + id;
+        const getUrl = this.domain + 'api/' + culture + '/articles/edit/' + id;
         return this.http.get(getUrl).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
@@ -44,7 +44,7 @@ export class ArticleService {
 
     private extractData(res: Response) {
         const body = res.json();
-        return (body.isSucceed && body.data) || {};
+        return body || {};
     }
 
     private handleErrorPromise(error: Response | any) {
