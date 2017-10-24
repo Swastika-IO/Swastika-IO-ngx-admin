@@ -1,5 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
@@ -22,8 +21,7 @@ import { DOCUMENT } from '@angular/platform-browser';
     DatetimeRenderComponent,
   ],
 })
-export class ListArticlesComponent {
-
+export class ListArticlesComponent implements AfterViewInit {
   settings = {
     mode: 'external',
     add: {
@@ -77,7 +75,6 @@ export class ListArticlesComponent {
       add: true,
     },
   };
-
   source: ServerDataSource;
   data: ArticleListItem[];
   pagingData = new PagingData();
@@ -90,8 +87,7 @@ export class ListArticlesComponent {
 
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }
-
-  OnInit(): void {
+  ngAfterViewInit(): void {
     this.source = new ServerDataSource(this.http,
       {
         endPoint: this.pagingData.endPoint,
@@ -102,7 +98,8 @@ export class ListArticlesComponent {
 
       },
     );
-  };
+  }
+
   fetchData(pageSize: number, pageIndex: number): void {
     this.service.getArticlesWithPromise('vi-vn', pageSize, pageIndex)
       .then(result => {
@@ -112,7 +109,7 @@ export class ListArticlesComponent {
           this.showErrors(result.errors, result.ex);
         }
       },
-      error => {  });
+      error => { });
   }
 
   delete(event): void {
