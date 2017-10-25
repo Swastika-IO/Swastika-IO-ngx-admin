@@ -1,10 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
-import { CKEditorComponent } from '../../editors/ckeditor/ckeditor.component'
 import '../../editors/ckeditor/ckeditor.loader';
+import 'ckeditor';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.services';
-import { ArticleBackend, Template } from '../article.viewmodels'
+import { ModuleService } from '../../modules/modules.service';
+import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
@@ -21,8 +22,11 @@ export class CreateArticleComponent implements OnInit {
   ex: any;
   private sub: any;
   data = new ArticleBackend();
+  activedModules: ModuleFullDetails[] = [];
+  activedModule: ModuleFullDetails;
   constructor(private route: ActivatedRoute
     , private service: ArticleService
+    , private moduleService: ModuleService
     , private notificationService: NotificationService) { }
 
   ngOnInit() {
@@ -94,6 +98,27 @@ export class CreateArticleComponent implements OnInit {
           this.data.thumbnailFileStream = myReader.result;
         }
 
+      }
+    }
+  }
+
+  onChange(navigation: ArticleModuleNav) {
+    if (navigation.isActived) {
+      this.moduleService.getFullModuleWithPromise(navigation.specificulture, navigation.moduleId)
+        .then(result => {
+          if (result.isSucceed) {
+            this.activedModule = result.data;
+            this.activedModules.push(result.data);
+          } else {
+            this.errors = result.errors;
+            this.ex = result.ex;
+            this.showErrors();
+          }
+        })
+    } else {
+      var m = this.activedModules.filter(a => a.id == navigation.moduleId);
+      if (m.length > 0) {
+        this.activedModules.splice(this.activedModules.indexOf(m[0]), 1);
       }
     }
   }

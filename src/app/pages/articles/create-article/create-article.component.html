@@ -68,26 +68,30 @@
           </div>
         </nb-tab>
         <nb-tab tabTitle="Parents">
-          <h3>Categories</h3>
-          <div class="col-md-12 row">
-            <div class="col-md-6" *ngFor="let cate of data.categories">
-              <nb-checkbox [(ngModel)]="cate.isActived" status="success">{{cate.description}}</nb-checkbox>
-            </div>
-          </div>
-          <h3>Modules</h3>
-          <div class="col-md-12 row">
-            <div class="col-md-6" *ngFor="let module of data.modules">
-              <nb-checkbox [(ngModel)]="module.isActived" status="success">{{module.description}}</nb-checkbox>
-            </div>
-          </div>
+          <ng-container *ngIf="data?.categories">
+            <sw-category-nav [(navigations)]="data.categories"></sw-category-nav>
+          </ng-container>
+          <ng-container *ngIf="data?.modules">
+            <sw-module-nav [(navigations)]="data.modules"></sw-module-nav>
+          </ng-container>
+
         </nb-tab>
         <nb-tab tabTitle="Modules">
-          <h3>Sub Modules</h3>
-          <div class="col-md-12 row">
-            <div class="col-md-6" *ngFor="let module of data.moduleNavs">
-              <nb-checkbox [(ngModel)]="module.isActived" status="success">{{module.description}}</nb-checkbox>
-            </div>
-          </div>
+          <ng-container *ngIf="data?.moduleNavs">
+            <sw-module-nav [(navigations)]="data.moduleNavs" header="Sub Modules" (onSuggest)="onChange($event)"></sw-module-nav>
+
+            <nb-card>
+              <nb-card-header>
+                Actived Modules
+              </nb-card-header>
+              <nb-card-body>
+
+                <ng-container *ngFor="let module of activedModules">
+                  <sw-module-details [module]="module"></sw-module-details>
+                </ng-container>
+              </nb-card-body>
+            </nb-card>
+          </ng-container>
         </nb-tab>
         <nb-tab tabTitle="Languages">
           <div class="col-md-12 row">
@@ -127,9 +131,9 @@
     </nb-card>
 
   </div>
-  <div class="col-lg-4">   
+  <div class="col-lg-4">
     <nb-card size="auto" class="feature-image">
-        <nb-card-header>Image</nb-card-header>
+      <nb-card-header>Image</nb-card-header>
       <nb-card-body>
         <ng2-file-input (onAction)="onSelectFile('image', $event)" class="form-control"></ng2-file-input>
         <ng-container *ngIf="data?.image">
@@ -150,7 +154,7 @@
       </nb-card-footer>
     </nb-card>
     <nb-card size="auto" class="feature-image">
-        <nb-card-header>Thumbnail</nb-card-header>
+      <nb-card-header>Thumbnail</nb-card-header>
       <nb-card-body>
         <ng2-file-input (onAction)="onSelectFile('thumbnail', $event)" class="form-control"></ng2-file-input>
         <ng-container *ngIf="data?.thumbnail">

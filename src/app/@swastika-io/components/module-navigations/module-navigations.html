@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-header>
+        {{title}}
+    </nb-card-header>
+    <nb-card-body>
+        <div class="col-md-12 row">
+            <div class="col-md-6" *ngFor="let nav of navs">
+                <nb-checkbox (change)="onChange(nav)" [(ngModel)]="nav.isActived" status="success">{{nav.description}}</nb-checkbox>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

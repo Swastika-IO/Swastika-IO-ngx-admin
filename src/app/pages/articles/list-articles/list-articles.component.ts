@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
-import { PagingData, ArticleListItem } from '../article.viewmodels';
+import { PagingData, ArticleListItem } from '../../../@swastika-io/viewmodels/article.viewmodels';
 import { ImageRenderComponent, DatetimeRenderComponent } from '../../components/data-render/data-render.components';
 import { NbSpinnerService } from '@nebular/theme';
 import { ServerDataSource } from '../../components/components.component';

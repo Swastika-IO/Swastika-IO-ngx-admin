@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.services';
-import { ArticleBackend } from '../article.viewmodels'
+import { ArticleBackend } from '../../../@swastika-io/viewmodels/article.viewmodels';
 import '../../editors/ckeditor/ckeditor.loader';
 import 'ckeditor';
 import 'ngx-input-file'
