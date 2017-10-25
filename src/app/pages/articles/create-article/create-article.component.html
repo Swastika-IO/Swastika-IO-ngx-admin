@@ -37,22 +37,28 @@
     </nb-card>
   </div>
   <div class="col-lg-8">
+    
+    <nb-card size="auto">
+      <nb-card-header>Main contents</nb-card-header>
+      <nb-card-body>
+          <div class="input-group">
+              <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
+            </div>
+            <div class="input-group">
+              <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
+            </div>
+            <div class="input-group">
+              <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
+            </div>
+            <div class="input-group">
+              <ckeditor class="" [(ngModel)]="data.content"></ckeditor>
+            </div>
+      </nb-card-body>
+      <!-- <nb-card-footer>
+          </nb-card-footer> -->
+    </nb-card>
     <nb-card size="">
       <nb-tabset fullWidth>
-        <nb-tab tabTitle="Main contents">
-          <div class="input-group">
-            <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
-          </div>
-          <div class="input-group">
-            <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
-          </div>
-          <div class="input-group">
-            <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
-          </div>
-          <div class="input-group">
-            <ckeditor class="form-control" [(ngModel)]="data.content"></ckeditor>
-          </div>
-        </nb-tab>
         <nb-tab tabTitle="SEO">
           <div class="input-group">
             <input type="text" [(ngModel)]="data.seotitle" placeholder="Title" class="form-control" />
