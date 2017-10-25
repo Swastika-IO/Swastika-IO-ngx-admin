@@ -39,7 +39,7 @@ export class ServerDataSource extends LocalDataSource {
   constructor(protected _http: Http, conf: any) {
     super();
 
-    this.conf.endPoint = conf.endPoint;
+    this.conf = conf;
 
     if (!this.conf.endPoint) {
       throw new Error('At least endPoint must be specified as a configuration of the server data source.');

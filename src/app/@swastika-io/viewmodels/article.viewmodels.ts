@@ -153,3 +153,15 @@ export class DataColumn {
     isDisplay: boolean;
     width: number;
 }
+
+export enum DataType
+{
+    String = 0,
+    Int = 1,
+    Image = 2,
+    Icon = 3,
+    CodeEditor = 4,
+    Html = 5,
+    TextArea = 6,
+    Boolean = 7
+}
