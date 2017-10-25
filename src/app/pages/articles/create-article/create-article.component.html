@@ -37,22 +37,28 @@
     </nb-card>
   </div>
   <div class="col-lg-8">
+    
+    <nb-card size="auto">
+      <nb-card-header>Main contents</nb-card-header>
+      <nb-card-body>
+          <div class="input-group">
+              <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
+            </div>
+            <div class="input-group">
+              <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
+            </div>
+            <div class="input-group">
+              <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
+            </div>
+            <div class="input-group">
+              <ckeditor class="" [(ngModel)]="data.content"></ckeditor>
+            </div>
+      </nb-card-body>
+      <!-- <nb-card-footer>
+          </nb-card-footer> -->
+    </nb-card>
     <nb-card size="">
       <nb-tabset fullWidth>
-        <nb-tab tabTitle="Main contents">
-          <div class="input-group">
-            <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
-          </div>
-          <div class="input-group">
-            <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
-          </div>
-          <div class="input-group">
-            <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
-          </div>
-          <div class="input-group">
-            <ckeditor class="form-control" [(ngModel)]="data.content"></ckeditor>
-          </div>
-        </nb-tab>
         <nb-tab tabTitle="SEO">
           <div class="input-group">
             <input type="text" [(ngModel)]="data.seotitle" placeholder="Title" class="form-control" />
@@ -93,16 +99,6 @@
             </nb-card>
           </ng-container>
         </nb-tab>
-        <nb-tab tabTitle="Languages">
-          <div class="col-md-12 row">
-            <div class="col-md-4" *ngFor="let culture of data.listSupportedCulture">
-              <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
-                {{culture.description}}
-                <i class="{{culture.icon}}"></i>
-              </nb-checkbox>
-            </div>
-          </div>
-        </nb-tab>
         <nb-tab tabTitle="Layout">
 
           <div class="input-group">
@@ -132,6 +128,29 @@
 
   </div>
   <div class="col-lg-4">
+      <nb-card>
+          <nb-card-header>Languages</nb-card-header>
+          <nb-card-body>
+              <div class="col-md-12" *ngFor="let culture of data.listSupportedCulture">
+                  <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
+                    {{culture.description}}
+                    <i class="{{culture.icon}}"></i>
+                  </nb-checkbox>
+                </div>
+            <!-- <div class="demo-checkboxes col-sm-12">
+              
+              <nb-checkbox>Checkbox 1</nb-checkbox>
+              <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Bootstrap Checkbox</span>
+              </label>
+            </div> -->
+          </nb-card-body>
+        </nb-card>
+    
+
     <nb-card size="auto" class="feature-image">
       <nb-card-header>Image</nb-card-header>
       <nb-card-body>
