@@ -4,7 +4,7 @@ import { ViewCell } from 'ng2-smart-table';
 
 @Component({
   template: `
-    <img src="{{renderValue}}" height="100px"/>
+    <img src="{{renderValue}}" height="50px"/>
   `,
 })
 export class ImageRenderComponent implements ViewCell, OnInit {

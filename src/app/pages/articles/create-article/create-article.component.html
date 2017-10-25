@@ -99,16 +99,6 @@
             </nb-card>
           </ng-container>
         </nb-tab>
-        <nb-tab tabTitle="Languages">
-          <div class="col-md-12 row">
-            <div class="col-md-4" *ngFor="let culture of data.listSupportedCulture">
-              <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
-                {{culture.description}}
-                <i class="{{culture.icon}}"></i>
-              </nb-checkbox>
-            </div>
-          </div>
-        </nb-tab>
         <nb-tab tabTitle="Layout">
 
           <div class="input-group">
@@ -138,6 +128,29 @@
 
   </div>
   <div class="col-lg-4">
+      <nb-card>
+          <nb-card-header>Languages</nb-card-header>
+          <nb-card-body>
+              <div class="col-md-12" *ngFor="let culture of data.listSupportedCulture">
+                  <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
+                    {{culture.description}}
+                    <i class="{{culture.icon}}"></i>
+                  </nb-checkbox>
+                </div>
+            <!-- <div class="demo-checkboxes col-sm-12">
+              
+              <nb-checkbox>Checkbox 1</nb-checkbox>
+              <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Bootstrap Checkbox</span>
+              </label>
+            </div> -->
+          </nb-card-body>
+        </nb-card>
+    
+
     <nb-card size="auto" class="feature-image">
       <nb-card-header>Image</nb-card-header>
       <nb-card-body>
