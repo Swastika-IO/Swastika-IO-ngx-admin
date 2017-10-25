@@ -5,8 +5,8 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { ApiResult, ArticleBackend, ArticleListItem } from './article.viewmodels';
-
+import { ApiResult, ArticleBackend, ArticleListItem } from '../../@swastika-io/viewmodels/article.viewmodels';
+ 
 @Injectable()
 export class ArticleService {
     domain = 'http://localhost:54920/';
