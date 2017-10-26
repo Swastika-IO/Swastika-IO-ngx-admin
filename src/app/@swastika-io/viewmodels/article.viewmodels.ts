@@ -69,6 +69,7 @@ export class ArticleBackend {
     categories: CategotyArticleNav[];
     modules: ModuleArticleNav[];
     moduleNavs: ArticleModuleNav[];
+    activedModules: ModuleFullDetails[];
     view: Template;
     templates: Template[];
 }
@@ -123,6 +124,8 @@ export class ModuleFullDetails {
     categoryId: string;
     view: string;
     data: PagingData; // <ModuleDataDetails>
+    source: any;
+    settings: any;
 }
 
 export class ModuleDataDetails {
@@ -149,7 +152,7 @@ export class DataProperty {
 
 export class DataColumn {
     name: string;
-    dataType: number;
+    dataType: DataType;
     isDisplay: boolean;
     width: number;
 }

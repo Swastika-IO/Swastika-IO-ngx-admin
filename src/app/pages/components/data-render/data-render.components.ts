@@ -22,6 +22,26 @@ export class ImageRenderComponent implements ViewCell, OnInit {
 
 @Component({
   template: `
+  <ng-container *ngIf="renderValue">
+    <div [innerHtml]="renderValue"></div>
+  </ng-container>
+  `,
+})
+export class HtmlRenderComponent implements ViewCell, OnInit {
+
+  renderValue: any;
+
+  @Input() value: string | number;
+  @Input() rowData: any;
+
+  ngOnInit() {
+    this.renderValue = this.value;
+  }
+
+}
+
+@Component({
+  template: `
   {{renderValue}}
   `,
 })

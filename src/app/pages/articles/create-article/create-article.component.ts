@@ -4,6 +4,7 @@ import '../../editors/ckeditor/ckeditor.loader';
 import 'ckeditor';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.services';
+import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { ModuleService } from '../../modules/modules.service';
 import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { NotificationService } from '../../components/notifications/notifications.service'
@@ -27,6 +28,7 @@ export class CreateArticleComponent implements OnInit {
   constructor(private route: ActivatedRoute
     , private service: ArticleService
     , private moduleService: ModuleService
+    , private moduleDetailsService: ModuleDetailsService
     , private notificationService: NotificationService) { }
 
   ngOnInit() {
@@ -48,6 +50,9 @@ export class CreateArticleComponent implements OnInit {
     this.service.getDefaultArticleWithPromise('vi-vn')
       .then(result => {
         if (result.isSucceed) {
+          result.data.activedModules.forEach(module => {
+            this.moduleDetailsService.initModuleDetails(module, this.data.id);
+          });
           this.data = result.data;
         } else {
           this.errors = result.errors;
@@ -61,7 +66,12 @@ export class CreateArticleComponent implements OnInit {
     this.service.getArticleWithPromise('vi-vn', this.data.id)
       .then(result => {
         if (result.isSucceed) {
+          result.data.activedModules.forEach(module => {
+            this.moduleDetailsService.initModuleDetails(module, this.data.id);
+          });
           this.data = result.data;
+
+
         } else {
           this.errors = result.errors;
           this.ex = result.ex;
@@ -107,8 +117,8 @@ export class CreateArticleComponent implements OnInit {
       this.moduleService.getFullModuleWithPromise(navigation.specificulture, navigation.moduleId)
         .then(result => {
           if (result.isSucceed) {
-            this.activedModule = result.data;
-            this.activedModules.push(result.data);
+            this.moduleDetailsService.initModuleDetails(result.data, this.data.id);
+            this.data.activedModules.push(result.data);
           } else {
             this.errors = result.errors;
             this.ex = result.ex;
@@ -116,9 +126,9 @@ export class CreateArticleComponent implements OnInit {
           }
         })
     } else {
-      var m = this.activedModules.filter(a => a.id == navigation.moduleId);
-      if (m.length > 0) {
-        this.activedModules.splice(this.activedModules.indexOf(m[0]), 1);
+      var index = this.data.activedModules.findIndex(a => a.id == navigation.moduleId);
+      if (index > -1) {
+        this.data.activedModules.splice(index, 1);
       }
     }
   }

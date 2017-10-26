@@ -37,22 +37,22 @@
     </nb-card>
   </div>
   <div class="col-lg-8">
-    
+
     <nb-card size="auto">
       <nb-card-header>Main contents</nb-card-header>
       <nb-card-body>
-          <div class="input-group">
-              <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
-            </div>
-            <div class="input-group">
-              <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
-            </div>
-            <div class="input-group">
-              <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
-            </div>
-            <div class="input-group">
-              <ckeditor class="" [(ngModel)]="data.content"></ckeditor>
-            </div>
+        <div class="input-group">
+          <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
+        </div>
+        <div class="input-group">
+          <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
+        </div>
+        <div class="input-group">
+          <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
+        </div>
+        <div class="input-group">
+          <ckeditor class="" [(ngModel)]="data.content"></ckeditor>
+        </div>
       </nb-card-body>
       <!-- <nb-card-footer>
           </nb-card-footer> -->
@@ -91,9 +91,8 @@
                 Actived Modules
               </nb-card-header>
               <nb-card-body>
-
-                <ng-container *ngFor="let module of activedModules">
-                  <sw-module-details [module]="module"></sw-module-details>
+                <ng-container *ngIf="data?.activedModules">
+                  <sw-list-module-details [(modules)]="data.activedModules" [articleId] = "data.id"></sw-list-module-details>
                 </ng-container>
               </nb-card-body>
             </nb-card>
@@ -128,16 +127,16 @@
 
   </div>
   <div class="col-lg-4">
-      <nb-card>
-          <nb-card-header>Languages</nb-card-header>
-          <nb-card-body>
-              <div class="col-md-12" *ngFor="let culture of data.listSupportedCulture">
-                  <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
-                    {{culture.description}}
-                    <i class="{{culture.icon}}"></i>
-                  </nb-checkbox>
-                </div>
-            <!-- <div class="demo-checkboxes col-sm-12">
+    <nb-card>
+      <nb-card-header>Languages</nb-card-header>
+      <nb-card-body>
+        <div class="col-md-12" *ngFor="let culture of data.listSupportedCulture">
+          <nb-checkbox [(ngModel)]="culture.isSupported" status="success">
+            {{culture.description}}
+            <i class="{{culture.icon}}"></i>
+          </nb-checkbox>
+        </div>
+        <!-- <div class="demo-checkboxes col-sm-12">
               
               <nb-checkbox>Checkbox 1</nb-checkbox>
               <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
@@ -147,9 +146,9 @@
                 <span class="custom-control-description">Bootstrap Checkbox</span>
               </label>
             </div> -->
-          </nb-card-body>
-        </nb-card>
-    
+      </nb-card-body>
+    </nb-card>
+
 
     <nb-card size="auto" class="feature-image">
       <nb-card-header>Image</nb-card-header>

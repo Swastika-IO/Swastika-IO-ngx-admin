@@ -1,0 +1,11 @@
+<nb-card *ngFor="let module of _modules">
+    <nb-card-header>
+        {{module.title}}
+    </nb-card-header>
+    <nb-card-body>        
+        <ng2-smart-table  [settings]="module.settings" [source]="module.source" 
+        (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreate(module.id, _articleId, $event.newData)"
+        (edit)="onEdit($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
