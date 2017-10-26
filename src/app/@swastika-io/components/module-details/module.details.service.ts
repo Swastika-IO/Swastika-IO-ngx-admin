@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter, Injectable } from '@angular/core';
-import { ModuleFullDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ModuleFullDetails, ModuleDataDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { CKEditorComponent } from 'ng2-ckeditor';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
@@ -30,6 +30,7 @@ export class ModuleDetailsService {
                 editButtonContent: '<i class="nb-edit"></i>',
                 saveButtonContent: '<i class="nb-checkmark"></i>',
                 cancelButtonContent: '<i class="nb-close"></i>',
+                confirmSave: true,
             },
             delete: {
                 deleteButtonContent: '<i class="nb-trash"></i>',
@@ -51,10 +52,10 @@ export class ModuleDetailsService {
                 case DataType.Html:
                     module.settings.columns[col.name]['type'] = 'custom';
                     module.settings.columns[col.name]['renderComponent'] = HtmlRenderComponent;
-                    module.settings.columns[col.name]['editor'] = {
-                        type: 'custom',
-                        component: CKEditorComponent,
-                    };
+                    // module.settings.columns[col.name]['editor'] = {
+                    //     type: 'custom',
+                    //     component: CKEditorComponent,
+                    // };
                     break;
                 default:
                     module.settings.columns[col.name]['type'] = 'text';
@@ -72,6 +73,26 @@ export class ModuleDetailsService {
                 totalKey: 'data.totalItems',
             },
         );
+    }
+    saveModuleData(url: string, data: ModuleDataDetails): void {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers['Access-Control-Allow-Origin'] = '*'
+        let options = new RequestOptions({ headers: headers });
+
+        var result = this.http.post(url, data, options).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+        console.log(result);
+    }
+
+    private extractData(res: Response) {
+        const body = res.json();
+        return body || {};
+    }
+
+    private handleErrorPromise(error: Response | any) {
+        console.error(error.message || error);
+        return Promise.reject(error.message || error);
     }
 
 }

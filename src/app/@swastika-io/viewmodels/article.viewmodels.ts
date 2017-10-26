@@ -1,3 +1,4 @@
+import { ServerDataSource } from '../../pages/components/components.component';
 export class SupportdCulture {
     id: number;
     specificulture: string;
@@ -124,7 +125,7 @@ export class ModuleFullDetails {
     categoryId: string;
     view: string;
     data: PagingData; // <ModuleDataDetails>
-    source: any;
+    source: ServerDataSource;
     settings: any;
 }
 
