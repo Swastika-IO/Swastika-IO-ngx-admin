@@ -17,32 +17,31 @@
           <nb-action>
             <i class="ion-ios-cloud-upload-outline"></i>
             <a (click)="submit()">
-              <span>Submit</span>
+              <span>Publish</span>
             </a>
           </nb-action>
           <nb-action>
-            <i class="ion-eye"></i>
-            <span>Publish</span>
+            <i class="ion-ios-eye-outline"></i>
+            <span>Preview</span>
           </nb-action>
           <nb-action>
-            <i class="ion-compose"></i>
+            <i class="ion-ios-compose-outline"></i>
             <span>Draft</span>
           </nb-action>
           <nb-action>
-            <i class="ion-calendar"></i>
+            <i class="ion-ios-calendar-outline"></i>
             <span>Scheduler</span>
           </nb-action>
         </nb-actions>
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-lg-8">
-
+  <div class="col-lg-9">
     <nb-card size="auto">
       <nb-card-header>Main contents</nb-card-header>
       <nb-card-body>
         <div class="input-group">
-          <input type="text" [ngModel]="data.title" placeholder="Title" class="form-control" />
+          <input type="text" [ngModel]="data.title" placeholder="Enter title here..." class="form-control" />
         </div>
         <div class="input-group">
           <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
@@ -126,7 +125,7 @@
     </nb-card>
 
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <nb-card>
       <nb-card-header>Languages</nb-card-header>
       <nb-card-body>
@@ -150,49 +149,6 @@
     </nb-card>
 
 
-    <nb-card size="auto" class="feature-image">
-      <nb-card-header>Image</nb-card-header>
-      <nb-card-body>
-        <ng2-file-input (onAction)="onSelectFile('image', $event)" class="form-control"></ng2-file-input>
-        <ng-container *ngIf="data?.image">
-          <img src="{{data.image}}" class="form-control" />
-        </ng-container>
-      </nb-card-body>
-      <nb-card-footer>
-        <nb-actions size="auto" fullWidth>
-          <nb-action>
-            <i class="ion-ios-plus-empty"></i>
-            <span>Upload</span>
-          </nb-action>
-          <nb-action>
-            <i class="ion-ios-close-empty"></i>
-            <span>Remove</span>
-          </nb-action>
-        </nb-actions>
-      </nb-card-footer>
-    </nb-card>
-    <nb-card size="auto" class="feature-image">
-      <nb-card-header>Thumbnail</nb-card-header>
-      <nb-card-body>
-        <ng2-file-input (onAction)="onSelectFile('thumbnail', $event)" class="form-control"></ng2-file-input>
-        <ng-container *ngIf="data?.thumbnail">
-          <img src="{{data.thumbnail}}" class="form-control" />
-        </ng-container>
-
-      </nb-card-body>
-      <nb-card-footer>
-        <nb-actions size="medium" fullWidth>
-          <nb-action>
-            <i class="ion-ios-plus-empty"></i>
-            <span>Upload</span>
-          </nb-action>
-          <nb-action>
-            <i class="ion-ios-close-empty"></i>
-            <span>Remove</span>
-          </nb-action>
-        </nb-actions>
-      </nb-card-footer>
-    </nb-card>
     <nb-card>
       <nb-card-header>Post Type</nb-card-header>
       <nb-card-body>
@@ -211,8 +167,56 @@
     <nb-card>
       <nb-card-header>Tags</nb-card-header>
       <nb-card-body>
+        <div class="form-group">
+          <input type="text" placeholder="tag,..." class="form-control" />
+          <small class="form-text">Separate tags with commas</small>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+
+    <nb-card size="auto" class="feature-image">
+      <nb-card-header>Featured Image</nb-card-header>
+      <nb-card-body>
+        <ng2-file-input (onAction)="onSelectFile('image', $event)" class="form-control"></ng2-file-input>
+        <ng-container *ngIf="data?.image">
+          <img src="{{data.image}}" class="form-control" />
+        </ng-container>
+      </nb-card-body>
+      <!-- <nb-card-footer>
+        <nb-actions size="auto" fullWidth>
+          <nb-action>
+            <i class="ion-ios-plus-empty"></i>
+            <span>Upload</span>
+          </nb-action>
+          <nb-action>
+            <i class="ion-ios-close-empty"></i>
+            <span>Remove</span>
+          </nb-action>
+        </nb-actions>
+      </nb-card-footer> -->
+    </nb-card>
+    <nb-card size="auto" class="feature-image">
+      <nb-card-header>Thumbnail</nb-card-header>
+      <nb-card-body>
+        <ng2-file-input (onAction)="onSelectFile('thumbnail', $event)" class="form-control"></ng2-file-input>
+        <ng-container *ngIf="data?.thumbnail">
+          <img src="{{data.thumbnail}}" class="form-control" />
+        </ng-container>
 
       </nb-card-body>
+      <!-- <nb-card-footer>
+        <nb-actions size="medium" fullWidth>
+          <nb-action>
+            <i class="ion-ios-plus-empty"></i>
+            <span>Upload</span>
+          </nb-action>
+          <nb-action>
+            <i class="ion-ios-close-empty"></i>
+            <span>Remove</span>
+          </nb-action>
+        </nb-actions>
+      </nb-card-footer> -->
     </nb-card>
   </div>
 </div>
