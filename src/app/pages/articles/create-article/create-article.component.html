@@ -153,12 +153,25 @@
       <nb-card-header>Post Type</nb-card-header>
       <nb-card-body>
         <div class="demo-checkboxes col-sm-12">
-          <nb-checkbox>Checkbox 1</nb-checkbox>
-          <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="customRadio">
             <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Bootstrap Checkbox</span>
+            <span class="custom-control-description">Blank</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="customRadio" checked>
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Article</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="customRadio">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">List</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="customRadio">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Modules</span>
           </label>
         </div>
       </nb-card-body>
