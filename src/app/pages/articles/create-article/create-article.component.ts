@@ -113,23 +113,41 @@ export class CreateArticleComponent implements OnInit {
   }
 
   onChange(navigation: ArticleModuleNav) {
-    if (navigation.isActived) {
-      this.moduleService.getFullModuleWithPromise(navigation.specificulture, navigation.moduleId)
-        .then(result => {
-          if (result.isSucceed) {
+    if (this.data.id != null) {
+      const addUrl = 'api/' + navigation.specificulture + '/modules/addToArticle';
+      this.moduleDetailsService.addToArticle(addUrl, navigation).then(addResult => {
+        if (addResult.isSucceed) {
+          this.modifyActivedModules(navigation);
+        } else {
+          this.errors = addResult.errors;
+          this.ex = addResult.ex;
+          this.showErrors();
+        }
+      });
+    } else {
+      this.modifyActivedModules(navigation);
+    }
+
+  }
+  modifyActivedModules(navigation: ArticleModuleNav): void {
+    this.moduleService.getFullModuleWithPromise(navigation.specificulture, navigation.moduleId)
+      .then(result => {
+        if (result.isSucceed) {
+          if (navigation.isActived) {
             this.moduleDetailsService.initModuleDetails(result.data, this.data.id);
             this.data.activedModules.push(result.data);
           } else {
-            this.errors = result.errors;
-            this.ex = result.ex;
-            this.showErrors();
+            var index = this.data.activedModules.findIndex(a => a.id == navigation.moduleId);
+            if (index > -1) {
+              this.data.activedModules.splice(index, 1);
+            }
           }
-        })
-    } else {
-      var index = this.data.activedModules.findIndex(a => a.id == navigation.moduleId);
-      if (index > -1) {
-        this.data.activedModules.splice(index, 1);
-      }
-    }
+        } else {
+          this.errors = result.errors;
+          this.ex = result.ex;
+          this.showErrors();
+        }
+      });
   }
+
 }

@@ -40,15 +40,28 @@ export class ListModuleDetailsComponent implements OnInit {
         this.onCheckedChange.emit(event);
     }
     onCreate(module: ModuleFullDetails, articleId, data) {
-        var model: any = {};
-        model.ArticleId = articleId;
-        model.ModuleId = module.id;
-        model.Specificulture = module.specificulture;
-        model.Fields = module.fields;
-        data.Model = model;
-        data.Columns = module.columns;
-        const postUrl = this.pagingData.endPoint + 'save'
-        var result = this.moduleDetailsService.saveModuleData(postUrl, data);
+        if (articleId != null) {
+
+            var model: any = {};
+            model.ArticleId = articleId;
+            model.ModuleId = module.id;
+            model.Specificulture = module.specificulture;
+            model.Fields = module.fields;
+            data.Model = model;
+            data.Columns = module.columns;
+            const postUrl = this.pagingData.endPoint + 'save'
+            this.moduleDetailsService.saveModuleData(postUrl, data).then(
+                result => {
+                    if (result.isSucceed) {
+                        var index = this._modules.findIndex(m => m.id == module.id);
+                        this.moduleDetailsService.initModuleDetails(module[index]);
+                    }
+                }
+            );
+
+        } else {
+
+        }
         console.log(module, articleId, JSON.stringify(data));
     }
     onEdit(module: ModuleFullDetails, event) {

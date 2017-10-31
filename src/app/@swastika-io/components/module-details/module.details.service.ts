@@ -1,11 +1,12 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter, Injectable } from '@angular/core';
-import { ModuleFullDetails, ModuleDataDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ApiResult, ArticleModuleNav, ModuleFullDetails, ModuleDataDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { CKEditorComponent } from 'ng2-ckeditor';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
 import { ServerDataSource } from '../../../pages/components/components.component';
 @Injectable()
 export class ModuleDetailsService {
+    domain = 'http://localhost:54920/';
     pagingData = new PagingData();
     constructor(private http: Http) {
         this.pagingData.pageIndex = 0;
@@ -74,7 +75,7 @@ export class ModuleDetailsService {
             },
         );
     }
-    saveModuleData(url: string, data: ModuleDataDetails): void {
+    saveModuleData(url: string, data: ModuleDataDetails): Promise<ApiResult> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers['Access-Control-Allow-Origin'] = '*'
         let options = new RequestOptions({ headers: headers });
@@ -82,7 +83,18 @@ export class ModuleDetailsService {
         var result = this.http.post(url, data, options).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
-        console.log(result);
+        return result;
+    }
+
+    addToArticle(url: string, data: ArticleModuleNav): Promise<ApiResult> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers['Access-Control-Allow-Origin'] = '*';
+        let options = new RequestOptions({ headers: headers });
+        console.log(data);
+        var result = this.http.post(this.domain + url, data, options).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+        return result;
     }
 
     private extractData(res: Response) {
