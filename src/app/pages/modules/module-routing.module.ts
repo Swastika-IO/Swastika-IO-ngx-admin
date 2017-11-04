@@ -1,36 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ArticlesComponent } from './articles.component';
-import { CreateArticleComponent } from './create-article/create-article.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
-import { ListArticlesComponent } from './list-articles/list-articles.component';
-import { ListDraftArticlesComponent } from './list-draft-articles/list-draft-articles.component';
+import { ModuleComponent } from './module.component';
+import { ListModuleComponent } from './list-module/list-module.component';
+
 
 const routes: Routes = [{
   path: '',
-  component: ArticlesComponent,
+  component: ModuleComponent,
   children: [
     {
-      path: 'list-articles',
-      component: ListArticlesComponent,
-    },
-    {
-      path: 'list-draft-articles',
-      component: ListDraftArticlesComponent,
-    },
-    {
-      path: 'create-article',
-      component: CreateArticleComponent,
-    },
-    {
-      path: 'create-article/:id',
-      component: CreateArticleComponent,
-    },    
-    {
-      path: 'edit-article/:id',
-      component: EditArticleComponent,
-    },
+      path: 'list-module',
+      component: ListModuleComponent,
+    }
+    // ,{
+    //   path: 'manage-module',
+    //   component: ManageModuleComponent,
+    // }
+    // ,{
+    //   path: 'manage-module/:id',
+    //   component: ManageModuleComponent,
+    // },
   ],
 }];
 
@@ -38,12 +28,9 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ArticlesRoutingModule { }
+export class ModuleRoutingModule { }
 
 export const routedComponents = [
-  ArticlesComponent,
-  CreateArticleComponent,
-  EditArticleComponent,
-  ListArticlesComponent,
-  ListDraftArticlesComponent,
+  ModuleComponent,
+  ListModuleComponent,
 ];
