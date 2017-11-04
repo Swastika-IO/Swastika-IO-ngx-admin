@@ -14,6 +14,9 @@ const routes: Routes = [{
     path: 'articles',
     loadChildren: './articles/articles.module#ArticlesModule',
   }, {
+    path: 'modules',
+    loadChildren: './modules/module.module#ModuleModule',
+  }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {

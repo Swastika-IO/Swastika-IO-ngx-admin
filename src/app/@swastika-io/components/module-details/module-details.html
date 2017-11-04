@@ -3,7 +3,7 @@
         {{_module.title}}
     </nb-card-header>
     <nb-card-body>        
-        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (create)="onCreate($event)"
+        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteDataConfirm($event)" (create)="onCreate($event)"
         (edit)="onEdit($event)">
       </ng2-smart-table>
     </nb-card-body>

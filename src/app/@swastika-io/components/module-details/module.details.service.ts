@@ -86,6 +86,13 @@ export class ModuleDetailsService {
         return result;
     }
 
+    deleteModuleDataWithPromise(culture: string, id: string): Promise<ApiResult> {
+        const getUrl = this.domain + 'api/' + culture + '/ModuleData/delete/' + id;
+        return this.http.get(getUrl).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+    }
+
     addToArticle(url: string, data: ArticleModuleNav): Promise<ApiResult> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers['Access-Control-Allow-Origin'] = '*';

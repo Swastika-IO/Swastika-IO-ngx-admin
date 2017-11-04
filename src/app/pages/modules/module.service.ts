@@ -19,6 +19,14 @@ export class ModuleService {
             .catch(this.handleErrorPromise);
     }
 
+    deleteModuleWithPromise(culture: string, id: number): Promise<ApiResult> {
+        const getUrl = this.domain + 'api/' + culture + '/Modules/delete/' + id;
+        return this.http.get(getUrl).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+    }
+
+
     private extractData(res: Response) {
         const body = res.json();
         return body || {};

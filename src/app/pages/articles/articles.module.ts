@@ -6,7 +6,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { ArticlesRoutingModule, routedComponents } from './articles-routing.module';
 import { SmartTableService } from '../../@core/data/smart-table.service';
 import { ArticleService } from './article.services';
-import { ModuleService } from '../modules/modules.service';
+import { ModuleService } from '../modules/module.service';
 import { ModuleDetailsService } from '../../@swastika-io/components/module-details/module.details.service';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../components/data-render/data-render.components';
 import { CKEditorModule } from 'ng2-ckeditor';

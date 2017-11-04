@@ -34,6 +34,7 @@ export class ListModuleDetailsComponent implements OnInit {
     @Input() articleId: string;
     ngOnInit() {
         this._modules = this.modules;
+        console.log(this._modules)
         this._articleId = this.articleId;
     }
     onChange(event) {
@@ -43,12 +44,12 @@ export class ListModuleDetailsComponent implements OnInit {
         if (articleId != null) {
 
             var model: any = {};
-            model.ArticleId = articleId;
-            model.ModuleId = module.id;
-            model.Specificulture = module.specificulture;
-            model.Fields = module.fields;
-            data.Model = model;
-            data.Columns = module.columns;
+            model.articleId = articleId;
+            model.moduleId = module.id;
+            model.specificulture = module.specificulture;
+            model.fields = module.fields;
+            data.model = model;
+            data.columns = module.columns;
             const postUrl = this.pagingData.endPoint + 'save'
             this.moduleDetailsService.saveModuleData(postUrl, data).then(
                 result => {
@@ -65,10 +66,32 @@ export class ListModuleDetailsComponent implements OnInit {
         console.log(module, articleId, JSON.stringify(data));
     }
     onEdit(module: ModuleFullDetails, event) {
-        console.log(event);
         var index = this._modules.findIndex(m => m.id == module.id);
         if (index > -1) {
             this.moduleDetailsService.initModuleDetails(this._modules[index]);
         }
     }
+    onDeleteDataConfirm(event): void {
+        if (window.confirm('Are you sure you want to delete?')) {
+            this.deleteModuleData(event);
+        }
+    };
+
+    deleteModuleData(event): void {
+        console.log(event);
+        this.moduleDetailsService.deleteModuleDataWithPromise('vi-vn', event.data.model.id)
+            .then(result => {
+                if (result.isSucceed) {
+                    var index = this._modules.findIndex(m => m.id == event.data.model.moduleId);
+                    if (index > -1) {
+                        this.moduleDetailsService.initModuleDetails(this._modules[index]);
+                    }
+                } else {
+                    this.showErrors(result.errors, result.ex);
+                }
+            },
+            error => { });
+    }
+    showErrors(errors: string[], ex: any) {
+    };
 }

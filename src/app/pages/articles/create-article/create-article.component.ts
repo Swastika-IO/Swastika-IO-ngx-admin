@@ -5,7 +5,7 @@ import 'ckeditor';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.services';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
-import { ModuleService } from '../../modules/modules.service';
+import { ModuleService } from '../../modules/module.service';
 import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';

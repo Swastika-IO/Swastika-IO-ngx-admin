@@ -65,8 +65,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/modules/create',
       },
       {
-        title: 'All Articles',
-        link: '/pages/modules/index',
+        title: 'All Modules',
+        link: '/pages/modules/list-module',
       },
       {
         title: 'Trash',

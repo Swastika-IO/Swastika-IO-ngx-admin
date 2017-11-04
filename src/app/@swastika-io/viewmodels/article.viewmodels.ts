@@ -112,6 +112,22 @@ export class ApiResult {
     ex: any;
 }
 
+export class ModuleListItem {
+    id: number;
+    specificulture: string;
+    name: string;
+    template: string;
+    description: string;
+    fields: string;
+    columns: DataColumn[];
+    title: string;
+    articleId: string;
+    categoryId: string;
+    view: string;
+    source: ServerDataSource;
+    settings: any;
+}
+
 export class ModuleFullDetails {
     id: number;
     specificulture: string;
@@ -142,6 +158,8 @@ export class ModuleDataDetails {
     dataProperties: DataProperty[];
     columns: DataColumn[];
 }
+
+
 
 export class DataProperty {
     moduleId: number;
