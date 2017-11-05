@@ -12,7 +12,7 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 export class HeaderComponent implements OnInit {
 
 
-  @Input() position = 'normal';
+  @Input() position: string = 'normal';
 
   user: any;
 

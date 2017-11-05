@@ -18,7 +18,7 @@ export class SearchInputComponent {
 
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
-  isInputShown = false;
+  isInputShown: boolean = false;
 
   showInput() {
     this.isInputShown = true;
