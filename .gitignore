@@ -1,6 +1,6 @@
 # compiled output
 /dist
-!/dist/portal/
+!/dist/portal/*
 /tmp
 /out-tsc
 
