@@ -126,10 +126,12 @@ export class ServerDataSource extends LocalDataSource {
 
     if (this.filterConf.filters) {
       this.filterConf.filters.forEach((fieldConf: any) => {
+        var keyword = ' ';
         if (fieldConf['search']) {
-          requestOptions.url += '/' + fieldConf['search'];
+          keyword = fieldConf['search'];
           // searchParams.set(this.conf.filterFieldKey.replace('#field#', fieldConf['field']), fieldConf['search']);
         }
+        requestOptions.url += '/' + keyword;
       });
     }
 

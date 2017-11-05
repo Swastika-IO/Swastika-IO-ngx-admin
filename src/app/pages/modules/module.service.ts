@@ -26,7 +26,6 @@ export class ModuleService {
             .catch(this.handleErrorPromise);
     }
 
-
     private extractData(res: Response) {
         const body = res.json();
         return body || {};

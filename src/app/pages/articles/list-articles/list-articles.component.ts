@@ -5,10 +5,11 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
 import { PagingData, ArticleListItem } from '../../../@swastika-io/viewmodels/article.viewmodels';
-import { ImageRenderComponent, DatetimeRenderComponent } from '../../components/data-render/data-render.components';
+import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../components/data-render/data-render.components';
 import { NbSpinnerService } from '@nebular/theme';
 import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
+
 @Component({
   selector: 'ngx-list-articles',
   templateUrl: './list-articles.component.html',
@@ -18,9 +19,13 @@ import { DOCUMENT } from '@angular/platform-browser';
     }
   `],
   entryComponents: [
-    ImageRenderComponent,
-    DatetimeRenderComponent,
-  ],
+        // CategoryNavsComponent,
+        // ModuleNavsComponent,
+        // ModuleDetailsComponent,
+        // ListModuleDetailsComponent,
+        ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent,
+  ]
+
 })
 export class ListArticlesComponent {
 

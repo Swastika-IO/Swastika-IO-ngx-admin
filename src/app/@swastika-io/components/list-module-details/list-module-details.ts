@@ -34,7 +34,6 @@ export class ListModuleDetailsComponent implements OnInit {
     @Input() articleId: string;
     ngOnInit() {
         this._modules = this.modules;
-        console.log(this._modules)
         this._articleId = this.articleId;
     }
     onChange(event) {

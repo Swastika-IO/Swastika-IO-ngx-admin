@@ -5,7 +5,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ModuleService } from '../module.service';
 import { PagingData, ModuleListItem } from '../../../@swastika-io/viewmodels/article.viewmodels';
-import { ImageRenderComponent, DatetimeRenderComponent } from '../../components/data-render/data-render.components';
+
 import { NbSpinnerService } from '@nebular/theme';
 import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
@@ -18,8 +18,6 @@ import { DOCUMENT } from '@angular/platform-browser';
     }
   `],
   entryComponents: [
-    ImageRenderComponent,
-    DatetimeRenderComponent,
   ],
 })
 export class ListModuleComponent {

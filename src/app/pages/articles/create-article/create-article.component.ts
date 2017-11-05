@@ -11,10 +11,21 @@ import { NotificationService } from '../../components/notifications/notification
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
 
+// import { CategoryNavsComponent } from '../../../@swastika-io/components/category-navigations/category-navigations'
+// import { ModuleNavsComponent } from '../../../@swastika-io/components/module-navigations/module-navigations'
+// import { ModuleDetailsComponent } from '../../../@swastika-io/components/module-details/module-details'
+// import { ListModuleDetailsComponent } from '../../../@swastika-io/components/list-module-details/list-module-details'
+
 @Component({
   selector: 'ngx-create-article',
   styleUrls: ['./create-article.component.scss'],
   templateUrl: './create-article.component.html',
+  entryComponents: [
+    // CategoryNavsComponent,
+    // ModuleNavsComponent,
+    // ModuleDetailsComponent,
+    // ListModuleDetailsComponent,
+  ]
 })
 export class CreateArticleComponent implements OnInit {
 

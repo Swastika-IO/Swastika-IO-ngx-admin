@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ArticlesComponent } from './articles.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { ListDraftArticlesComponent } from './list-draft-articles/list-draft-articles.component';
 
@@ -29,7 +28,7 @@ const routes: Routes = [{
     },    
     {
       path: 'edit-article/:id',
-      component: EditArticleComponent,
+      component: CreateArticleComponent,
     },
   ],
 }];
@@ -43,7 +42,6 @@ export class ArticlesRoutingModule { }
 export const routedComponents = [
   ArticlesComponent,
   CreateArticleComponent,
-  EditArticleComponent,
   ListArticlesComponent,
   ListDraftArticlesComponent,
 ];
