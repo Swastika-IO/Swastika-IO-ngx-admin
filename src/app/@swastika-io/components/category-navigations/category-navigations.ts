@@ -8,7 +8,6 @@ export class CategoryNavsComponent implements OnInit {
     @Input() navigations: any;
 
     ngOnInit() {
-        // console.log(this.navigations);
         this.navs = this.navigations;
     }
 }

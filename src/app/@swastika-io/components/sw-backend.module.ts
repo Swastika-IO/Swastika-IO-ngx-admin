@@ -34,6 +34,16 @@ import { NotificationService } from "app/pages/components/notifications/notifica
     providers: [
         SmartTableService,
         NotificationService,
+    ],
+    exports:[
+        CategoryNavsComponent,
+        ModuleNavsComponent,
+        ModuleDetailsComponent,
+        ListModuleDetailsComponent,
+
+        ImageRenderComponent,
+        DatetimeRenderComponent,
+        HtmlRenderComponent,
     ]
 })
 export class SWBackendModule { }
