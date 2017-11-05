@@ -58,6 +58,12 @@ export class ModuleDetailsComponent implements OnInit {
     onChange(event) {
         this.onCheckedChange.emit(event);
     }
+    onCreate(event) {
+        
+    }
+    onEdit(event) {
+        
+    }
     source: ServerDataSource;
     settings = {
         mode: 'inline',

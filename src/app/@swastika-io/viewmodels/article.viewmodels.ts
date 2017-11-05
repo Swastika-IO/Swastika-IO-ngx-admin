@@ -51,8 +51,10 @@ export class ArticleBackend {
     thumbnailFileStream: string;
     title: string;
     staticUrl: string;
-    briefContent: string;
-    fullContent: string;
+    briefContent: string; // -> excerpt
+    fullContent: string; // -> content
+    excerpt: string;
+    content: string;
     seoname: string;
     seotitle: string;
     seodescription: string;
