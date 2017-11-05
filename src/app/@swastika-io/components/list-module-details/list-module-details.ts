@@ -5,6 +5,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
 import { ServerDataSource } from '../../../pages/components/components.component';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
+import { environment } from '../../../../environments/environment';
 @Component({
     selector: 'sw-list-module-details',
     templateUrl: 'list-module-details.html',
@@ -22,12 +23,13 @@ export class ListModuleDetailsComponent implements OnInit {
     title: string = "Modules";
     _articleId: string;
     pagingData = new PagingData();
+    apiUrl = environment.apiUrl;
     constructor(private http: Http
         , private moduleDetailsService: ModuleDetailsService
     ) {
         this.pagingData.pageIndex = 0;
         this.pagingData.pageSize = 15;
-        this.pagingData.endPoint = 'http://localhost:54920/api/vi-vn/moduleData/'
+        this.pagingData.endPoint = this.apiUrl + '/api/vi-vn/moduleData/'
     }
     @Output() onCheckedChange: EventEmitter<any> = new EventEmitter();
     @Input() modules: any;

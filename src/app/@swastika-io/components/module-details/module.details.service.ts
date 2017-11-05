@@ -4,9 +4,11 @@ import { CKEditorComponent } from 'ng2-ckeditor';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
 import { ServerDataSource } from '../../../pages/components/components.component';
+import { environment } from '../../../../environments/environment';
 @Injectable()
 export class ModuleDetailsService {
-    domain = 'http://localhost:54920/';
+    domain = environment.domain;
+    apiUrl = environment.apiUrl;
     pagingData = new PagingData();
     constructor(private http: Http) {
         this.pagingData.pageIndex = 0;
@@ -14,7 +16,7 @@ export class ModuleDetailsService {
 
     }
     initModuleDetails(module: ModuleFullDetails, articleId: string = ''): void {
-        this.pagingData.endPoint = 'http://localhost:54920/api/vi-vn/moduleData/';
+        this.pagingData.endPoint = this.apiUrl + 'api/vi-vn/moduleData/';
         if (articleId != '') {
             this.pagingData.endPoint += 'getByArticle/' + articleId + '/';
         }

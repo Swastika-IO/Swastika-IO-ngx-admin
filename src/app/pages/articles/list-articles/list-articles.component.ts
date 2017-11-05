@@ -9,6 +9,7 @@ import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } fr
 import { NbSpinnerService } from '@nebular/theme';
 import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ngx-list-articles',
@@ -86,12 +87,15 @@ export class ListArticlesComponent {
   source: ServerDataSource;
   data: ArticleListItem[];
   pagingData = new PagingData();
+  
+  apiUrl = environment.apiUrl;
+
   constructor(private router: Router, private http: Http, private service: ArticleService,
     private spinnerService: NbSpinnerService,
     @Inject(DOCUMENT) private document: Document) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
-    this.pagingData.endPoint = 'http://localhost:54920/api/vi-vn/articles'
+    this.pagingData.endPoint = this.apiUrl + 'api/vi-vn/articles'
 
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }

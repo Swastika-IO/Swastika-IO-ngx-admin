@@ -7,9 +7,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { ApiResult, ArticleBackend, ArticleListItem } from '../../@swastika-io/viewmodels/article.viewmodels';
  
+import { environment } from '../../../environments/environment';
+
 @Injectable()
 export class ArticleService {
-    domain = 'http://localhost:54920/';
+    domain = environment.domain;
     constructor(private http: Http) {
 
     }

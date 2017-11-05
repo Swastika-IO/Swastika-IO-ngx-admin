@@ -3,7 +3,8 @@ import { ModuleFullDetails, PagingData, DataType } from '../../../@swastika-io/v
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
 import { ServerDataSource } from '../../../pages/components/components.component';
-import { ModuleDetailsService } from './module.details.service'
+import { ModuleDetailsService } from './module.details.service';
+import { environment } from '../../../../environments/environment';
 @Component({
     selector: 'sw-module-details',
     templateUrl: 'module-details.html',
@@ -16,12 +17,14 @@ export class ModuleDetailsComponent implements OnInit {
     _module: ModuleFullDetails;
     title: string = "Modules";
     pagingData = new PagingData();
+    apiUrl = environment.apiUrl;
+
     constructor(private http: Http
         , private moduleDetailsService: ModuleDetailsService
     ) {
         this.pagingData.pageIndex = 0;
         this.pagingData.pageSize = 15;
-        this.pagingData.endPoint = 'http://localhost:54920/api/vi-vn/moduleData/'
+        this.pagingData.endPoint = this.apiUrl + 'api/vi-vn/moduleData/'
     }
     @Output() onCheckedChange: EventEmitter<any> = new EventEmitter();
     @Input() module: any;

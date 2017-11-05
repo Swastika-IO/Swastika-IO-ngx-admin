@@ -6,10 +6,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { ApiResult } from '../../@swastika-io/viewmodels/article.viewmodels';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ModuleService {
-    domain = 'http://localhost:54920/';
+    domain = environment.domain;
     constructor(private http: Http) {
     }
     getFullModuleWithPromise(culture: string, id: number): Promise<ApiResult> {
