@@ -5,8 +5,9 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/observable/fromPromise';
 import { ApiResult, ArticleBackend, ArticleListItem } from '../../@swastika-io/viewmodels/article.viewmodels';
- 
+
 import { environment } from '../../../environments/environment';
 
 @Injectable()
@@ -26,6 +27,20 @@ export class ArticleService {
     getArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
         const getUrl = this.domain + 'api/' + culture + '/articles/edit/' + id;
         return this.http.get(getUrl).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+    }
+
+    saveArticleWithPromise(culture: string, article: ArticleBackend): Promise<ApiResult> {
+        const saveUrl = this.domain + 'api/' + culture + '/articles/save';
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers['Access-Control-Allow-Origin'] = '*'
+        let options = new RequestOptions({ headers: headers });
+
+        let obj = JSON.stringify(article);
+        console.log(obj);
+
+        return this.http.post(saveUrl, obj, options).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
     }

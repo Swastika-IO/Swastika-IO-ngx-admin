@@ -1,7 +1,9 @@
 import { ServerDataSource } from '../../pages/components/components.component';
+import {jsonIgnoreReplacer, jsonIgnore} from 'json-ignore'
+
 export class SupportdCulture {
-    id: number;
-    specificulture: string;
+    id: number = 1;
+    specificulture: string = 'test';
     lcid: string;
     alias: string;
     fullName: string;
@@ -43,6 +45,7 @@ export class ArticleModuleNav {
 }
 
 export class ArticleBackend {
+    @jsonIgnore()
     id: string;
     specificulture: string;
     image: string;
@@ -71,8 +74,10 @@ export class ArticleBackend {
     listSupportedCulture: SupportdCulture[];
     categories: CategotyArticleNav[];
     modules: ModuleArticleNav[];
-    moduleNavs: ArticleModuleNav[];
+    moduleNavs: ArticleModuleNav[];    
+    @jsonIgnore()
     activedModules: ModuleFullDetails[];
+    listTag: string[];
     view: Template;
     templates: Template[];
 }
@@ -126,7 +131,9 @@ export class ModuleListItem {
     articleId: string;
     categoryId: string;
     view: string;
+    @jsonIgnore()
     source: ServerDataSource;
+    @jsonIgnore()
     settings: any;
 }
 
@@ -143,8 +150,12 @@ export class ModuleFullDetails {
     categoryId: string;
     view: string;
     data: PagingData; // <ModuleDataDetails>
+    @jsonIgnore()
     source: ServerDataSource;
+    @jsonIgnore()    
     settings: any;
+
+    constructor(){};
 }
 
 export class ModuleDataDetails {

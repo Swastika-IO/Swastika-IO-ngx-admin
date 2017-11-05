@@ -12,6 +12,7 @@ import { ListModuleDetailsComponent } from '../@swastika-io/components/list-modu
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AceEditorModule, AceEditorDirective } from 'ng2-ace-editor';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import "reflect-metadata";
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];

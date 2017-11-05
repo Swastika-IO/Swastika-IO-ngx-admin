@@ -6,13 +6,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.services';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { ModuleService } from '../../modules/module.service';
-import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
 
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
+import { jsonIgnoreReplacer } from 'json-ignore';
 
 
 // import { CategoryNavsComponent } from '../../../@swastika-io/components/category-navigations/category-navigations'
@@ -41,15 +42,18 @@ export class CreateArticleComponent implements OnInit {
   activedModules: ModuleFullDetails[] = [];
   activedModule: ModuleFullDetails;
 
-  toasterconfig : ToasterConfig = new ToasterConfig({animation: 'fade'});
+  toasterconfig: ToasterConfig = new ToasterConfig({ animation: 'fade' });
 
   constructor(private route: ActivatedRoute
-    , private service: ArticleService
+    , private articleService: ArticleService
     , private moduleService: ModuleService
     , private moduleDetailsService: ModuleDetailsService
     , private notificationService: NotificationService) { }
 
   ngOnInit() {
+    let c = new SupportdCulture();
+    c.id = 10;
+    c.description = 'sdfsdf';
     this.sub = this.route.params.subscribe(params => {
       // In a real app: dispatch action to load the details here.
       this.data.id = params['id']; // (+) converts string 'id' to a number      
@@ -65,13 +69,15 @@ export class CreateArticleComponent implements OnInit {
     this.sub.unsubscribe();
   }
   getDefaultArticle(): void {
-    this.service.getDefaultArticleWithPromise('vi-vn')
+    this.articleService.getDefaultArticleWithPromise('vi-vn')
       .then(result => {
         if (result.isSucceed) {
           result.data.activedModules.forEach(module => {
             this.moduleDetailsService.initModuleDetails(module, this.data.id);
           });
           this.data = result.data;
+          
+
         } else {
           this.errors = result.errors;
           this.ex = result.ex;
@@ -81,14 +87,14 @@ export class CreateArticleComponent implements OnInit {
       error => { });
   }
   fetchData(): void {
-    this.service.getArticleWithPromise('vi-vn', this.data.id)
+    this.articleService.getArticleWithPromise('vi-vn', this.data.id)
       .then(result => {
         if (result.isSucceed) {
           result.data.activedModules.forEach(module => {
             this.moduleDetailsService.initModuleDetails(module, this.data.id);
           });
           this.data = result.data;
-
+          console.log(JSON.stringify(this.data, jsonIgnoreReplacer));
 
         } else {
           this.errors = result.errors;
@@ -102,7 +108,8 @@ export class CreateArticleComponent implements OnInit {
     this.data.view = view;
   }
   submit(): void {
-    console.log(this.data);
+    console.log(JSON.stringify(this.data, jsonIgnoreReplacer));
+    // this.articleService.saveArticleWithPromise('vi-vn', this.data);
     this.showErrors();
   }
   showErrors(): void {

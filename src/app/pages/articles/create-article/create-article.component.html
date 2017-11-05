@@ -74,7 +74,8 @@
         </nb-tab>
         <nb-tab tabTitle="Parents">
           <ng-container *ngIf="data?.categories">
-            <sw-category-nav [(navigations)]="data.categories"></sw-category-nav>
+            <sw-category-nav [(navigations)]="data.categories">              
+            </sw-category-nav>
           </ng-container>
           <ng-container *ngIf="data?.modules">
             <sw-module-nav [(navigations)]="data.modules"></sw-module-nav>
@@ -181,8 +182,7 @@
       <nb-card-header>Tags</nb-card-header>
       <nb-card-body>
         <div class="form-group">
-          <input type="text" placeholder="tag,..." class="form-control" />
-          <small class="form-text">Separate tags with commas</small>
+          <tag-input class="" [(ngModel)]="data.listTag" ></tag-input>
         </div>
       </nb-card-body>
     </nb-card>
