@@ -10,6 +10,7 @@ import "reflect-metadata";
       <router-outlet></router-outlet>
     </ngx-sample-layout>
   `,
+  
 })
 export class PagesComponent {
   menu = MENU_ITEMS;

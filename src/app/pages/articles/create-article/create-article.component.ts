@@ -6,15 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.services';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { ModuleService } from '../../modules/module.service';
-import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
 
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import { jsonIgnoreReplacer } from 'json-ignore';
-
+import { plainToClass } from "class-transformer";
+// import "reflect-metadata";
 
 // import { CategoryNavsComponent } from '../../../@swastika-io/components/category-navigations/category-navigations'
 // import { ModuleNavsComponent } from '../../../@swastika-io/components/module-navigations/module-navigations'
@@ -51,9 +51,7 @@ export class CreateArticleComponent implements OnInit {
     , private notificationService: NotificationService) { }
 
   ngOnInit() {
-    let c = new SupportdCulture();
-    c.id = 10;
-    c.description = 'sdfsdf';
+
     this.sub = this.route.params.subscribe(params => {
       // In a real app: dispatch action to load the details here.
       this.data.id = params['id']; // (+) converts string 'id' to a number      
@@ -76,7 +74,7 @@ export class CreateArticleComponent implements OnInit {
             this.moduleDetailsService.initModuleDetails(module, this.data.id);
           });
           this.data = result.data;
-          
+
 
         } else {
           this.errors = result.errors;
@@ -93,9 +91,7 @@ export class CreateArticleComponent implements OnInit {
           result.data.activedModules.forEach(module => {
             this.moduleDetailsService.initModuleDetails(module, this.data.id);
           });
-          this.data = result.data;
-          console.log(JSON.stringify(this.data, jsonIgnoreReplacer));
-
+          this.data = result.data;          
         } else {
           this.errors = result.errors;
           this.ex = result.ex;
@@ -108,8 +104,9 @@ export class CreateArticleComponent implements OnInit {
     this.data.view = view;
   }
   submit(): void {
-    console.log(JSON.stringify(this.data, jsonIgnoreReplacer));
-    // this.articleService.saveArticleWithPromise('vi-vn', this.data);
+    var model = plainToClass(ModuleFullDetails, this.data)[0];
+    console.log(model);
+    // this.articleService.saveArticleWithPromise('vi-vn', model);
     this.showErrors();
   }
   showErrors(): void {

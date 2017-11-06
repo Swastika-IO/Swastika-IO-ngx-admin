@@ -16,6 +16,7 @@ import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2FileInputModule } from 'ng2-file-input'
 import { TagInputModule } from 'ngx-chips';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

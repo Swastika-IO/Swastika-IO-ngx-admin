@@ -10,7 +10,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:2089/",
-  domain: "http://localhost:2089/",
+  apiUrl: "http://localhost:61136/",
+  domain: "http://localhost:61136/",
   culture: 'vi-vn',
 };

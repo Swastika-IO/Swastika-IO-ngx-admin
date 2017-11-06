@@ -1,5 +1,5 @@
 import { ServerDataSource } from '../../pages/components/components.component';
-import {jsonIgnoreReplacer, jsonIgnore} from 'json-ignore'
+import {Exclude} from "class-transformer";
 
 export class SupportdCulture {
     id: number = 1;
@@ -20,7 +20,7 @@ export class Template {
     fileStream: string;
 }
 
-export class CategotyArticleNav {
+export class CategotyArticleNav {    
     articleId: string;
     categoryId: number;
     specificulture: string;
@@ -45,7 +45,6 @@ export class ArticleModuleNav {
 }
 
 export class ArticleBackend {
-    @jsonIgnore()
     id: string;
     specificulture: string;
     image: string;
@@ -64,7 +63,7 @@ export class ArticleBackend {
     seokeywords: string;
     source: string;
     views: string;
-    type: number;
+    // type: number;
     createdDateTime: Date;
     createdBy: string;
     isVisible: boolean;
@@ -75,7 +74,7 @@ export class ArticleBackend {
     categories: CategotyArticleNav[];
     modules: ModuleArticleNav[];
     moduleNavs: ArticleModuleNav[];    
-    @jsonIgnore()
+    @Exclude()
     activedModules: ModuleFullDetails[];
     listTag: string[];
     view: Template;
@@ -131,9 +130,9 @@ export class ModuleListItem {
     articleId: string;
     categoryId: string;
     view: string;
-    @jsonIgnore()
+    @Exclude()
     source: ServerDataSource;
-    @jsonIgnore()
+    @Exclude()
     settings: any;
 }
 
@@ -150,12 +149,10 @@ export class ModuleFullDetails {
     categoryId: string;
     view: string;
     data: PagingData; // <ModuleDataDetails>
-    @jsonIgnore()
+    @Exclude()
     source: ServerDataSource;
-    @jsonIgnore()    
+    @Exclude()
     settings: any;
-
-    constructor(){};
 }
 
 export class ModuleDataDetails {
