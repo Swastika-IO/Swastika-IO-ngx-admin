@@ -5,8 +5,8 @@
  */
 export const environment = {
   production: true,
-  apiUrl: "http://localhost:61136/",
-  domain: "http://localhost:61136/",
+  apiUrl: "http://localhost:2089/",
+  domain: "http://localhost:2089/",
   culture: 'vi-vn',
   pagingConfig: {
     endPoint: this.apiUrl,

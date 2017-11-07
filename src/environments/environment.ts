@@ -10,8 +10,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:61136/",
-  domain: "http://localhost:61136/",
+  apiUrl: "http://localhost:2089/",
+  domain: "http://localhost:2089/",
   culture: 'vi-vn',
   pagingConfig: {
     endPoint: "http://localhost:61136/api/vi-vn/moduleData/",
