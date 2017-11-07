@@ -6,14 +6,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from '../article.services';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { ModuleService } from '../../modules/module.service';
-import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav, SWDataTable } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
 
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-import { plainToClass } from "class-transformer";
+import { plainToClass, classToPlain, classToClass } from "class-transformer";
 // import "reflect-metadata";
 
 // import { CategoryNavsComponent } from '../../../@swastika-io/components/category-navigations/category-navigations'
@@ -69,12 +69,15 @@ export class CreateArticleComponent implements OnInit {
   getDefaultArticle(): void {
     this.articleService.getDefaultArticleWithPromise('vi-vn')
       .then(result => {
+
         if (result.isSucceed) {
+          var subModules: SWDataTable[] = [];
           result.data.activedModules.forEach(module => {
-            this.moduleDetailsService.initModuleDetails(module, this.data.id);
+            var sm = this.moduleDetailsService.initModuleDetails(module, this.data.id);
+            subModules.push(sm);
           });
           this.data = result.data;
-
+          this.data.subModules = subModules;
 
         } else {
           this.errors = result.errors;
@@ -88,26 +91,35 @@ export class CreateArticleComponent implements OnInit {
     this.articleService.getArticleWithPromise('vi-vn', this.data.id)
       .then(result => {
         if (result.isSucceed) {
+          var subModules: SWDataTable[] = [];
           result.data.activedModules.forEach(module => {
-            this.moduleDetailsService.initModuleDetails(module, this.data.id);
+            var sm = this.moduleDetailsService.initModuleDetails(module, this.data.id);
+            subModules.push(sm);
           });
-          this.data = result.data;          
+
+          this.data = result.data;
+          this.data.subModules = subModules;
+
         } else {
           this.errors = result.errors;
           this.ex = result.ex;
           this.showErrors();
         }
       },
-      error => { });
+      error => {
+        this.errors = error;
+        this.showErrors();
+      });
   }
   setView(view: Template) {
     this.data.view = view;
   }
   submit(): void {
-    var model = plainToClass(ModuleFullDetails, this.data)[0];
-    console.log(model);
-    // this.articleService.saveArticleWithPromise('vi-vn', model);
-    this.showErrors();
+    this.data.subModules.forEach(sm => {
+      sm.source.getElements().then(result => sm.models.data = result);
+    });
+    var model = plainToClass(ArticleBackend, this.data);
+    this.articleService.saveArticleWithPromise('vi-vn', model);
   }
   showErrors(): void {
     this.errors.forEach(element => {
@@ -137,39 +149,48 @@ export class CreateArticleComponent implements OnInit {
   onChange(navigation: ArticleModuleNav) {
     if (this.data.id != null) {
       const addUrl = 'api/' + navigation.specificulture + '/modules/addToArticle';
-      this.moduleDetailsService.addToArticle(addUrl, navigation).then(addResult => {
-        if (addResult.isSucceed) {
-          this.modifyActivedModules(navigation);
-        } else {
-          this.errors = addResult.errors;
-          this.ex = addResult.ex;
-          this.showErrors();
-        }
-      });
+      if (!navigation.isActived && !confirm("The data will be deleted too!")) {
+        return;
+      }
+
+      this.modifyActivedModules(navigation);
+      // this.moduleDetailsService.addToArticle(addUrl, navigation).then(addResult => {
+      //   if (addResult.isSucceed) {
+      //     this.modifyActivedModules(navigation);
+      //   } else {
+      //     this.errors = addResult.errors;
+      //     this.ex = addResult.ex;
+      //     this.showErrors();
+      //   }
+      // });
     } else {
       this.modifyActivedModules(navigation);
     }
 
   }
   modifyActivedModules(navigation: ArticleModuleNav): void {
-    this.moduleService.getFullModuleWithPromise(navigation.specificulture, navigation.moduleId)
-      .then(result => {
-        if (result.isSucceed) {
-          if (navigation.isActived) {
-            this.moduleDetailsService.initModuleDetails(result.data, this.data.id);
+    if (navigation.isActived) {
+      this.moduleService.getFullModuleByArticle(navigation.specificulture, navigation.moduleId, this.data.id)
+        .then(result => {
+          if (result.isSucceed) {
+            var sm = this.moduleDetailsService.initModuleDetails(result.data, this.data.id);
+            this.data.subModules.push(sm);
             this.data.activedModules.push(result.data);
           } else {
-            var index = this.data.activedModules.findIndex(a => a.id == navigation.moduleId);
-            if (index > -1) {
-              this.data.activedModules.splice(index, 1);
-            }
+            this.errors = result.errors;
+            this.ex = result.ex;
+            this.showErrors();
           }
-        } else {
-          this.errors = result.errors;
-          this.ex = result.ex;
-          this.showErrors();
-        }
-      });
+        });
+    }
+    else {
+      var index = this.data.activedModules.findIndex(a => a.id == navigation.moduleId);
+      if (index > -1) {
+        this.data.activedModules.splice(index, 1);
+        this.data.subModules.splice(index, 1);
+      }
+    }
   }
+
 
 }

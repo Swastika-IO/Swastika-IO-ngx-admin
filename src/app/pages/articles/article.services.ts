@@ -37,10 +37,7 @@ export class ArticleService {
         headers['Access-Control-Allow-Origin'] = '*'
         let options = new RequestOptions({ headers: headers });
 
-        let obj = JSON.stringify(article);
-        console.log(obj);
-
-        return this.http.post(saveUrl, obj, options).toPromise()
+        return this.http.post(saveUrl, article, options).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);
     }

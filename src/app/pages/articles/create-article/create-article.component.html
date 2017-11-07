@@ -44,9 +44,6 @@
           <input type="text" [ngModel]="data.title" placeholder="Enter title here..." class="form-control" />
         </div>
         <div class="input-group">
-          <input type="text" [ngModel]="data.staticUrl" placeholder="Static URL" class="form-control" />
-        </div>
-        <div class="input-group">
           <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
         </div>
         <div class="input-group">
@@ -91,8 +88,8 @@
                 Actived Modules
               </nb-card-header>
               <nb-card-body>
-                <ng-container *ngIf="data?.activedModules">
-                  <sw-list-module-details [(modules)]="data.activedModules" [articleId] = "data.id"></sw-list-module-details>
+                <ng-container *ngIf="data?.subModules">
+                  <sw-list-module-details [(modules)]="data.subModules" [articleId] = "data.id"></sw-list-module-details>
                 </ng-container>
               </nb-card-body>
             </nb-card>

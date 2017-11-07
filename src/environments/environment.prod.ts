@@ -5,6 +5,15 @@
  */
 export const environment = {
   production: true,
-  apiUrl: "/",
-  domain: "/",
+  apiUrl: "http://localhost:61136/",
+  domain: "http://localhost:61136/",
+  culture: 'vi-vn',
+  pagingConfig: {
+    endPoint: this.apiUrl,
+    dataKey: 'data.items',
+    pagerLimitKey: 'data.pageSize',
+    pagerPageKey: 'data.pageIndex',
+    totalKey: 'data.totalItems',
+
+  }
 };

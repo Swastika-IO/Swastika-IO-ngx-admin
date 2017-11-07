@@ -6,6 +6,7 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { getDeepFromObject } from 'ng2-smart-table/lib/helpers';
+import { environment } from 'environments/environment';
 
 export class ServerDataSource extends LocalDataSource {
 
@@ -39,6 +40,9 @@ export class ServerDataSource extends LocalDataSource {
   constructor(protected _http: Http, conf: any) {
     super();
 
+    if (conf == undefined) {
+      conf = environment.pagingConfig;
+    }
     this.conf = conf;
 
     if (!this.conf.endPoint) {

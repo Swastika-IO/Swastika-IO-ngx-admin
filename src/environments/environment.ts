@@ -13,4 +13,12 @@ export const environment = {
   apiUrl: "http://localhost:61136/",
   domain: "http://localhost:61136/",
   culture: 'vi-vn',
+  pagingConfig: {
+    endPoint: "http://localhost:61136/api/vi-vn/moduleData/",
+    dataKey: 'data.items',
+    pagerLimitKey: 'data.pageSize',
+    pagerPageKey: 'data.pageIndex',
+    totalKey: 'data.totalItems',
+
+  }
 };

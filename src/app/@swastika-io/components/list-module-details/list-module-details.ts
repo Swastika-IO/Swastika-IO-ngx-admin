@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { ModuleFullDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ModuleFullDetails, PagingData, DataType, SWDataTable } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { CKEditorComponent } from 'ng2-ckeditor';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
@@ -19,7 +19,7 @@ import { environment } from '../../../../environments/environment';
     ]
 })
 export class ListModuleDetailsComponent implements OnInit {
-    _modules: ModuleFullDetails[];
+    _modules: SWDataTable[];
     title: string = "Modules";
     _articleId: string;
     pagingData = new PagingData();
@@ -41,51 +41,69 @@ export class ListModuleDetailsComponent implements OnInit {
     onChange(event) {
         this.onCheckedChange.emit(event);
     }
-    onCreate(module: ModuleFullDetails, articleId, data) {
-        if (articleId != null) {
+    onCreate(vmModule: SWDataTable, articleId, data) {
+        var module = vmModule.models;
+        var model: any = {};
+        model.articleId = articleId;
+        model.moduleId = module.id;
+        model.specificulture = module.specificulture;
+        model.fields = module.fields;
+        data.model = model;
+        data.columns = module.columns;
+        const postUrl = this.pagingData.endPoint + 'save'
+        
+        vmModule.source.prepend(data);
+        vmModule.source.refresh();
+        // console.log(vmModule);
+        alert('adfas');
+        // if (articleId != null) {
 
-            var model: any = {};
-            model.articleId = articleId;
-            model.moduleId = module.id;
-            model.specificulture = module.specificulture;
-            model.fields = module.fields;
-            data.model = model;
-            data.columns = module.columns;
-            const postUrl = this.pagingData.endPoint + 'save'
-            this.moduleDetailsService.saveModuleData(postUrl, data).then(
-                result => {
-                    if (result.isSucceed) {
-                        var index = this._modules.findIndex(m => m.id == module.id);
-                        this.moduleDetailsService.initModuleDetails(module[index]);
-                    }
-                }
-            );
+        //     // var model: any = {};
+        //     // model.articleId = articleId;
+        //     // model.moduleId = module.id;
+        //     // model.specificulture = module.specificulture;
+        //     // model.fields = module.fields;
+        //     // data.model = model;
+        //     // data.columns = module.columns;
+        //     // const postUrl = this.pagingData.endPoint + 'save'
+            
+        //     // this.moduleDetailsService.saveModuleData(postUrl, data).then(
+        //     //     result => {
+        //     //         if (result.isSucceed) {
+        //     //             var index = this._modules.findIndex(m => m.models.id == module.id);
+        //     //             this.moduleDetailsService.initModuleDetails(module[index]);
+        //     //         }
+        //     //     }
+        //     // );
 
-        } else {
+        // } else {
 
-        }
-        console.log(module, articleId, JSON.stringify(data));
+        // }
     }
-    onEdit(module: ModuleFullDetails, event) {
-        var index = this._modules.findIndex(m => m.id == module.id);
-        if (index > -1) {
-            this.moduleDetailsService.initModuleDetails(this._modules[index]);
-        }
-    }
-    onDeleteDataConfirm(event): void {
+    // onEdit(module: ModuleFullDetails, event) {
+    //     var index = this._modules.findIndex(m => m.models.id == module.id);
+    //     if (index > -1) {
+    //         this._modules[index] = this.moduleDetailsService.initModuleDetails(this._modules[index].models);
+    //     }
+    // }
+    onDeleteDataConfirm(vmModule: SWDataTable, articleId, data): void {
         if (window.confirm('Are you sure you want to delete?')) {
-            this.deleteModuleData(event);
+            // this.deleteModuleData(event);
+            // console.log(data);
+            vmModule.source.remove(data);
+            vmModule.source.refresh();
+            // console.log(vmModule);
         }
     };
 
     deleteModuleData(event): void {
-        console.log(event);
+        // console.log(event);
         this.moduleDetailsService.deleteModuleDataWithPromise('vi-vn', event.data.model.id)
             .then(result => {
                 if (result.isSucceed) {
-                    var index = this._modules.findIndex(m => m.id == event.data.model.moduleId);
+                    var index = this._modules.findIndex(m => m.models.id == event.data.model.moduleId);
                     if (index > -1) {
-                        this.moduleDetailsService.initModuleDetails(this._modules[index]);
+                        this._modules[index] =this.moduleDetailsService.initModuleDetails(this._modules[index].models);
                     }
                 } else {
                     this.showErrors(result.errors, result.ex);

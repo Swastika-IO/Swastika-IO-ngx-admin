@@ -1,5 +1,6 @@
 import { ServerDataSource } from '../../pages/components/components.component';
-import {Exclude} from "class-transformer";
+import { Exclude, Transform } from "class-transformer";
+import { LocalDataSource } from 'ng2-smart-table';
 
 export class SupportdCulture {
     id: number = 1;
@@ -20,7 +21,7 @@ export class Template {
     fileStream: string;
 }
 
-export class CategotyArticleNav {    
+export class CategotyArticleNav {
     articleId: string;
     categoryId: number;
     specificulture: string;
@@ -53,7 +54,6 @@ export class ArticleBackend {
     thumbnailFileStream: string;
     title: string;
     staticUrl: string;
-    briefContent: string; // -> excerpt
     fullContent: string; // -> content
     excerpt: string;
     content: string;
@@ -63,7 +63,7 @@ export class ArticleBackend {
     seokeywords: string;
     source: string;
     views: string;
-    // type: number;
+    type: number;
     createdDateTime: Date;
     createdBy: string;
     isVisible: boolean;
@@ -73,12 +73,14 @@ export class ArticleBackend {
     listSupportedCulture: SupportdCulture[];
     categories: CategotyArticleNav[];
     modules: ModuleArticleNav[];
-    moduleNavs: ArticleModuleNav[];    
-    @Exclude()
+    moduleNavs: ArticleModuleNav[];
     activedModules: ModuleFullDetails[];
+    @Exclude()
+    subModules: SWDataTable[];
     listTag: string[];
     view: Template;
     templates: Template[];
+    constructor(){}
 }
 
 export class ArticleListItem {
@@ -108,7 +110,8 @@ export class PagingData {
     pageSize: number;
     totalPage: number;
     totalItems: number;
-    items: any[]
+    items: any[];
+    jsonItems: any[];
 }
 
 export class ApiResult {
@@ -116,6 +119,12 @@ export class ApiResult {
     data: any;
     errors: string[];
     ex: any;
+}
+
+export class SWDataTable{
+    models: any;
+    source: LocalDataSource;
+    settings: any;
 }
 
 export class ModuleListItem {
@@ -130,10 +139,8 @@ export class ModuleListItem {
     articleId: string;
     categoryId: string;
     view: string;
-    @Exclude()
-    source: ServerDataSource;
-    @Exclude()
-    settings: any;
+
+    
 }
 
 export class ModuleFullDetails {
@@ -149,10 +156,6 @@ export class ModuleFullDetails {
     categoryId: string;
     view: string;
     data: PagingData; // <ModuleDataDetails>
-    @Exclude()
-    source: ServerDataSource;
-    @Exclude()
-    settings: any;
 }
 
 export class ModuleDataDetails {
@@ -186,8 +189,7 @@ export class DataColumn {
     width: number;
 }
 
-export enum DataType
-{
+export enum DataType {
     String = 0,
     Int = 1,
     Image = 2,

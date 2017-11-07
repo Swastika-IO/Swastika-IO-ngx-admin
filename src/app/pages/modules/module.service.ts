@@ -20,6 +20,13 @@ export class ModuleService {
             .catch(this.handleErrorPromise);
     }
 
+    getFullModuleByArticle(culture: string, id: number, articleId: string): Promise<ApiResult> {
+        const getUrl = this.domain + 'api/' + culture + '/modules/byArticle/' + id + '/' + articleId;
+        return this.http.get(getUrl).toPromise()
+            .then(this.extractData)
+            .catch(this.handleErrorPromise);
+    }
+
     deleteModuleWithPromise(culture: string, id: number): Promise<ApiResult> {
         const getUrl = this.domain + 'api/' + culture + '/Modules/delete/' + id;
         return this.http.get(getUrl).toPromise()
