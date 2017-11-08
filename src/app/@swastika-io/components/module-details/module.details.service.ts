@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, OnChanges, EventEmitter, Injectable } from '@angular/core';
-import { ApiResult,SWDataTable, ArticleModuleNav, ModuleFullDetails, ModuleDataDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ApiResult, SWDataTable, ArticleModuleNav, ModuleFullDetails, ModuleDataDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { CKEditorComponent } from 'ng2-ckeditor';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
@@ -47,31 +47,37 @@ export class ModuleDetailsService {
                 add: true,
             },
         };
+        // result.settings.columns['id'] = {
+        //     title: 'ID',
+        //     type: 'string',
+        //     filter: false,
+            
+        // };
         module.columns.forEach(col => {
             result.settings.columns[col.name] = {};
             result.settings.columns[col.name]['title'] = col.name;
             switch (col.dataType) {
                 case DataType.Image:
-                result.settings.columns[col.name]['type'] = 'custom';
-                result.settings.columns[col.name]['renderComponent'] = ImageRenderComponent;
+                    result.settings.columns[col.name]['type'] = 'custom';
+                    result.settings.columns[col.name]['renderComponent'] = ImageRenderComponent;
                     break;
                 case DataType.Html:
-                result.settings.columns[col.name]['type'] = 'custom';
-                result.settings.columns[col.name]['renderComponent'] = HtmlRenderComponent;
+                    result.settings.columns[col.name]['type'] = 'custom';
+                    result.settings.columns[col.name]['renderComponent'] = HtmlRenderComponent;
                     // module.settings.columns[col.name]['editor'] = {
                     //     type: 'custom',
                     //     component: CKEditorComponent,
                     // };
                     break;
                 default:
-                result.settings.columns[col.name]['type'] = 'text';
+                    result.settings.columns[col.name]['type'] = 'text';
                     break;
             }
             result.settings.columns[col.name]['filter'] = false;
         });
 
         result.source = new LocalDataSource();
-        
+
         result.source.load(module.data.jsonItems);
         // (this.http,
         //     {

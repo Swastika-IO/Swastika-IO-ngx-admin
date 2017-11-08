@@ -4,9 +4,9 @@
     </nb-card-header>
     <nb-card-body>        
         <ng2-smart-table  [settings]="module.settings" [source]="module.source" 
-        (deleteConfirm)="onDeleteDataConfirm(module, _articleId, $event.data)" 
-        (createConfirm)="onCreate(module, _articleId, $event.newData)"
-        (editConfirm)="onEdit(module, $event)">
+        (deleteConfirm)="onDeleteDataConfirm(module, _articleId, $event)" 
+        (createConfirm)="onCreate(module, _articleId, $event.newData)"          
+        >
       </ng2-smart-table>
     </nb-card-body>
 </nb-card>

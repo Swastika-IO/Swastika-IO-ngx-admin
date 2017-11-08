@@ -34,7 +34,7 @@ export class ArticleService {
     saveArticleWithPromise(culture: string, article: ArticleBackend): Promise<ApiResult> {
         const saveUrl = this.domain + 'api/' + culture + '/articles/save';
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers['Access-Control-Allow-Origin'] = '*'
+        // headers['Access-Control-Allow-Origin'] = '*'
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(saveUrl, article, options).toPromise()

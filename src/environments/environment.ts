@@ -7,11 +7,14 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
+import { NbSpinnerService } from '@nebular/theme';
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:2089/",
-  domain: "http://localhost:2089/",
+  spinnerServices: new NbSpinnerService(),
+  isBusy: false,
+  apiUrl: "http://localhost:61136/api/",
+  domain: "http://localhost:61136/",
   culture: 'vi-vn',
   pagingConfig: {
     endPoint: "http://localhost:61136/api/vi-vn/moduleData/",

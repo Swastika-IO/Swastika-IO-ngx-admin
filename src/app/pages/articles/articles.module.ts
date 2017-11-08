@@ -21,7 +21,6 @@ import { ListModuleDetailsComponent } from '../../@swastika-io/components/list-m
 import { PagesModule } from '../pages.module'
 import { SWBackendModule } from 'app/@swastika-io/components/sw-backend.module';
 import { TagInputModule } from 'ngx-chips';
-
 @NgModule({
   imports: [
     ThemeModule,

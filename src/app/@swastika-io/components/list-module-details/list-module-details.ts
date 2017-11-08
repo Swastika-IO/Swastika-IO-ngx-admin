@@ -51,7 +51,7 @@ export class ListModuleDetailsComponent implements OnInit {
         data.model = model;
         data.columns = module.columns;
         const postUrl = this.pagingData.endPoint + 'save'
-        
+
         vmModule.source.prepend(data);
         vmModule.source.refresh();
         // console.log(vmModule);
@@ -66,7 +66,7 @@ export class ListModuleDetailsComponent implements OnInit {
         //     // data.model = model;
         //     // data.columns = module.columns;
         //     // const postUrl = this.pagingData.endPoint + 'save'
-            
+
         //     // this.moduleDetailsService.saveModuleData(postUrl, data).then(
         //     //     result => {
         //     //         if (result.isSucceed) {
@@ -86,25 +86,26 @@ export class ListModuleDetailsComponent implements OnInit {
     //         this._modules[index] = this.moduleDetailsService.initModuleDetails(this._modules[index].models);
     //     }
     // }
-    onDeleteDataConfirm(vmModule: SWDataTable, articleId, data): void {
+    onDeleteDataConfirm(vmModule: SWDataTable, articleId, event): void {
         if (window.confirm('Are you sure you want to delete?')) {
             // this.deleteModuleData(event);
-            // console.log(data);
-            vmModule.source.remove(data);
-            vmModule.source.refresh();
+            if (event.data.id != '') {
+                this.deleteModuleData(vmModule, event);
+            } else {
+                vmModule.source.remove(event.data);
+                vmModule.source.refresh();
+            }
             // console.log(vmModule);
         }
     };
 
-    deleteModuleData(event): void {
+    deleteModuleData(vmModule: SWDataTable, event): void {
         // console.log(event);
-        this.moduleDetailsService.deleteModuleDataWithPromise('vi-vn', event.data.model.id)
+        this.moduleDetailsService.deleteModuleDataWithPromise(environment.culture, event.data.id)
             .then(result => {
                 if (result.isSucceed) {
-                    var index = this._modules.findIndex(m => m.models.id == event.data.model.moduleId);
-                    if (index > -1) {
-                        this._modules[index] =this.moduleDetailsService.initModuleDetails(this._modules[index].models);
-                    }
+                    vmModule.source.remove(event.data);
+                    vmModule.source.refresh();
                 } else {
                     this.showErrors(result.errors, result.ex);
                 }

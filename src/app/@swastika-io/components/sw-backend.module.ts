@@ -12,7 +12,6 @@ import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } fr
 import { SmartTableService } from "app/@core/data/smart-table.service";
 import { NotificationService } from "app/pages/components/notifications/notifications.service";
 
-
 @NgModule({
     imports: [
         ThemeModule,

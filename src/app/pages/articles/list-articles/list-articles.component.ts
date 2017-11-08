@@ -6,7 +6,6 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
 import { PagingData, ArticleListItem } from '../../../@swastika-io/viewmodels/article.viewmodels';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../components/data-render/data-render.components';
-import { NbSpinnerService } from '@nebular/theme';
 import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
@@ -20,10 +19,6 @@ import { environment } from '../../../../environments/environment';
     }
   `],
   entryComponents: [
-        // CategoryNavsComponent,
-        // ModuleNavsComponent,
-        // ModuleDetailsComponent,
-        // ListModuleDetailsComponent,
         ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent,
   ]
 
@@ -88,19 +83,17 @@ export class ListArticlesComponent {
   data: ArticleListItem[];
   pagingData = new PagingData();
   
-  apiUrl = environment.apiUrl;
-
   constructor(private router: Router, private http: Http, private service: ArticleService,
-    private spinnerService: NbSpinnerService,
     @Inject(DOCUMENT) private document: Document) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
-    this.pagingData.endPoint = this.apiUrl + 'api/vi-vn/articles'
+    this.pagingData.endPoint = environment.apiUrl + 'vi-vn/articles'
 
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }
 
   ngOnInit(): void {
+    this.fetchData(10,0);
     this.source = new ServerDataSource(this.http,
       {
         endPoint: this.pagingData.endPoint,
@@ -117,6 +110,7 @@ export class ListArticlesComponent {
       .then(result => {
         if (result.isSucceed) {
           this.data = result.data;
+          console.log(this.data);
         } else {
           this.showErrors(result.errors, result.ex);
         }

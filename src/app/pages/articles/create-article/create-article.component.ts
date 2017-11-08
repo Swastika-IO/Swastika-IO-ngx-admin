@@ -11,7 +11,6 @@ import { NotificationService } from '../../components/notifications/notification
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
 
-
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { plainToClass, classToPlain, classToClass } from "class-transformer";
 // import "reflect-metadata";
@@ -44,7 +43,8 @@ export class CreateArticleComponent implements OnInit {
 
   toasterconfig: ToasterConfig = new ToasterConfig({ animation: 'fade' });
 
-  constructor(private route: ActivatedRoute
+  constructor(
+    private route: ActivatedRoute
     , private articleService: ArticleService
     , private moduleService: ModuleService
     , private moduleDetailsService: ModuleDetailsService
@@ -119,7 +119,8 @@ export class CreateArticleComponent implements OnInit {
       sm.source.getElements().then(result => sm.models.data = result);
     });
     var model = plainToClass(ArticleBackend, this.data);
-    this.articleService.saveArticleWithPromise('vi-vn', model);
+    console.log(model);
+    // this.articleService.saveArticleWithPromise('vi-vn', model);
   }
   showErrors(): void {
     this.errors.forEach(element => {

@@ -6,9 +6,10 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ModuleService } from '../module.service';
 import { PagingData, ModuleListItem } from '../../../@swastika-io/viewmodels/article.viewmodels';
 
-import { NbSpinnerService } from '@nebular/theme';
 import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
+import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from 'app/pages/components/data-render/data-render.components';
+import { environment } from 'environments/environment';
 @Component({
   selector: 'ngx-list-module',
   templateUrl: './list-module.component.html',
@@ -16,7 +17,10 @@ import { DOCUMENT } from '@angular/platform-browser';
     nb-card {
       transform: translate3d(0, 0, 0);
     }
-  `]
+  `],
+  entryComponents: [
+    ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent,
+  ]
 })
 export class ListModuleComponent {
 
@@ -51,7 +55,7 @@ export class ListModuleComponent {
         title: 'Template',
         type: 'string',
         filter: false,
-      },     
+      },
       title: {
         title: 'Title',
         type: 'string',
@@ -70,11 +74,10 @@ export class ListModuleComponent {
   data: ModuleListItem[];
   pagingData = new PagingData();
   constructor(private router: Router, private http: Http, private service: ModuleService,
-    private spinnerService: NbSpinnerService,
     @Inject(DOCUMENT) private document: Document) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
-    this.pagingData.endPoint = 'http://localhost:54920/api/vi-vn/modules'
+    this.pagingData.endPoint = environment.apiUrl + 'vi-vn/modules';
 
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }

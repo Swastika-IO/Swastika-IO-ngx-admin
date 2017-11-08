@@ -33,10 +33,7 @@ import { AceEditorModule } from 'ng2-ace-editor';
     ...routedComponents,
 
   ],
-  providers: [
-    SmartTableService,
-    NotificationService,
-    Ng2FileInputService,
+  providers: [    
     ModuleService,
     ModuleDetailsService
   ],

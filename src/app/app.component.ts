@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import "es6-shim";
 import { AnalyticsService } from './@core/utils/analytics.service';
 import { NbSpinnerService } from '@nebular/theme';
+import { environment } from 'environments/environment';
 @Component({
   selector: 'ngx-app',
   template: '<router-outlet></router-outlet>',

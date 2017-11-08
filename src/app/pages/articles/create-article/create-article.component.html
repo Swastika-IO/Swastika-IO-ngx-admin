@@ -41,10 +41,10 @@
       <nb-card-header>Main contents</nb-card-header>
       <nb-card-body>
         <div class="input-group">
-          <input type="text" [ngModel]="data.title" placeholder="Enter title here..." class="form-control" />
+          <input type="text" [(ngModel)]="data.title" placeholder="Enter title here..." class="form-control" />
         </div>
         <div class="input-group">
-          <textarea rows="5" [ngModel]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
+          <textarea rows="5" [(ngModel)]="data.excerpt" placeholder="Excerpt" class="form-control"></textarea>
         </div>
         <div class="input-group">
           <ckeditor class="" [(ngModel)]="data.content"></ckeditor>
@@ -57,16 +57,16 @@
       <nb-tabset fullWidth>
         <nb-tab tabTitle="SEO">
           <div class="input-group">
-            <input type="text" [(ngModel)]="data.seotitle" placeholder="Title" class="form-control" />
+            <input type="text" [(ngModel)]="data.seoTitle" placeholder="Title" class="form-control" />
           </div>
           <div class="input-group">
-            <input type="text" [(ngModel)]="data.seoname" placeholder="Name" class="form-control" />
+            <input type="text" [(ngModel)]="data.seoName" placeholder="Name" class="form-control" />
           </div>
           <div class="input-group">
-            <textarea rows="5" [(ngModel)]="data.seodescription" placeholder="Description" class="form-control"></textarea>
+            <textarea rows="5" [(ngModel)]="data.seoDescription" placeholder="Description" class="form-control"></textarea>
           </div>
           <div class="input-group">
-            <textarea rows="5" [(ngModel)]="data.seokeywords" placeholder="Keywords" class="form-control"></textarea>
+            <textarea rows="5" [(ngModel)]="data.seoKeywords" placeholder="Keywords" class="form-control"></textarea>
           </div>
         </nb-tab>
         <nb-tab tabTitle="Parents">
