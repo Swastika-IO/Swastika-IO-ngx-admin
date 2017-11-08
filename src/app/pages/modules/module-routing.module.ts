@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ModuleComponent } from './module.component';
 import { ListModuleComponent } from './list-module/list-module.component';
+import { CreateModuleComponent } from './create-module/create-module.component';
 
 
 const routes: Routes = [{
@@ -12,7 +13,11 @@ const routes: Routes = [{
     {
       path: 'list-module',
       component: ListModuleComponent,
-    }
+    },
+    {
+      path: 'create-module',
+      component: CreateModuleComponent,
+    } 
     // ,{
     //   path: 'manage-module',
     //   component: ManageModuleComponent,
@@ -33,4 +38,5 @@ export class ModuleRoutingModule { }
 export const routedComponents = [
   ModuleComponent,
   ListModuleComponent,
+  CreateModuleComponent,
 ];
