@@ -97,21 +97,23 @@
         </nb-tab>
         <nb-tab tabTitle="Layout">
 
-          <div class="input-group">
-            <ng-container *ngIf="data?.view">
-              <div class="input-group-btn" ngbDropdown>
-                <button type="button" class="btn btn-success dropdown-toggle" ngbDropdownToggle>
-                  Action
-                </button>
-                <ul class="dropdown-menu">
-                  <li class="dropdown-item" *ngFor="let templ of data.templates" (click)="setView(templ)">{{templ.filename}}</li>
-                  <!-- <div role="separator" class="dropdown-divider"></div>
-                          <li class="dropdown-item">Separated link</li> -->
-                </ul>
-              </div>
-              <input type="text" class="form-control" [(ngModel)]="data.view.filename" placeholder="Template name...">
+          <div class="input-group row">
+            <ng-container *ngIf="data?.templates">                        
+                <div class="form-control dropdown ghost-dropdown" ngbDropdown>
+                    <button class="btn btn-primary" type="button btn-primary" ngbDropdownToggle>
+                      {{data.view?.filename}}
+                    </button>
+                    <ul class="dropdown-menu" style="width:96%" ngbDropdownMenu>
+                      <li class="dropdown-item" *ngFor="let templ of data.templates" (click)="setView(templ)">{{templ.filename}}</li>
+                    </ul>
+                  </div>
             </ng-container>
           </div>
+          <div class="input-group">
+              <ng-container *ngIf="data?.view">
+                  <input type="text" class="form-control" [(ngModel)]="data.view.filename" placeholder="Template name...">                
+              </ng-container>
+            </div>
           <div class="input-group">
             <ng-container *ngIf="data?.view">
               <ace-editor #editor [(text)]="data.view.content" [mode]="'csharp'" [theme]="'eclipse'" [options]="options" [readOnly]="false"

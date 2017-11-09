@@ -2,11 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import '../../editors/ckeditor/ckeditor.loader';
 import 'ckeditor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../article.services';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { ModuleService } from '../../modules/module.service';
-import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav, SWDataTable } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav, SWDataTable, FileStreamViewModel } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
@@ -45,6 +45,7 @@ export class CreateArticleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute
+    ,private router: Router
     , private articleService: ArticleService
     , private moduleService: ModuleService
     , private moduleDetailsService: ModuleDetailsService
@@ -112,6 +113,7 @@ export class CreateArticleComponent implements OnInit {
       });
   }
   setView(view: Template) {
+    console.log(view);
     this.data.view = view;
   }
   submit(): void {
@@ -120,7 +122,17 @@ export class CreateArticleComponent implements OnInit {
     });
     var model = plainToClass(ArticleBackend, this.data);
     console.log(model);
-    // this.articleService.saveArticleWithPromise('vi-vn', model);
+    this.articleService.saveArticleWithPromise('vi-vn', model)
+    .then(result=>{
+      if (result.isSucceed) {
+        this.router.navigate(['/pages/articles/list-articles']);
+      } else {
+        this.errors = result.errors;
+        this.ex = result.ex;
+        this.showErrors();
+      }
+    })
+    
   }
   showErrors(): void {
     this.errors.forEach(element => {
@@ -131,16 +143,25 @@ export class CreateArticleComponent implements OnInit {
     var myReader: FileReader = new FileReader();
     if (event.action === 1) {
       if (type === 'image') {
+        
         myReader.readAsDataURL(event.file);
         myReader.onloadend = (e) => {
           this.data.image = myReader.result;
-          this.data.imageFileStream = myReader.result;
+          this.data.imageFileStream = new FileStreamViewModel()
+          this.data.imageFileStream.base64 = myReader.result
+          this.data.imageFileStream.name = event.file.name;
+          this.data.imageFileStream.type = event.file.type;
+          this.data.imageFileStream.size = event.file.size;
         }
       } else {
         myReader.readAsDataURL(event.file);
         myReader.onloadend = (e) => {
           this.data.thumbnail = myReader.result;
-          this.data.thumbnailFileStream = myReader.result;
+          this.data.thumbnailFileStream = new FileStreamViewModel()
+          this.data.thumbnailFileStream.base64 = myReader.result
+          this.data.thumbnailFileStream.name = event.file.name;
+          this.data.thumbnailFileStream.type = event.file.type;
+          this.data.thumbnailFileStream.size = event.file.size;
         }
 
       }

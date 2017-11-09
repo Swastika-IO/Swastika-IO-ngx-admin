@@ -49,9 +49,9 @@ export class ArticleBackend {
     id: string;
     specificulture: string;
     image: string;
-    imageFileStream: string;
+    imageFileStream = new FileStreamViewModel();
     thumbnail: string;
-    thumbnailFileStream: string;
+    thumbnailFileStream= new FileStreamViewModel();
     title: string;
     staticUrl: string;
     fullContent: string; // -> content
@@ -198,4 +198,11 @@ export enum DataType {
     Html = 5,
     TextArea = 6,
     Boolean = 7
+}
+
+export class FileStreamViewModel{
+    base64: string;
+    name: string;
+    size: number;
+    type: string;
 }

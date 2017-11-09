@@ -39,7 +39,7 @@ import { TagInputModule } from 'ngx-chips';
         removable: true,
         multiple: false,
         showPreviews: false,
-        extensions: ['jpg','gif', 'png'],
+        extensions: ['jpg','gif', 'png', 'xlsx'],
       }
     ),
   ],
