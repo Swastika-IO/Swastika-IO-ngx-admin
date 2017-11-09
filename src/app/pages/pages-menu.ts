@@ -62,7 +62,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Add New',
-        link: '/pages/modules/create',
+        link: '/pages/modules/create-module',
       },
       {
         title: 'All Modules',
