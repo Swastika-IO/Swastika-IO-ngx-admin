@@ -13,6 +13,8 @@ import 'style-loader!ng2-file-input/ng2-file-input.scss';
 
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { plainToClass, classToPlain, classToClass } from "class-transformer";
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { environment } from 'environments/environment';
 // import "reflect-metadata";
 
 // import { CategoryNavsComponent } from '../../../@swastika-io/components/category-navigations/category-navigations'
@@ -34,7 +36,7 @@ import { plainToClass, classToPlain, classToClass } from "class-transformer";
 export class CreateArticleComponent implements OnInit {
 
   id: string;
-  errors: string[] = ['test 1', 'test 2', 'test 3'];
+  errors: string[] = [];
   ex: any;
   private sub: any;
   data = new ArticleBackend();
@@ -45,11 +47,13 @@ export class CreateArticleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute
-    ,private router: Router
+    , private router: Router
     , private articleService: ArticleService
     , private moduleService: ModuleService
     , private moduleDetailsService: ModuleDetailsService
-    , private notificationService: NotificationService) { }
+    , private notificationService: NotificationService
+    , private spinnerSerice: Ng4LoadingSpinnerService
+  ) { }
 
   ngOnInit() {
 
@@ -108,7 +112,7 @@ export class CreateArticleComponent implements OnInit {
         }
       },
       error => {
-        this.errors = error;
+        this.errors.push(error);
         this.showErrors();
       });
   }
@@ -121,32 +125,40 @@ export class CreateArticleComponent implements OnInit {
       sm.source.getElements().then(result => sm.models.data = result);
     });
     var model = plainToClass(ArticleBackend, this.data);
-    console.log(model);
+    environment.isBusy = true;
+    // this.spinnerSerice.show();
     this.articleService.saveArticleWithPromise('vi-vn', model)
-    .then(result=>{
-      if (result.isSucceed) {
-        this.router.navigate(['/pages/articles/list-articles']);
-      } else {
-        this.errors = result.errors;
-        this.ex = result.ex;
-        this.showErrors();
+      .then(result => {
+        if (result.isSucceed) {
+          this.router.navigate(['/pages/articles/list-articles']);
+        } else {
+          this.errors = result.errors;
+          this.ex = result.ex;
+          this.showErrors();
+        }
+        // this.spinnerSerice.hide();
+      }).catch(errors => {
+        // this.spinnerSerice.hide();
       }
-    })
-    
+      );
+
   }
   showErrors(): void {
-    this.errors.forEach(element => {
-      this.notificationService.makeToast('error', '', element);
-    });
+    if (this.errors) {
+      this.errors.forEach(element => {
+        this.notificationService.makeToast('error', '', element);
+      });
+    }
+
   }
   onSelectFile(type: string, event: any): void {
     var myReader: FileReader = new FileReader();
     if (event.action === 1) {
       if (type === 'image') {
-        
+
         myReader.readAsDataURL(event.file);
         myReader.onloadend = (e) => {
-          this.data.image = myReader.result;
+          this.data.imageUrl = myReader.result;
           this.data.imageFileStream = new FileStreamViewModel()
           this.data.imageFileStream.base64 = myReader.result
           this.data.imageFileStream.name = event.file.name;
@@ -156,7 +168,7 @@ export class CreateArticleComponent implements OnInit {
       } else {
         myReader.readAsDataURL(event.file);
         myReader.onloadend = (e) => {
-          this.data.thumbnail = myReader.result;
+          this.data.thumbnailUrl = myReader.result;
           this.data.thumbnailFileStream = new FileStreamViewModel()
           this.data.thumbnailFileStream.base64 = myReader.result
           this.data.thumbnailFileStream.name = event.file.name;

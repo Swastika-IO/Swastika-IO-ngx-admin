@@ -57,7 +57,7 @@ export class ListArticlesComponent {
         type: 'string',
         filter: false,
       },
-      thumbnail: {
+      thumbnailUrl: {
         title: 'thumbnail',
         type: 'custom',
         renderComponent: ImageRenderComponent,

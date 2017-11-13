@@ -80,6 +80,9 @@ export class ArticleBackend {
     listTag: string[];
     view: Template;
     templates: Template[];
+
+    imageUrl: string;
+    thumbnailUrl: string;
     constructor(){}
 }
 
@@ -98,6 +101,8 @@ export class ArticleListItem {
     isDeleted: string;
     detailsUrl: string;
     editUrl: string;
+    imageUrl: string;
+    thumbnailUrl: string;
     constructor() {
     }
 }

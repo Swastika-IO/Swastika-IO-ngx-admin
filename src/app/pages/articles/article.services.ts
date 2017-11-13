@@ -9,61 +9,41 @@ import 'rxjs/add/observable/fromPromise';
 import { ApiResult, ArticleBackend, ArticleListItem } from '../../@swastika-io/viewmodels/article.viewmodels';
 
 import { environment } from '../../../environments/environment';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { ServiceHelper } from 'app/@swastika-io/helpers/sw.service.helper';
 
 @Injectable()
 export class ArticleService {
     domain = environment.domain;
-    constructor(private http: Http) {
-
+    constructor(private http: Http
+        , private serviceHelper: ServiceHelper
+        // , private spinnerSerice: Ng4LoadingSpinnerService
+    ) {
     }
 
     getArticlesWithPromise(culture: string, pageSize: number, pageIndex: number): Promise<ApiResult> {
         const getUrl = this.domain + 'api/' + culture + '/articles/' + pageSize + '/' + pageIndex;
-        return this.http.get(getUrl).toPromise()
-            .then(this.extractData)
-            .catch(this.handleErrorPromise);
+        return this.serviceHelper.getWithPromise(getUrl);        
     }
 
     getArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
         const getUrl = this.domain + 'api/' + culture + '/articles/edit/' + id;
-        return this.http.get(getUrl).toPromise()
-            .then(this.extractData)
-            .catch(this.handleErrorPromise);
+        return this.serviceHelper.getWithPromise(getUrl);
     }
 
     saveArticleWithPromise(culture: string, article: ArticleBackend): Promise<ApiResult> {
-        const saveUrl = this.domain + 'api/' + culture + '/articles/save';
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        // headers['Access-Control-Allow-Origin'] = '*'
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.post(saveUrl, article, options).toPromise()
-            .then(this.extractData)
-            .catch(this.handleErrorPromise);
+        const saveUrl = this.domain + 'api/' + culture + '/articles/save';       
+        return this.serviceHelper.postWithPromise(saveUrl, article);
     }
 
     getDefaultArticleWithPromise(culture: string): Promise<ApiResult> {
         const getUrl = this.domain + 'api/' + culture + '/articles/create';
-        return this.http.get(getUrl).toPromise()
-            .then(this.extractData)
-            .catch(this.handleErrorPromise);
+        return this.serviceHelper.getWithPromise(getUrl);
     }
 
     deleteArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
         const getUrl = this.domain + 'api/' + culture + '/articles/delete' + id;
-        return this.http.get(getUrl).toPromise()
-            .then(this.extractData)
-            .catch(this.handleErrorPromise);
-    }
-
-    private extractData(res: Response) {
-        const body = res.json();
-        return body || {};
-    }
-
-    private handleErrorPromise(error: Response | any) {
-        console.error(error.message || error);
-        return Promise.reject(error.message || error);
+        return this.serviceHelper.getWithPromise(getUrl);
     }
 }
 

@@ -16,8 +16,13 @@ import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2FileInputModule } from 'ng2-file-input'
 import { TagInputModule } from 'ngx-chips';
+import { SWSpinnerComponent } from 'app/@swastika-io/components/spinner/spinner.component';
+import { ServiceHelper } from 'app/@swastika-io/helpers/sw.service.helper';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { NotificationService } from 'app/@swastika-io/helpers/notifications.service';
+import { ToasterModule, ToastComponent } from 'angular2-toaster';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SWSpinnerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -28,7 +33,7 @@ import { TagInputModule } from 'ngx-chips';
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     
-    
+    Ng4LoadingSpinnerModule,
     Ng2FileInputModule.forRoot(
       {
         dropText: "Drop file here",
@@ -42,10 +47,14 @@ import { TagInputModule } from 'ngx-chips';
         extensions: ['jpg','gif', 'png', 'xlsx'],
       }
     ),
+
+    ToasterModule,
   ],
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+    ServiceHelper,
+    NotificationService,
   ],
 })
 export class AppModule {

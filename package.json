@@ -70,6 +70,7 @@
     "ng2-material-dropdown": "^0.8.0",
     "ng2-smart-table": "^1.2.2",
     "ng2-tree": "^2.0.0-alpha.10",
+    "ng4-loading-spinner": "^1.0.27",
     "ngx-chips": "^1.5.9",
     "ngx-echarts": "1.2.2",
     "ngx-input-file": "^0.2.1",

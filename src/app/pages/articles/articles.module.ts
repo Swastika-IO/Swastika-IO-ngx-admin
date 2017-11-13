@@ -28,11 +28,10 @@ import { TagInputModule } from 'ngx-chips';
     Ng2SmartTableModule,
     CKEditorModule,
     AceEditorModule,
-    ToasterModule,
+   
     SWBackendModule,
     TagInputModule,
-    Ng2FileInputModule,
-
+    Ng2FileInputModule,    
     ArticlesRoutingModule,    
   ],
   declarations: [
@@ -44,7 +43,7 @@ import { TagInputModule } from 'ngx-chips';
     // Ng2FileInputService,
     ArticleService,
     ModuleService,
-    ModuleDetailsService
+    ModuleDetailsService,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   
