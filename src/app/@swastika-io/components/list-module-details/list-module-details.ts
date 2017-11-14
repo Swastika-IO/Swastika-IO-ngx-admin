@@ -54,8 +54,6 @@ export class ListModuleDetailsComponent implements OnInit {
 
         vmModule.source.prepend(data);
         vmModule.source.refresh();
-        // console.log(vmModule);
-        alert('adfas');
         // if (articleId != null) {
 
         //     // var model: any = {};

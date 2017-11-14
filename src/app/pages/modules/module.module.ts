@@ -10,7 +10,7 @@ import { ModuleDetailsService } from '../../@swastika-io/components/module-detai
 
 import { SWBackendModule } from 'app/@swastika-io/components/sw-backend.module';
 
-import { NotificationService } from '../components/notifications/notifications.service'
+// import { NotificationService } from '../components/notifications/notifications.service'
 import { Ng2FileInputService, } from 'ng2-file-input'
 import { PagesModule } from '../pages.module'
 import { Ng2SmartTableModule } from 'ng2-smart-table';

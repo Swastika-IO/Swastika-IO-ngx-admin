@@ -11,7 +11,7 @@ import { ModuleDetailsService } from '../../@swastika-io/components/module-detai
 
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AceEditorModule, AceEditorDirective } from 'ng2-ace-editor';
-import { NotificationService } from '../components/notifications/notifications.service'
+import { NotificationService } from '../../@swastika-io/helpers/notifications.service'
 import { Ng2FileInputService, } from 'ng2-file-input'
 import { CategoryNavsComponent } from '../../@swastika-io/components/category-navigations/category-navigations'
 import { ModuleNavsComponent } from '../../@swastika-io/components/module-navigations/module-navigations'

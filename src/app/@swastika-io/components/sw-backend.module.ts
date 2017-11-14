@@ -10,7 +10,7 @@ import { AceEditorModule } from "ng2-ace-editor";
 import { ToasterModule } from "angular2-toaster";
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from "app/pages/components/data-render/data-render.components";
 import { SmartTableService } from "app/@core/data/smart-table.service";
-import { NotificationService } from "app/pages/components/notifications/notifications.service";
+// import { NotificationService } from "../helpers/notifications.service";
 
 @NgModule({
     imports: [
@@ -32,7 +32,7 @@ import { NotificationService } from "app/pages/components/notifications/notifica
     ],
     providers: [
         SmartTableService,
-        NotificationService,
+        // NotificationService,
     ],
     exports:[
         CategoryNavsComponent,

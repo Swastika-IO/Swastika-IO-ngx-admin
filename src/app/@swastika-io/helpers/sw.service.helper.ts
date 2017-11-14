@@ -68,7 +68,6 @@ export class ServiceHelper {
         if (errors) {
             errors.forEach(element => {                
                 this.notificationService.makeToast('error', '', element);
-                console.log(this.notificationService)
             });
         }
 

@@ -7,7 +7,7 @@ import { ArticleService } from '../article.services';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { ModuleService } from '../../modules/module.service';
 import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav, SWDataTable, FileStreamViewModel } from '../../../@swastika-io/viewmodels/article.viewmodels'
-import { NotificationService } from '../../components/notifications/notifications.service'
+// import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
 
@@ -51,7 +51,7 @@ export class CreateArticleComponent implements OnInit {
     , private articleService: ArticleService
     , private moduleService: ModuleService
     , private moduleDetailsService: ModuleDetailsService
-    , private notificationService: NotificationService
+    // , private notificationService: NotificationService
     , private spinnerSerice: Ng4LoadingSpinnerService
   ) { }
 
@@ -146,7 +146,7 @@ export class CreateArticleComponent implements OnInit {
   showErrors(): void {
     if (this.errors) {
       this.errors.forEach(element => {
-        this.notificationService.makeToast('error', '', element);
+        // this.notificationService.makeToast('error', '', element);
       });
     }
 
