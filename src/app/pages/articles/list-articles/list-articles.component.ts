@@ -51,12 +51,7 @@ export class ListArticlesComponent {
         title: 'Culture',
         type: 'string',
         filter: false,
-      },
-      template: {
-        title: 'Template',
-        type: 'string',
-        filter: false,
-      },
+      },      
       thumbnailUrl: {
         title: 'thumbnail',
         type: 'custom',
@@ -119,7 +114,7 @@ export class ListArticlesComponent {
   }
 
   delete(event): void {
-    this.service.deleteArticleWithPromise('vi-vn', event.data.id)
+    this.service.recycleArticleWithPromise('vi-vn', event.data.id)
       .then(result => {
         if (result.isSucceed) {
           this.source.refresh();
@@ -129,6 +124,7 @@ export class ListArticlesComponent {
       },
       error => { });
   }
+  
   showErrors(errors: string[], ex: any) {
   };
   onCreate(event): void {

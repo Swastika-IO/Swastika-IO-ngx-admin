@@ -1,10 +1,21 @@
 <nb-card>
   <nb-card-header>
-    Draft
+    Articles
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+     <ng2-smart-table [settings]="settings" [source]="source" 
+     (delete)="onDeleteConfirm($event)"
+      (custom)="onCustom($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
+<style>
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+  .ng2-smart-action ng2-st-tbody-custom{
+    display: flex;
+  }
+  .ng2-smart-actions ng2-st-tbody-custom{ display: none!important;}
+</style>

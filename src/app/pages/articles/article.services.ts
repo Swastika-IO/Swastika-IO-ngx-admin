@@ -42,7 +42,17 @@ export class ArticleService {
     }
 
     deleteArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
-        const getUrl = this.domain + 'api/' + culture + '/articles/delete' + id;
+        const getUrl = this.domain + 'api/' + culture + '/articles/delete/' + id;
+        return this.serviceHelper.getWithPromise(getUrl);
+    }
+
+    recycleArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
+        const getUrl = this.domain + 'api/' + culture + '/articles/recycle/' + id;
+        return this.serviceHelper.getWithPromise(getUrl);
+    }
+
+    restoreArticleWithPromise(culture: string, id: string): Promise<ApiResult> {
+        const getUrl = this.domain + 'api/' + culture + '/articles/restore/' + id;
         return this.serviceHelper.getWithPromise(getUrl);
     }
 }
