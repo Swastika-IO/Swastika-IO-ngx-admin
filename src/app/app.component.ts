@@ -8,6 +8,7 @@ import "es6-shim";
 import { AnalyticsService } from './@core/utils/analytics.service';
 import { environment } from '../environments/environment';
 import { ToasterConfig } from 'angular2-toaster';
+import { CookieStorage, LocalStorage, SessionStorage } from 'ngx-store';
 @Component({
   selector: 'ngx-app',
   template: '<router-outlet></router-outlet><app-spinner> </app-spinner><toaster-container [toasterconfig]="toasterconfig"></toaster-container>',

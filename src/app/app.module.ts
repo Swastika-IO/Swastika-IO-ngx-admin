@@ -21,6 +21,8 @@ import { ServiceHelper } from 'app/@swastika-io/helpers/sw.service.helper';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { NotificationService } from 'app/@swastika-io/helpers/notifications.service';
 import { ToasterModule, ToastComponent } from 'angular2-toaster';
+import { WebStorageModule } from 'ngx-store';
+import { StorageService } from 'app/@swastika-io/helpers/localStorage.service';
 @NgModule({
   declarations: [AppComponent, SWSpinnerComponent],
   imports: [
@@ -28,7 +30,7 @@ import { ToasterModule, ToastComponent } from 'angular2-toaster';
     BrowserAnimationsModule,
     HttpModule,
     AppRoutingModule,
-
+    WebStorageModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
@@ -55,6 +57,7 @@ import { ToasterModule, ToastComponent } from 'angular2-toaster';
     { provide: APP_BASE_HREF, useValue: '/' },
     ServiceHelper,
     NotificationService,
+    StorageService,
   ],
 })
 export class AppModule {

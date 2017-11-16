@@ -1,3 +1,5 @@
+import { AccessTokenViewModel } from "app/@swastika-io/viewmodels/article.viewmodels";
+
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -21,5 +23,6 @@ export const environment = {
     pagerPageKey: 'data.pageIndex',
     totalKey: 'data.totalItems',
 
-  }
+  },
+  accessToken: new AccessTokenViewModel()
 };

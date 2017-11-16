@@ -37,7 +37,9 @@ export class ArticleService {
     }
 
     getDefaultArticleWithPromise(culture: string): Promise<ApiResult> {
-        const getUrl = this.domain + 'api/' + culture + '/articles/create';
+        // const agetUrl = this.domain + 'api/' + culture + '/account/get';
+        // this.serviceHelper.getWithPromise(agetUrl)
+        const getUrl = this.domain + 'api/' + culture + '/articles/create';        
         return this.serviceHelper.getWithPromise(getUrl);
     }
 
