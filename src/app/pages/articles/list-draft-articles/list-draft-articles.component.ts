@@ -22,7 +22,17 @@ import { environment } from '../../../../environments/environment';
 export class ListDraftArticlesComponent {
 
   settings = {
-    mode: 'external',   
+    mode: 'external',
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+    },
+    edit: {
+      editButtonContent: '<i class="ion-reply"></i>',
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },   
     columns: {
       id: {
         title: 'ID',
@@ -52,21 +62,21 @@ export class ListDraftArticlesComponent {
       },
     },
     actions: {
-      add: false,
-      edit: false,
-      delete: false,
+      add: true,
+      edit: true,
+      delete: true,
       
-      custom: [
-        {
-          name: 'delete',
-          title: '<i class="nb-trash"></i>',
-        },
-        {
-          name: 'restore',
-          title: '<i class="ion-reply"></i>',
-        },
+      // custom: [
+      //   {
+      //     name: 'delete',
+      //     title: '<i class="nb-trash"></i>',
+      //   },
+      //   {
+      //     name: 'restore',
+      //     title: '<i class="ion-reply"></i>',
+      //   },
         
-      ]
+      // ]
     },
   };
 

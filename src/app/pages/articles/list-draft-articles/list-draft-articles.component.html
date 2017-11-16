@@ -6,7 +6,7 @@
   <nb-card-body>
      <ng2-smart-table [settings]="settings" [source]="source" 
      (delete)="onDeleteConfirm($event)"
-      (custom)="onCustom($event)">
+      (edit)="restore($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
