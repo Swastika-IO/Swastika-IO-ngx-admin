@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../article.services';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { ModuleService } from '../../modules/module.service';
-import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav, SWDataTable, FileStreamViewModel } from '../../../@swastika-io/viewmodels/article.viewmodels'
+import { ModuleFullDetails, ArticleModuleNav, ArticleBackend, Template, SupportdCulture, CategotyArticleNav, SWDataTable, FileStreamViewModel, AccessTokenViewModel } from '../../../@swastika-io/viewmodels/article.viewmodels'
 // import { NotificationService } from '../../components/notifications/notifications.service'
 import 'style-loader!angular2-toaster/toaster.css';
 import 'style-loader!ng2-file-input/ng2-file-input.scss';
@@ -15,26 +15,15 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { plainToClass, classToPlain, classToClass } from "class-transformer";
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { environment } from 'environments/environment';
-// import "reflect-metadata";
 
-// import { CategoryNavsComponent } from '../../../@swastika-io/components/category-navigations/category-navigations'
-// import { ModuleNavsComponent } from '../../../@swastika-io/components/module-navigations/module-navigations'
-// import { ModuleDetailsComponent } from '../../../@swastika-io/components/module-details/module-details'
-// import { ListModuleDetailsComponent } from '../../../@swastika-io/components/list-module-details/list-module-details'
+import { CookieStorage, SharedStorage, LocalStorage, SessionStorage, WebstorableArray } from 'ngx-store';
 
 @Component({
   selector: 'ngx-create-article',
   styleUrls: ['./create-article.component.scss'],
-  templateUrl: './create-article.component.html',
-  entryComponents: [
-    // CategoryNavsComponent,
-    // ModuleNavsComponent,
-    // ModuleDetailsComponent,
-    // ListModuleDetailsComponent,
-  ]
+  templateUrl: './create-article.component.html',  
 })
-export class CreateArticleComponent implements OnInit {
-
+export class CreateArticleComponent implements OnInit {  
   id: string;
   errors: string[] = [];
   ex: any;
@@ -53,10 +42,10 @@ export class CreateArticleComponent implements OnInit {
     , private moduleDetailsService: ModuleDetailsService
     // , private notificationService: NotificationService
     , private spinnerSerice: Ng4LoadingSpinnerService
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
-
     this.sub = this.route.params.subscribe(params => {
       // In a real app: dispatch action to load the details here.
       this.data.id = params['id']; // (+) converts string 'id' to a number      
@@ -72,7 +61,7 @@ export class CreateArticleComponent implements OnInit {
     this.sub.unsubscribe();
   }
   getDefaultArticle(): void {
-    this.articleService.getDefaultArticleWithPromise('vi-vn')
+    this.articleService.getDefaultArticleWithPromise(environment.culture)
       .then(result => {
 
         if (result.isSucceed) {
@@ -93,7 +82,7 @@ export class CreateArticleComponent implements OnInit {
       error => { });
   }
   fetchData(): void {
-    this.articleService.getArticleWithPromise('vi-vn', this.data.id)
+    this.articleService.getArticleWithPromise(environment.culture, this.data.id)
       .then(result => {
         if (result.isSucceed) {
           var subModules: SWDataTable[] = [];
@@ -117,7 +106,6 @@ export class CreateArticleComponent implements OnInit {
       });
   }
   setView(view: Template) {
-    console.log(view);
     this.data.view = view;
   }
   submit(): void {
@@ -127,7 +115,7 @@ export class CreateArticleComponent implements OnInit {
     var model = plainToClass(ArticleBackend, this.data);
     environment.isBusy = true;
     // this.spinnerSerice.show();
-    this.articleService.saveArticleWithPromise('vi-vn', model)
+    this.articleService.saveArticleWithPromise(environment.culture, model)
       .then(result => {
         if (result.isSucceed) {
           this.router.navigate(['/pages/articles/list-articles']);

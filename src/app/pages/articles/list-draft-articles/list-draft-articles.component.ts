@@ -111,7 +111,6 @@ export class ListDraftArticlesComponent {
       .then(result => {
         if (result.isSucceed) {
           this.data = result.data;
-          console.log(this.data);
         } else {
           this.showErrors(result.errors, result.ex);
         }

@@ -211,3 +211,21 @@ export class FileStreamViewModel{
     size: number;
     type: string;
 }
+
+export class AccessTokenViewModel{
+    access_token: string;
+    token_type: string;
+    refresh_token: string;
+    expires_in: number;
+    client_id: string;
+    issued: Date;
+    expires: Date;
+    deviceId: string;
+    userData: any;
+}
+
+export class LoginViewModel{
+    email: string;
+    password: string;
+    rememberMe: boolean;
+}

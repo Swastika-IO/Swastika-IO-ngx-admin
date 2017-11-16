@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
-import { PagingData, ArticleListItem } from '../../../@swastika-io/viewmodels/article.viewmodels';
+import { PagingData, ArticleListItem, AccessTokenViewModel } from '../../../@swastika-io/viewmodels/article.viewmodels';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../components/data-render/data-render.components';
 import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
-
+import { CookieStorage, SharedStorage, LocalStorage, SessionStorage, WebstorableArray } from 'ngx-store';
 @Component({
   selector: 'ngx-list-articles',
   templateUrl: './list-articles.component.html',
@@ -19,12 +19,11 @@ import { environment } from '../../../../environments/environment';
     }
   `],
   entryComponents: [
-        ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent,
+    ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent,
   ]
 
 })
 export class ListArticlesComponent {
-
   settings = {
     mode: 'external',
     add: {
@@ -51,7 +50,7 @@ export class ListArticlesComponent {
         title: 'Culture',
         type: 'string',
         filter: false,
-      },      
+      },
       thumbnailUrl: {
         title: 'thumbnail',
         type: 'custom',
@@ -77,18 +76,17 @@ export class ListArticlesComponent {
   source: ServerDataSource;
   data: ArticleListItem[];
   pagingData = new PagingData();
-  
+
   constructor(private router: Router, private http: Http, private service: ArticleService,
     @Inject(DOCUMENT) private document: Document) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
-    this.pagingData.endPoint = environment.apiUrl + 'vi-vn/articles'
-
+    this.pagingData.endPoint = environment.apiUrl + environment.culture + '/articles';
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }
 
   ngOnInit(): void {
-    this.fetchData(10,0);
+    this.fetchData(10, 0);
     this.source = new ServerDataSource(this.http,
       {
         endPoint: this.pagingData.endPoint,
@@ -105,12 +103,11 @@ export class ListArticlesComponent {
       .then(result => {
         if (result.isSucceed) {
           this.data = result.data;
-          console.log(this.data);
         } else {
           this.showErrors(result.errors, result.ex);
         }
       },
-      error => {  });
+      error => { });
   }
 
   delete(event): void {
@@ -124,7 +121,7 @@ export class ListArticlesComponent {
       },
       error => { });
   }
-  
+
   showErrors(errors: string[], ex: any) {
   };
   onCreate(event): void {

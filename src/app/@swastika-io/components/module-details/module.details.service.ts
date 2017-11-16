@@ -113,7 +113,6 @@ export class ModuleDetailsService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         headers['Access-Control-Allow-Origin'] = '*';
         let options = new RequestOptions({ headers: headers });
-        console.log(data);
         var result = this.http.post(this.domain + url, data, options).toPromise()
             .then(this.extractData)
             .catch(this.handleErrorPromise);

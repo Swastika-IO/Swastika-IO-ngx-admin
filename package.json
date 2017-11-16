@@ -74,6 +74,7 @@
     "ngx-chips": "^1.5.9",
     "ngx-echarts": "1.2.2",
     "ngx-input-file": "^0.2.1",
+    "ngx-store": "^1.2.2",
     "normalize.css": "6.0.0",
     "pace-js": "^1.0.2",
     "reflect-metadata": "^0.1.10",
