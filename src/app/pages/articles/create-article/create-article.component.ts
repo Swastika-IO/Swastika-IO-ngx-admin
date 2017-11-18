@@ -21,9 +21,9 @@ import { CookieStorage, SharedStorage, LocalStorage, SessionStorage, Webstorable
 @Component({
   selector: 'ngx-create-article',
   styleUrls: ['./create-article.component.scss'],
-  templateUrl: './create-article.component.html',  
+  templateUrl: './create-article.component.html',
 })
-export class CreateArticleComponent implements OnInit {  
+export class CreateArticleComponent implements OnInit {
   id: string;
   errors: string[] = [];
   ex: any;
@@ -42,7 +42,7 @@ export class CreateArticleComponent implements OnInit {
     , private moduleDetailsService: ModuleDetailsService
     // , private notificationService: NotificationService
     , private spinnerSerice: Ng4LoadingSpinnerService
-  ) { 
+  ) {
   }
 
   ngOnInit() {
@@ -63,8 +63,7 @@ export class CreateArticleComponent implements OnInit {
   getDefaultArticle(): void {
     this.articleService.getDefaultArticleWithPromise(environment.culture)
       .then(result => {
-
-        if (result.isSucceed) {
+        if (result != undefined && result.isSucceed) {
           var subModules: SWDataTable[] = [];
           result.data.activedModules.forEach(module => {
             var sm = this.moduleDetailsService.initModuleDetails(module, this.data.id);

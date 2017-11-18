@@ -3,7 +3,6 @@ import { ApiResult, SWDataTable, ArticleModuleNav, ModuleFullDetails, ModuleData
 import { CKEditorComponent } from 'ng2-ckeditor';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
-import { ServerDataSource } from '../../../pages/components/components.component';
 import { environment } from '../../../../environments/environment';
 import { LocalDataSource } from 'ng2-smart-table';
 @Injectable()

@@ -6,10 +6,14 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ArticleService } from '../article.services';
 import { PagingData, ArticleListItem, AccessTokenViewModel } from '../../../@swastika-io/viewmodels/article.viewmodels';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../components/data-render/data-render.components';
-import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
 import { CookieStorage, SharedStorage, LocalStorage, SessionStorage, WebstorableArray } from 'ngx-store';
+import { ServerDataSource } from 'app/@swastika-io/components/smart-table-server-data-source/server-data-source.component';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { StorageService } from 'app/@swastika-io/helpers/localStorage.service';
+import { ServiceHelper } from 'app/@swastika-io/helpers/sw.service.helper';
+
 @Component({
   selector: 'ngx-list-articles',
   templateUrl: './list-articles.component.html',
@@ -77,8 +81,14 @@ export class ListArticlesComponent {
   data: ArticleListItem[];
   pagingData = new PagingData();
 
-  constructor(private router: Router, private http: Http, private service: ArticleService,
-    @Inject(DOCUMENT) private document: Document) {
+  constructor(
+    private router: Router
+    , private http: Http
+    , private service: ArticleService
+    , private serviceHelper: ServiceHelper
+    , private spinnerSerice: Ng4LoadingSpinnerService
+    , private storageService: StorageService
+  ) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
     this.pagingData.endPoint = environment.apiUrl + environment.culture + '/articles';
@@ -86,16 +96,20 @@ export class ListArticlesComponent {
   }
 
   ngOnInit(): void {
-    this.fetchData(10, 0);
-    this.source = new ServerDataSource(this.http,
-      {
+    // this.fetchData(10, 0);
+    this.source = new ServerDataSource(
+      this.http
+      , this.serviceHelper
+      , this.storageService
+      , this.spinnerSerice
+      , {
         endPoint: this.pagingData.endPoint,
         dataKey: 'data.items',
         pagerLimitKey: 'data.pageSize',
         pagerPageKey: 'data.pageIndex',
         totalKey: 'data.totalItems',
 
-      },
+      }
     );
   };
   fetchData(pageSize: number, pageIndex: number): void {

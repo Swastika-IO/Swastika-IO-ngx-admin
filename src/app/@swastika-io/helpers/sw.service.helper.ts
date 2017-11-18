@@ -13,25 +13,25 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NotificationService } from './notifications.service';
 import { StorageService } from './localStorage.service';
 import { CookieStorage, LocalStorage, SessionStorage, WebstorableArray } from 'ngx-store';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ServiceHelper {
     private accessToken: AccessTokenViewModel;
-    public spinnerService: Ng4LoadingSpinnerService;
     errors: string[] = [];
     domain = environment.domain;
     constructor(private http: Http
-        , spinnerSerice: Ng4LoadingSpinnerService
+        , private spinnerService: Ng4LoadingSpinnerService
         , private notificationService: NotificationService
         , private storageService: StorageService
+        , private router: Router
     ) {
-        this.spinnerService = spinnerSerice;
-        var token = this.storageService.getLocalData('accessToken');        
-        this.accessToken =  JSON.parse(token) as AccessTokenViewModel;
+        var token = this.storageService.getLocalData(environment.localStorageKeys.accessToken);
+        this.accessToken = JSON.parse(token) as AccessTokenViewModel;
     }
 
-    getWithPromise(apiUrl: string): Promise<ApiResult> {
-        console.log(this.accessToken, this.accessToken.token_type + ' ' + this.accessToken.access_token);
+    getWithPromise(apiUrl: string, params: any = null): Promise<ApiResult> {
+        this.spinnerService.show();
         let headers = new Headers(
             {
                 'Content-Type': 'application/json',
@@ -45,13 +45,19 @@ export class ServiceHelper {
                 headers: headers
             }
         );
+        options.params = params;
         var request = this.http.request(apiUrl, options);
 
-        return request.toPromise()
-            .then(
-            result => this.extractData(request, result, this.spinnerService
+        return request
+            .map(
+            result => this.extractData(options, result, this.spinnerService
             ))
-            .catch(errors => this.handleErrorPromise(request, errors, this.spinnerService));
+            // .retryWhen(errors => errors.delay(5000).scan(function (errorCount, err)
+            // {
+            //     this.refreshToken(options)
+            // }).take(1))
+            .catch(errors => Observable.of(this.handleErrorPromise(options, errors, this.spinnerService)))// this.handleErrorPromise(options, errors, this.spinnerService))
+            .toPromise();
 
     }
 
@@ -66,16 +72,17 @@ export class ServiceHelper {
             {
                 method: RequestMethod.Post,
                 url: apiUrl,
-                headers: headers
+                headers: headers,
+                body: body
             }
         );
         this.spinnerService.show();
-        var request = this.http.post(apiUrl, body, options);
+        var request = this.http.request(apiUrl, options);
         return request.toPromise()
-            .then(result => this.extractData(request, result, this.spinnerService))
-            .catch(errors => this.handleErrorPromise(request, errors, this.spinnerService));
+            .then(result => this.extractData(options, result, this.spinnerService))
+            .catch(errors => this.handleErrorPromise(options, errors, this.spinnerService));
     }
-    private extractData(request: any, res: Response, service: Ng4LoadingSpinnerService) {
+    extractData(request: RequestOptions, res: Response, service: Ng4LoadingSpinnerService) {
         const body = res.json();
         service.hide()
         if (body.isSucceed) {
@@ -87,21 +94,17 @@ export class ServiceHelper {
         return body || {};
     }
 
-    private handleErrorPromise(request: any, error: Response | any, spinnerService: Ng4LoadingSpinnerService) {
+    handleErrorPromise(options: RequestOptions, error: Response | any, spinnerService: Ng4LoadingSpinnerService) {
         // console.error(error.message || error);
         spinnerService.hide()
+
+        // Handle UnAuthorized request (try 1 more time using refresh_token)
         if (error.status == 401) {
-            if (environment.accessToken.refresh_token == undefined) {
+            if (this.accessToken.refresh_token == undefined) {
                 this.login();
             }
             else {
-                const getTokenUrl = this.domain + 'api/' + environment.culture + '/account/refreshToken/' +
-                    environment.accessToken.refresh_token;
-                var login = new LoginViewModel();
-                this.getWithPromise(getTokenUrl)
-                    .then(result => {
-                        environment.accessToken = result.data;
-                    });
+                return this.refreshToken(options);
             }
         }
 
@@ -110,18 +113,49 @@ export class ServiceHelper {
         this.showErrors([error.message]);
         return Promise.reject(error.message || error).then(error => { this.spinnerService.hide() });
     }
+
+    refreshToken(options: RequestOptions = null): Promise<any> {
+        const getTokenUrl = this.domain + 'api/' + environment.culture + '/account/refreshToken/' +
+            this.accessToken.refresh_token;
+
+        return this.getWithPromise(getTokenUrl)
+            .then(result => {
+                if (result.isSucceed) {
+                    this.accessToken = result.data;
+                    this.storageService.saveLocalData(environment.localStorageKeys.accessToken, result.data);
+                    if (options != null) {
+                        this.accessToken = result.data;
+                        let headers = new Headers(
+                            {
+                                'Content-Type': 'application/json',
+                                'Authorization': this.accessToken.token_type + ' ' + this.accessToken.access_token
+                            });
+                        options.headers = headers;
+                        var req = this.http.request(options.url, options);
+                        return req.toPromise()
+                            .then(result => this.extractData(options, result, this.spinnerService))
+                            .catch(errors => this.handleErrorPromise(options, errors, this.spinnerService));
+                    }
+                } else {
+                    this.login();
+                }
+            });
+    }
     login(): void {
         const saveUrl = this.domain + 'api/' + environment.culture + '/account/login';
         var login = new LoginViewModel();
         login.email = 'nhathoang989@gmail.com';
         login.password = '1234qwe@';
-        
+
         this.postWithPromise(saveUrl, login)
             .then(result => {
-                environment.accessToken = result.data;
-                this.storageService.saveLocalData('accessToken', result.data);
-                this.accessToken = environment.accessToken;
+                this.accessToken = result.data;
+                this.storageService.saveLocalData(environment.localStorageKeys.accessToken, result.data);
             });
+    }
+    logout(): void {
+        this.storageService.clearLocalData(environment.localStorageKeys.accessToken);
+        this.router.navigate(['/pages/articles/list-articles']);
     }
     showErrors(errors: string[]): void {
         if (errors) {

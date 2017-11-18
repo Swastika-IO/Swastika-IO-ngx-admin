@@ -3,7 +3,6 @@ import { ModuleFullDetails, PagingData, DataType, SWDataTable } from '../../../@
 import { CKEditorComponent } from 'ng2-ckeditor';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
-import { ServerDataSource } from '../../../pages/components/components.component';
 import { ModuleDetailsService } from '../../../@swastika-io/components/module-details/module.details.service';
 import { environment } from '../../../../environments/environment';
 @Component({
