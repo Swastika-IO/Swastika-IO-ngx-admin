@@ -16,11 +16,16 @@ export class StorageService {
 
     public saveLocalData(key: string, data: any) {        
         this.localStorageService.set(key, data);  
-        // console.log(localStorage.getItem('accessToken'));      
     }
+
     public  getLocalData(key: string): any {        
         return localStorage.getItem(key);
     }
+
+    public  clearLocalData(key: string): void {        
+        this.localStorageService.set(key, null); // removes only variables created by decorating functions
+    }
+
     public saveSomeData(object: Object, array: Array<any>) {
         this.localStorageService.set('someObject', object);
         this.sessionStorageService.set('someArray', array);

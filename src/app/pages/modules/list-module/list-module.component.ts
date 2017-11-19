@@ -6,10 +6,14 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { ModuleService } from '../module.service';
 import { PagingData, ModuleListItem } from '../../../@swastika-io/viewmodels/article.viewmodels';
 
-import { ServerDataSource } from '../../components/components.component';
 import { DOCUMENT } from '@angular/platform-browser';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from 'app/pages/components/data-render/data-render.components';
 import { environment } from 'environments/environment';
+import { ServerDataSource } from 'app/@swastika-io/components/smart-table-server-data-source/server-data-source.component';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { StorageService } from 'app/@swastika-io/helpers/localStorage.service';
+import { ServiceHelper } from 'app/@swastika-io/helpers/sw.service.helper';
+
 @Component({
   selector: 'ngx-list-module',
   templateUrl: './list-module.component.html',
@@ -73,18 +77,25 @@ export class ListModuleComponent {
   source: ServerDataSource;
   data: ModuleListItem[];
   pagingData = new PagingData();
-  constructor(private router: Router, private http: Http, private service: ModuleService,
-    @Inject(DOCUMENT) private document: Document) {
+  constructor(private router: Router, private http: Http
+    , private service: ModuleService
+    , private serviceHelper: ServiceHelper
+    , private spinnerSerice: Ng4LoadingSpinnerService
+    , private storageService: StorageService  
+  ) {
     this.pagingData.pageIndex = 0;
     this.pagingData.pageSize = 15;
-    this.pagingData.endPoint = environment.apiUrl + 'vi-vn/modules';
+    this.pagingData.endPoint = environment.apiUrl + environment.culture + '/modules';
 
     // this.fetchData(this.pagingData.pageSize, this.pagingData.pageIndex);
   }
 
   ngOnInit(): void {
-    this.source = new ServerDataSource(this.http,
-      {
+    this.source = new ServerDataSource(this.http
+      , this.serviceHelper
+      , this.storageService
+      , this.spinnerSerice
+      , {
         endPoint: this.pagingData.endPoint,
         dataKey: 'data.items',
         pagerLimitKey: 'data.pageSize',

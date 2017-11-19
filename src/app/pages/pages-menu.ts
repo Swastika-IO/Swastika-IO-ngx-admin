@@ -6,6 +6,30 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-home',
     link: '/pages/dashboard',
     home: true,
+  }
+  ,
+  {
+    title: 'Account',
+    icon: 'nb-locked',
+    link: '/pages/account',
+    children: [
+      {
+        title: 'Login',
+        link: '/pages/account/login',
+      },
+      // {
+      //   title: 'Register',
+      //   link: '/account/register',
+      // },
+      // {
+      //   title: 'Request Password',
+      //   link: '/account/request-password',
+      // },
+      // {
+      //   title: 'Reset Password',
+      //   link: '/account/reset-password',
+      // },
+    ],
   },
   {
     title: 'FEATURES',
@@ -238,6 +262,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+
   {
     title: 'Auth',
     icon: 'nb-locked',

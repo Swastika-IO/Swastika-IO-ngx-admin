@@ -24,5 +24,7 @@ export const environment = {
     totalKey: 'data.totalItems',
 
   },
-  accessToken: new AccessTokenViewModel()
+  localStorageKeys:{
+    accessToken: 'accessToken'
+  }
 };

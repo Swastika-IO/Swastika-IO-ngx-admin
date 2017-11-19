@@ -2,9 +2,12 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ModuleFullDetails, PagingData, DataType } from '../../../@swastika-io/viewmodels/article.viewmodels'
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../../../pages/components/data-render/data-render.components';
-import { ServerDataSource } from '../../../pages/components/components.component';
 import { ModuleDetailsService } from './module.details.service';
 import { environment } from '../../../../environments/environment';
+import { ServerDataSource } from 'app/@swastika-io/components/smart-table-server-data-source/server-data-source.component';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { StorageService } from 'app/@swastika-io/helpers/localStorage.service';
+import { ServiceHelper } from 'app/@swastika-io/helpers/sw.service.helper';
 @Component({
     selector: 'sw-module-details',
     templateUrl: 'module-details.html',
@@ -21,6 +24,9 @@ export class ModuleDetailsComponent implements OnInit {
 
     constructor(private http: Http
         , private moduleDetailsService: ModuleDetailsService
+        , private serviceHelper: ServiceHelper
+        , private spinnerSerice: Ng4LoadingSpinnerService
+        , private storageService: StorageService
     ) {
         this.pagingData.pageIndex = 0;
         this.pagingData.pageSize = 15;
@@ -48,8 +54,11 @@ export class ModuleDetailsComponent implements OnInit {
             }
             this.settings.columns[col.name]['filter'] = false;
         });
-        this.source = new ServerDataSource(this.http,
-            {
+        this.source = new ServerDataSource(this.http
+            , this.serviceHelper
+            , this.storageService
+            , this.spinnerSerice            
+            , {
                 endPoint: this.pagingData.endPoint + this._module.id,
                 dataKey: 'data.jsonItems',
                 pagerLimitKey: 'data.pageSize',

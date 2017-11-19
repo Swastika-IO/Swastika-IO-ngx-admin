@@ -1,4 +1,3 @@
-import { ServerDataSource } from '../../pages/components/components.component';
 import { Exclude, Transform } from "class-transformer";
 import { LocalDataSource } from 'ng2-smart-table';
 
