@@ -10,10 +10,15 @@ const routes: Routes = [{
   children: [{
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'account',
+    loadChildren: './account/account.module#AccountModule',
   }, {
     path: 'articles',
     loadChildren: './articles/articles.module#ArticlesModule',
-  }, {
+  }
+    , {
     path: 'modules',
     loadChildren: './modules/module.module#ModuleModule',
   }, {

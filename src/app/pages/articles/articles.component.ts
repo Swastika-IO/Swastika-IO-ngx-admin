@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { LocalStorage } from 'ngx-store/dist';
-import { AccessTokenViewModel } from 'app/@swastika-io/viewmodels/article.viewmodels';
 // import { ImageRenderComponent, DatetimeRenderComponent, HtmlRenderComponent } from '../components/data-render/data-render.components';
 // import { CategoryNavsComponent } from '../../@swastika-io/components/category-navigations/category-navigations'
 // import { ModuleNavsComponent } from '../../@swastika-io/components/module-navigations/module-navigations'
@@ -23,5 +21,4 @@ import { AccessTokenViewModel } from 'app/@swastika-io/viewmodels/article.viewmo
 
 })
 export class ArticlesComponent {
-  @LocalStorage('accessToken') accessToken: AccessTokenViewModel = new AccessTokenViewModel();
 }
