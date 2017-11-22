@@ -120,7 +120,7 @@ export class ListDraftArticlesComponent {
   };
 
   fetchData(pageSize: number, pageIndex: number): void {
-    this.service.getArticlesWithPromise('vi-vn', pageSize, pageIndex)
+    this.service.getArticlesWithPromise(environment.culture, pageSize, pageIndex)
       .then(result => {
         if (result.isSucceed) {
           this.data = result.data;
@@ -132,7 +132,7 @@ export class ListDraftArticlesComponent {
   }
 
   delete(event): void {
-    this.service.deleteArticleWithPromise('vi-vn', event.data.id)
+    this.service.deleteArticleWithPromise(environment.culture, event.data.id)
       .then(result => {
         if (result.isSucceed) {
           this.source.refresh();
@@ -144,7 +144,7 @@ export class ListDraftArticlesComponent {
   }
 
   restore(event): void {
-    this.service.restoreArticleWithPromise('vi-vn', event.data.id)
+    this.service.restoreArticleWithPromise(environment.culture, event.data.id)
       .then(result => {
         if (result.isSucceed) {
           this.source.refresh();

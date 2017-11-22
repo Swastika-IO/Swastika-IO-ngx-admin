@@ -13,11 +13,11 @@ import { AccessTokenViewModel } from "app/@swastika-io/viewmodels/article.viewmo
 export const environment = {
   production: false,  
   isBusy: false,
-  apiUrl: "http://localhost:61136/api/",
-  domain: "http://localhost:61136/",
-  culture: 'vi-vn',
+  apiUrl: "http://localhost:65493/api/",
+  domain: "http://localhost:65493/",
+  culture: 'vi-vn',//'en-UK',//
   pagingConfig: {
-    endPoint: "http://localhost:61136/api/vi-vn/moduleData/",
+    endPoint: "http://localhost:65493/api/vi-vn/moduleData/",
     dataKey: 'data.items',
     pagerLimitKey: 'data.pageSize',
     pagerPageKey: 'data.pageIndex',
@@ -26,5 +26,9 @@ export const environment = {
   },
   localStorageKeys:{
     accessToken: 'accessToken'
-  }
+  },
+  listSupportedCulture:[
+    'vi-vn', 
+    'en-UK',
+  ]
 };

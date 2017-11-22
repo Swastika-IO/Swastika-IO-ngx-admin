@@ -137,21 +137,23 @@ export class ServiceHelper {
                             .catch(errors => this.handleErrorPromise(options, errors, this.spinnerService));
                     }
                 } else {
+                    this.spinnerService.hide()
                     this.login();
                 }
             });
     }
     login(): void {
-        const saveUrl = this.domain + 'api/' + environment.culture + '/account/login';
-        var login = new LoginViewModel();
-        login.email = 'nhathoang989@gmail.com';
-        login.password = '1234qwe@';
+        this.router.navigate(['/pages/account/login']);
+        // const saveUrl = this.domain + 'api/' + environment.culture + '/account/login';
+        // var login = new LoginViewModel();
+        // login.email = 'nhathoang989@gmail.com';
+        // login.password = '1234qwe@';
 
-        this.postWithPromise(saveUrl, login)
-            .then(result => {
-                this.accessToken = result.data;
-                this.storageService.saveLocalData(environment.localStorageKeys.accessToken, result.data);
-            });
+        // this.postWithPromise(saveUrl, login)
+        //     .then(result => {
+        //         this.accessToken = result.data;
+        //         this.storageService.saveLocalData(environment.localStorageKeys.accessToken, result.data);
+        //     });
     }
     logout(): void {
         this.storageService.clearLocalData(environment.localStorageKeys.accessToken);

@@ -79,7 +79,10 @@ export class ServerDataSource extends LocalDataSource {
                 return Observable.throw(error).catch(err => Observable.of(err))
                     .map(err => {
                         if (err.status == 401) {
-                            
+                            if (this.accessToken.refresh_token == undefined) {
+                                this.serviceHelper.login();
+                            }
+                            else {
                             this.serviceHelper.refreshToken()
                                 .then(r => {
                                     this.spinnerSerice.hide();                                         
@@ -92,6 +95,7 @@ export class ServerDataSource extends LocalDataSource {
                                         }).toPromise();
                                         
                                 })
+                            }
                         }
                         else {
                             this.spinnerSerice.hide();
