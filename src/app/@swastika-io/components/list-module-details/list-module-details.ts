@@ -53,6 +53,7 @@ export class ListModuleDetailsComponent implements OnInit {
 
         vmModule.source.prepend(data);
         vmModule.source.refresh();
+        console.log('asdas: ', vmModule)
         // if (articleId != null) {
 
         //     // var model: any = {};
@@ -103,6 +104,7 @@ export class ListModuleDetailsComponent implements OnInit {
                 if (result.isSucceed) {
                     vmModule.source.remove(event.data);
                     vmModule.source.refresh();
+                    console.log(vmModule);
                 } else {
                     this.showErrors(result.errors, result.ex);
                 }

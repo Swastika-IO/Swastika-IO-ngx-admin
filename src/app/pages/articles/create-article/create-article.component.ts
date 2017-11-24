@@ -112,8 +112,7 @@ export class CreateArticleComponent implements OnInit {
       sm.source.getElements().then(result => sm.models.data = result);
     });
     var model = plainToClass(ArticleBackend, this.data);
-    environment.isBusy = true;
-    // this.spinnerSerice.show();
+    console.log(model);
     this.articleService.saveArticleWithPromise(environment.culture, model)
       .then(result => {
         if (result.isSucceed) {
@@ -123,9 +122,8 @@ export class CreateArticleComponent implements OnInit {
           this.ex = result.ex;
           this.showErrors();
         }
-        // this.spinnerSerice.hide();
       }).catch(errors => {
-        // this.spinnerSerice.hide();
+        this.spinnerSerice.hide();
       }
       );
 
